@@ -9,6 +9,7 @@ import Article from "../views/ArticlePage.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  // remove Login, Article, About
   {
     path: "/login",
     name: "Login",
