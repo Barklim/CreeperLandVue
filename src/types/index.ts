@@ -1,9 +1,9 @@
-export interface Item {
+export interface CardItem {
   id: number,
+  category: string,
   title: string,
-  destination: string,
-  autor: string,
-  postTime: string,
   image: string,
-  text: string
+  actions: number,
+  cost: number,
+  description: string,
 }

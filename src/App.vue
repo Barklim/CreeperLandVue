@@ -33,6 +33,12 @@ export default {
 .el-main {
   overflow: hidden;
 }
+/* redefine */
+.el-main {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .fade-enter-active {
   animation: slidePageIn 1s forwards;
   animation-timing-function: cubic-bezier(0.8, -0.49, 0.36, 1);

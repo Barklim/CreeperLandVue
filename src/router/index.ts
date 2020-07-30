@@ -50,6 +50,8 @@ router.beforeEach((to, from, next) => {
     const authUser = JSON.parse(
       window.localStorage.getItem("currentUser") || "{}"
     );
+    // TODO: realize Authorization
+    //
     // if (authUser && authUser.accessToken) {
     //   next();
     // } else {

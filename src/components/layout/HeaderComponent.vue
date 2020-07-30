@@ -141,6 +141,9 @@ header .content {
 .zones.template_compact .zone-header header .content__block {
   argin: 100px 0 40px!important;
 }
+.zone-header {
+  margin: 0 0 46px!important;
+}
 @media screen and (min-width: 960px) {
   .zones.template_compact .zone-header header .content__block, .zones.template_default .zone-header header .content__block, .zones.template_fit .zone-header header .content__block {
       max-width: 80%;

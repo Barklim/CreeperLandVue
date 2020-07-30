@@ -21,8 +21,9 @@ vue 4.4.6 => 4.1.2
 * unitpay.money
 
 * particles in header
-
 * HeaderComp bind state class and event
+
+* Использовать интернационализацию по рус укр енг
 
 ркон
 
@@ -40,6 +41,13 @@ ghpages and zeit
 Предложить сделать страницу блога с рефреном на vk
 авторизацию
 навигацию, интернационализацию
+
+## DONE
+
+* Проверить в разных браузерах
+* Адаптивность
+  * У них были не большие недоработки в части иконок vk, discord
+* шрифт
 
 ## questions
 1.Как определять количество игроков онлайн(также по запросу как и везде)
@@ -76,7 +84,10 @@ export default {
   }
 };
 
+backgroundImage
+https://github.com/vuejs/vue-loader/issues/646
+
 vue добавить класс
 https://ru.vuejs.org/v2/guide/events.html
-
-3) 
+vue ui
+i18n использоовать для валюты
