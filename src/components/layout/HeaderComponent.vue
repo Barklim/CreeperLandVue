@@ -48,6 +48,26 @@ export default class HeaderComponent extends Vue {
         <a href="/votes" target="_self">Ссылки на мониторинги</a>
       </div>
     </nav>
+      <div class="particlesVue">
+        <vue-particles
+        color="#dedede"
+        :particleOpacity="1.0"
+        :particlesNumber="800"
+        shapeType="circle"
+        :particleSize="3"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="false"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="1"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="false"
+        clickMode="push"
+      >
+      </vue-particles>
+    </div>
     <div class="open-menu"></div>
   </div>
 </template>
@@ -68,6 +88,14 @@ export default class HeaderComponent extends Vue {
 }
 .zones, .zones, .zone-header {
   position: relative;
+}
+
+/* ---------- Particles ---------- */
+
+.particlesVue {
+  position: absolute;
+  top: 0;
+  height: 406px;
 }
 
 /* ---------- HeaderImage ---------- */
