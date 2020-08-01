@@ -49,6 +49,13 @@ ghpages and zeit
   * У них были не большие недоработки в части иконок vk, discord
 * шрифт
 
+## Routes
+
+http://localhost:8080
+http://localhost:8080/Login
+http://localhost:8080/Login1
+http://localhost:8080/about
+
 ## questions
 1.Как определять количество игроков онлайн(также по запросу как и везде)
 
@@ -67,6 +74,10 @@ https://project365.design/
 * http://localhost:8080/Login
 * http://localhost:8080/about
 * http://localhost:8080/
+
+## Lets Read
+
+https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
 
 ## Garbage
 App.vue
@@ -91,3 +102,7 @@ vue добавить класс
 https://ru.vuejs.org/v2/guide/events.html
 vue ui
 i18n использоовать для валюты
+
+https://api.trademc.org/shop.getOnline?shop=129168&v=3
+https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
+https://api.trademc.org/shop.getItems?shop=129168&v=3

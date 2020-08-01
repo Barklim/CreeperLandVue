@@ -337,6 +337,9 @@ nav.type-1 .links {
     border-radius: 3px;
   }
 }
+.links a:hover {
+    background: hsla(0,0%,100%,.05);
+}
 
 nav .links a {
   text-transform: uppercase;
