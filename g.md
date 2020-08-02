@@ -4,6 +4,9 @@ https://github.com/slastonm
 http://minecraftrating.ru/
 https://tmonitoring.com/
 
+https://swiperjs.com/api/
+https://github.surmon.me/vue-awesome-swiper/
+
 ## WorkFlow
 npm run dev
 npm run serve
@@ -75,28 +78,7 @@ https://project365.design/
 * http://localhost:8080/about
 * http://localhost:8080/
 
-## Lets Read
-
-https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
-
 ## Garbage
-App.vue
- <HeaderComponent
-  v-if="$route.name != 'Login' && $route.name != '404'"
-></HeaderComponent> 
-
-import HeaderComponent from "./components/layout/HeaderComponent";
-
-export default {
-  name: "app",
-  components: {
-    HeaderComponent,
-    FooterComponent
-  }
-};
-
-backgroundImage
-https://github.com/vuejs/vue-loader/issues/646
 
 vue добавить класс
 https://ru.vuejs.org/v2/guide/events.html
@@ -106,3 +88,15 @@ i18n использоовать для валюты
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3
+
+## Lets Read
+
+https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
+
+## Issues
+
+backgroundImage
+https://github.com/vuejs/vue-loader/issues/646
+
+swiper
+https://github.com/surmon-china/vue-awesome-swiper/issues/348

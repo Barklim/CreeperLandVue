@@ -6,7 +6,7 @@
 
       <CardViewContainer></CardViewContainer>
 
-      <div>Последние покупки Block</div>
+      <LastPurchases></LastPurchases>
 
     </main>
   </div>
@@ -17,11 +17,13 @@ import { Vue, Component } from "vue-property-decorator";
 import { namespace } from "vuex-class";
 import CardViewContainer from "../components/CardViewContainer.vue";
 import ServersMonitoring from "../components/ServersMonitoring.vue";
+import LastPurchases from "../components/LastPurchases.vue";
 
 @Component({
   components: {
     CardViewContainer,
-    ServersMonitoring
+    ServersMonitoring,
+    LastPurchases
   }
 })
 export default class Home extends Vue {
