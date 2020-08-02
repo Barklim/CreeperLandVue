@@ -5,18 +5,23 @@ import { Vue, Component } from "vue-property-decorator";
 export default class HeaderComponent extends Vue {
   activeIndex: string = "1";
   menuIsActive: boolean = false;
+  active: boolean = false;
+  visible: boolean = false;
 
   lang: string = "en";
   logout() {
     window.localStorage.clear();
     this.$router.push("Login");
   }
-
   menuNav() {
     this.menuIsActive = !this.menuIsActive;
   }
   switchLang() {
     this.$i18n.locale = this.lang;
+  }
+
+  scrollTo() {
+    console.log(document.getElementById('donat').scrollIntoView());
   }
 }
 </script>
@@ -37,12 +42,16 @@ export default class HeaderComponent extends Vue {
           <h1 class="">Creeper Land</h1>
           <div class="description">Твой ламповый Minecraft сервер</div>
           <div class="actions">
-            <div class="button themed-button scroll-to-main">Перейти к товарам</div>
+            <div class="button themed-button scroll-to-main" 
+            @click="scrollTo"
+            >
+            Перейти к товарам
+            </div>
           </div>
         </div>
       </div>
     </header>
-    <nav class="menu type-1" role="navigation">
+    <nav class="menu type-1" role="navigation" :class="{ visible }">
       <a class="logo hidden uppercase" href="/">Creeper Land</a>
       <div class="links">
         <a href="/votes" target="_self">Ссылки на мониторинги</a>
@@ -68,7 +77,7 @@ export default class HeaderComponent extends Vue {
       >
       </vue-particles>
     </div>
-    <div class="open-menu"></div>
+    <div class="open-menu" :class="{ active }" id="toggle" @click="active = !active;visible = !visible"></div>
   </div>
 </template>
 
@@ -376,6 +385,7 @@ nav .links a {
   overflow: hidden;
 
   font-size:13px;
+  text-align: initial;
 }
 
 .zones .zone-header header~.open-menu {

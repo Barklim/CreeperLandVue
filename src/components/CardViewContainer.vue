@@ -41,7 +41,7 @@ export default class CardViewContainer extends Vue {
 </script>
 
 <template>
-  <div class="module-items gray-area">
+  <div class="module-items gray-area" id="donat">
     <div class="wrapper">
       <h2>
         Донат 
