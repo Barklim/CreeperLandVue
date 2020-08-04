@@ -190,6 +190,10 @@ span.current-value {
     color: inherit;
     text-decoration: none;
 }
+span.dropdown.link {
+  display: inline-block;
+  padding-bottom: 10px;
+}
 
 .dropdown .options {
   &:after {
