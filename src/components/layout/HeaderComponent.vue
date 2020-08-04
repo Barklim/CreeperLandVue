@@ -21,7 +21,8 @@ export default class HeaderComponent extends Vue {
   }
 
   scrollTo() {
-    console.log(document.getElementById('donat').scrollIntoView());
+    //console.log(document.getElementById('donat').scrollIntoView());
+    document.getElementById('donat').scrollIntoView()
   }
 }
 </script>

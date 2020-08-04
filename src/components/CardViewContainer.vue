@@ -8,6 +8,9 @@ import CardView from "../components/CardView.vue";
   }
 })
 export default class CardViewContainer extends Vue {
+
+  show: string = '';
+
   cards = [
     {
       id:1, 
@@ -46,15 +49,24 @@ export default class CardViewContainer extends Vue {
       <h2>
         Донат 
         <span class="sub-text pseudo-opacity">Валюта: 
-          <span class="dropdown link" data-default-value="" data-placeholder="Выберите валюту" data-action="shop.currency.set">
-          <span class="current-value">🇷🇺 Российский рубль</span><span class="options"><span onclick="shop.currency.set('RUB')">
-            🇷🇺 Российский рубль
+          <span 
+            class="dropdown link" 
+            data-default-value="" 
+            data-placeholder="Выберите валюту" 
+            data-action="shop.currency.set"
+            @mouseenter="show = !show"
+            @mouseleave="show = !show"
+            :class="{ show }"
+          >
+            <span class="current-value">🇷🇺 Российский рубль</span><span class="options"><span onclick="shop.currency.set('RUB')">
+              🇷🇺 Российский рубль
+            </span>
+            <span onclick="shop.currency.set('UAH')">🇺🇦 Украинская гривна</span>
+            <span onclick="shop.currency.set('BYN')">🇧🇾 Белорусский рубль</span>
+            <span onclick="shop.currency.set('KZT')">🇰🇿 Казахстанский тенге</span>
+            <span onclick="shop.currency.set('USD')">🇺🇸 Доллар США</span>
+            <span onclick="shop.currency.set('EUR')">🇪🇺 Евро</span></span>
           </span>
-          <span onclick="shop.currency.set('UAH')">🇺🇦 Украинская гривна</span>
-          <span onclick="shop.currency.set('BYN')">🇧🇾 Белорусский рубль</span>
-          <span onclick="shop.currency.set('KZT')">🇰🇿 Казахстанский тенге</span>
-          <span onclick="shop.currency.set('USD')">🇺🇸 Доллар США</span>
-          <span onclick="shop.currency.set('EUR')">🇪🇺 Евро</span></span></span>
         </span>
     </h2>
 
@@ -157,8 +169,10 @@ span.current-value {
     background: #fff;
     padding: 3px 0;
     color: #333;
-    top: calc(100% + 10px);
-    left: -20px;
+    /* top: calc(100% + 10px); */
+    /* left: -20px; */
+    left: 68px;
+    top: 106%;
     cursor: default;
     font-size: 13px;
     font-weight: 400;
@@ -175,6 +189,44 @@ span.current-value {
     line-height: 1;
     color: inherit;
     text-decoration: none;
+}
+
+.dropdown .options {
+  &:after {
+    content:"";
+    position:absolute;
+    width:0;
+    height:0;
+    border-style:solid;
+    border-width:0 6px 6px;
+    border-color:transparent transparent #fff;
+    top:-6px;
+    left:36px
+  }
+}
+.dropdown .options {
+  &:before {
+    content:"";
+    display:block;
+    height:10px;
+    position:absolute;
+    top:-10px;
+    width:100%
+  }
+}
+.dropdown.show .options {
+  display: block;
+  animation: i .3s ease;
+}
+span.current-value {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.options span {
+  &:hover {
+    background: #f8f9fa;
+  }
 }
 
 /* ---------- Manual ---------- */
