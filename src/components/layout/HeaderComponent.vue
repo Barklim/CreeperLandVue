@@ -22,7 +22,7 @@ export default class HeaderComponent extends Vue {
 
   scrollTo() {
     //console.log(document.getElementById('donat').scrollIntoView());
-    document.getElementById('donat').scrollIntoView()
+    document.getElementById('donat').scrollIntoView({behavior: "smooth"});
   }
 }
 </script>

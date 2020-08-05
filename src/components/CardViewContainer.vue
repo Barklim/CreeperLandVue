@@ -190,10 +190,6 @@ span.current-value {
     color: inherit;
     text-decoration: none;
 }
-span.dropdown.link {
-  display: inline-block;
-  padding-bottom: 10px;
-}
 
 .dropdown .options {
   &:after {
@@ -218,10 +214,33 @@ span.dropdown.link {
     width:100%
   }
 }
+
 .dropdown.show .options {
   display: block;
-  animation: i .3s ease;
+  
+  -webkit-animation: fadein 1s cubic-bezier(0, 1.15, 0.2, 1) alternate 1;
+  -moz-animation: fadein 1s cubic-bezier(0, 1.15, 0.2, 1) alternate 1;
+  animation: fadein 1s cubic-bezier(0, 1.15, 0.2, 1) alternate 1;
 }
+@-webkit-keyframes fadein {
+    from { opacity: 0; top: 108%}
+    to { opacity: 1; top: 106% }
+}
+@-moz-keyframes fadein {
+    from { opacity: 0; top: 108% }
+    to { opacity: 1; top: 106%}
+}
+@keyframes fadein {
+    from { opacity: 0; top: 108% }
+    to { opacity: 1; top: 106% }
+}
+/*
+.dropdown.show .options {
+  display: block;
+  margin-top: -20px !important;
+}
+*/
+
 span.current-value {
   &:hover {
     text-decoration: underline;
@@ -231,6 +250,11 @@ span.current-value {
   &:hover {
     background: #f8f9fa;
   }
+}
+
+span.current-value {
+    padding-bottom: 10px;
+    display: inline-block;
 }
 
 /* ---------- Manual ---------- */

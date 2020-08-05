@@ -40,6 +40,7 @@ vue 4.4.6 => 4.1.2
   * У них были не большие недоработки в части иконок vk, discord
 * шрифт
 * HeaderComp в телефонах 'ссылки на мониторинги' должна открывать модалку с ссылками
+* клик в хедере для плавного спуска вниз, плавный ховер на валюту
 
 Дискорд виджет как тут
   https://mcnova.ru/
@@ -86,8 +87,8 @@ vue скролл по клику
 vue scroll click
 
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
-https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3
+https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
 
 ## Lets Read
 
