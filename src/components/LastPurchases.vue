@@ -27,7 +27,7 @@ const cards = [
         name: "Крипер",
       }
     }
-  ] 
+  ]
 
 export default {
   name: 'LastPurchases',
@@ -60,15 +60,8 @@ export default {
     axios
       .get("https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3")
       .then(response => {
-        console.log('TESTE');
-        console.log(response.data.response);
-        console.log(cards);
-        console.log(this);
 
         this.cards = response.data.response;
-
-                console.log(cards);
-        console.log(this);
       })
       .catch(error => {
         console.log(error);

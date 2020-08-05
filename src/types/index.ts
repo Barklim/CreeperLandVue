@@ -7,3 +7,8 @@ export interface CardItem {
   cost: number,
   description: string,
 }
+
+export interface CategorieItem {
+  id: number,
+  name: string
+}

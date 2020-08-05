@@ -8,6 +8,9 @@ export default class CardView extends Vue {
 	// const cardImage = cardItem.image;
 	// cardImage: string = CardItem.image;
 	cardImage: string = 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg';
+  errored: boolean = false;
+
+  @Prop() cattegoriesButton1?;
 
 	truncate (str: string, n: number) {
 		// for truncate description 
@@ -17,6 +20,7 @@ export default class CardView extends Vue {
 		// this open Modal
 		// @click=openModal(cardItem.id, cardItem)
 	}
+
 }
 </script>
 

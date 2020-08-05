@@ -1,15 +1,26 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import CardView from "../components/CardView.vue";
+import CategorieView from "../components/CategorieView.vue";
+import axios from "axios";
 
 @Component({
   components: {
-    CardView
+    CardView,
+    CategorieView
   }
 })
 export default class CardViewContainer extends Vue {
+  dataCat = {};
 
   show: string = '';
+
+  categoriesbuttons = [ 
+    {
+      id: 1,
+      name: "Все товары"
+    }
+  ]
 
   cards = [
     {
@@ -40,6 +51,37 @@ export default class CardViewContainer extends Vue {
       description: '<strong>Выживание</strong><br>- 7 точек дома<br>- 7 приватов по 1 500 000 блоков<br>- x2.5 множитель добычи валюты с мобов<br>- 54 слота в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /back возврат назад (или на место смерти)<br>- /ptime приватное время<br>- /kit Dragon<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>'
     }
   ]
+
+  mounted() {
+    
+    axios
+      .get("https://api.trademc.org/shop.getItems?shop=129168&v=3")
+      .then(response => {
+
+        this.dataCat = response.data.response;
+
+        const curDataCat = this.dataCat
+
+        const dataCategorie = curDataCat.categories.map(function(item) {
+          return { 
+            id: item.id,
+            name: item.name
+          };
+        });
+
+        // foreEach don't work here, why?
+        for (let i = 0; i < dataCategorie.length; i++) {
+
+           this.categoriesbuttons.push(dataCategorie[i])
+        }
+
+      })
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      });
+  }
+
 }
 </script>
 
@@ -70,9 +112,19 @@ export default class CardViewContainer extends Vue {
         </span>
     </h2>
 
+
     <!-- ---------- Categories ---------- -->
-    <div class="categories buttons-group">
+    <div v-if="categoriesbuttons" id="categoriesItems" class="cards inner">
+      <CategorieView
+        v-for="categorieItem in categoriesbuttons"
+        v-bind:key="categorieItem.id" 
+        :categorieItem="categorieItem"
+      ></CategorieView>
     </div>
+    <div v-else>
+      <div>Все категории...</div>
+    </div>
+
 
     <!-- ---------- Cards ---------- -->
     <div v-if="cards" id="items" class="cards inner">
