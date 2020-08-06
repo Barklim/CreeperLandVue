@@ -217,13 +217,18 @@ span.current-value {
     text-transform: none;
     display: none;
     position: absolute;
+    /*position: relative;*/
+    /*width: 80px;*/
+    /*left: 42px;*/
+    margin-left: 40px;
+
     z-index: 15;
     background: #fff;
     padding: 3px 0;
     color: #333;
     /* top: calc(100% + 10px); */
     /* left: -20px; */
-    left: 68px;
+    /*left: 68px;*/
     top: 106%;
     cursor: default;
     font-size: 13px;
@@ -253,7 +258,8 @@ span.current-value {
     border-width:0 6px 6px;
     border-color:transparent transparent #fff;
     top:-6px;
-    left:36px
+    left:36px;
+    /*left: 80px;*/
   }
 }
 .dropdown .options {

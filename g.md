@@ -6,6 +6,8 @@ https://tmonitoring.com/
 
 https://swiperjs.com/api/
 https://github.surmon.me/vue-awesome-swiper/
+!!!
+https://www.framer.com/motion/
 
 ## WorkFlow
 npm run dev
