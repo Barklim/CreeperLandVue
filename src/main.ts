@@ -13,13 +13,13 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 //import '../node_modules/swiper/dist/css/swiper.css'
 import '../node_modules/swiper/swiper.scss'
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { faTags, faTag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faFontAwesome, faVk, faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 console.log('%cWellcome! CreepLand 👋', 'color: cadetblue; background: aliceblue; font-size: 30px; font-family: Optima');
 
-library.add(faUserSecret, faFontAwesome, faVk, faDiscord);
+library.add(faTags, faTag, faFontAwesome, faVk, faDiscord);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

@@ -167,6 +167,10 @@ export default class CardViewContainer extends Vue {
 
 <style lang="scss" scoped>
 
+#categoriesItems {
+  text-align: left;  
+}
+
 /* ---------- Cards ---------- */
 
 .gray-area {
@@ -313,6 +317,7 @@ span.current-value {
 span.current-value {
     padding-bottom: 10px;
     display: inline-block;
+    display: unset;
 }
 
 /* ---------- Manual ---------- */

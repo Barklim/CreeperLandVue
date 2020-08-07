@@ -1,6 +1,5 @@
 <script lang="ts">
 import { Vue } from "vue-property-decorator";
-import { faJs, faVuejs } from "@fortawesome/free-brands-svg-icons";
 
 export default class FooterComponent extends Vue {}
 </script>
