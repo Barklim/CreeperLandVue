@@ -7,44 +7,32 @@ export default class CardView extends Vue {
   @Prop() categorieItem?: CategorieItem;
   private isActive: boolean = false;
   private curActive: number;
+  // Create variable for vuex, current state of categorie button; 
 
   methods() {
-    const toggle2 =  function(event) {
-      this.isActive = !this.isActive;
+      const toggle2 =  function(event) {
+        this.isActive = !this.isActive;
     }
   }
   toggle() {
     this.isActive = !this.isActive;
   }
   toggleActive(event) {
+
     //activeCategory
     const element = event.currentTarget;
-    const className = element.getAttribute('class');
     const itemHasClass = element.classList.contains('active');
 
     if (!itemHasClass) {
 
-      // Clear active class if it active
-      //const categoriesArr = element.parentNode.parentNode.childNodes;
-      //categoriesArr.forEach(element => element.childNodes[0].classList.remove('active'));
+      // Clear all active state if this is not this element
+      this.$parent.$children.forEach(element1 => element1.$el !== element ? element1.isActive = false : null );
 
       this.toggle();
     }
-
-
-    console.log('123');
-    console.log(this);
-    console.log(this.$parent.$children[5].isActive = true);
-    console.log(element);
-    console.log(element.parentNode.parentNode.childNodes)
   }
 
   mounted() {
-    console.log('TEST123');
-    console.log(this);
-    //console.log(this.categorieItem.id);
-    //console.log(this.categorieItem.name);
-
     // Category 'All'
     if(this.categorieItem.id === 1) {
       this.isActive = true;
