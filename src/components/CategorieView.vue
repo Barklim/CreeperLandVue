@@ -5,34 +5,70 @@ import { CategorieItem } from "../types";
 @Component
 export default class CardView extends Vue {
   @Prop() categorieItem?: CategorieItem;
-  active: boolean = false;
+  private isActive: boolean = false;
+  private curActive: number;
 
+  methods() {
+    const toggle2 =  function(event) {
+      this.isActive = !this.isActive;
+    }
+  }
   toggle() {
-    console.log('TEST');
+    this.isActive = !this.isActive;
+  }
+  toggleActive(event) {
+    //activeCategory
+    const element = event.currentTarget;
+    const className = element.getAttribute('class');
+    const itemHasClass = element.classList.contains('active');
+
+    if (!itemHasClass) {
+
+      // Clear active class if it active
+      //const categoriesArr = element.parentNode.parentNode.childNodes;
+      //categoriesArr.forEach(element => element.childNodes[0].classList.remove('active'));
+
+      this.toggle();
+    }
+
+
+    console.log('123');
     console.log(this);
+    console.log(this.$parent.$children[5].isActive = true);
+    console.log(element);
+    console.log(element.parentNode.parentNode.childNodes)
+  }
 
-    this.active = !this.active;
+  mounted() {
+    console.log('TEST123');
+    console.log(this);
+    //console.log(this.categorieItem.id);
+    //console.log(this.categorieItem.name);
 
-    //return this.active;
+    // Category 'All'
+    if(this.categorieItem.id === 1) {
+      this.isActive = true;
+    } else {
+      this.isActive = false;
+    }
+  }
+  computed() {
+    const test = function(event) {
+      return 'Пользователь: ' + this.name.toUpperCase();
+    }
   }
 
 }
 </script>
 
-// v-bind:class="[categorieItem.id === 1 ? '' : '', '']"
-//
-// class="button action"
-// :class="{ active }"
-//
-//      class="button action"
-//      v-bind:class="{ active: active }"
-//      v-on:click="toggle"
 <template>
 	<div class="categories buttons-group">
 
     <div 
       class="button action"
-      :class="toggle1"
+      v-bind:class="{ active: isActive }"
+      v-on:click="toggleActive"
+      v-bind:categorieId="categorieItem.id"
     >
       <span class="label">
         <font-awesome-icon class="tags icon" v-if="categorieItem.id === 1" icon="tags" />
@@ -124,13 +160,17 @@ span.icon {
     border-radius: 3px;
 }
 .button.action.active {
-    pointer-events: none;
+    /*pointer-events: none;*/
     background: #1b1c1d;
     color: #fff;
     cursor: pointer;
 }
+  
 .button.action:hover {
     background: #d6d7d8;
+}
+.button.action.active:hover {
+  background: #1b1c1d;
 }
 
 .button.action .label {

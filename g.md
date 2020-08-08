@@ -82,16 +82,25 @@ https://project365.design/
 
 ## Garbage
 
-vue добавить класс, click, обработка событий
-https://ru.vuejs.org/v2/guide/events.html
 vue ui
 i18n использоовать для валюты
-vue скролл по клику
-vue scroll click
+.
+vue computed style
+replace
+component vue js computed
+vue get attribute of element
+https://jsfiddle.net/crswll/553jtefh/
+typescript vue lifecycle
+vue js css compute
+фильтры вьюих/  hover
 
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3
 https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
+
+## Paper
+
+https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
 
 ## Lets Read
 
