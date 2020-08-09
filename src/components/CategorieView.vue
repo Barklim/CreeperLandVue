@@ -1,13 +1,27 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator';
 import { CategorieItem } from "../types";
+import { namespace } from 'vuex-class';
+const categoryModule = namespace('CategoryModule')
 
 @Component
 export default class CardView extends Vue {
   @Prop() categorieItem?: CategorieItem;
   private isActive: boolean = false;
   private curActive: number;
-  // Create variable for vuex, current state of categorie button; 
+  // Create variable for vuex, current state of categorie button;
+
+  @categoryModule.State
+  public categoryName!: string
+
+  @categoryModule.Getter
+  public nameUpperCase!: string
+
+  @categoryModule.Mutation
+  public setName!: (newName: string) => void
+
+  @categoryModule.Action
+  public updateName!: (newName: string) => void
 
   methods() {
       const toggle2 =  function(event) {
@@ -44,6 +58,13 @@ export default class CardView extends Vue {
     const test = function(event) {
       return 'Пользователь: ' + this.name.toUpperCase();
     }
+  }
+  created () {
+    console.log('tH123aaaaAVb')
+    console.log(this)
+    //this.updateName('Test')
+    //this.nameUpperCase
+    this.setName('tH123aaaaAVb')
   }
 
 }

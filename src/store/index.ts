@@ -1,9 +1,12 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import Articles from "./modules/articles";
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  modules: {Articles}
-});
+import Vue from 'vue'
+import Vuex from 'vuex'
+import User from '@/store/modules/user'
+import CategoryModule from '@/store/modules/categoryModule'
+Vue.use(Vuex)
+const store = new Vuex.Store({
+  modules: {
+    User,
+    CategoryModule
+  }
+})
+export default store

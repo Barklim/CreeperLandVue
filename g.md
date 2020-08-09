@@ -83,7 +83,8 @@ https://project365.design/
 ## Garbage
 
 vue ui
-i18n использоовать для валюты
+i18n использоовать для валюты или фильтр
+https://jsfiddle.net/coligo/cc28z5d3/
 .
 vue computed style
 replace
@@ -98,9 +99,16 @@ https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3
 https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
 
+## Docs
+
+https://www.npmjs.com/package/vuex-module-decorators
+https://www.npmjs.com/package/vuex-class
+
 ## Paper
 
 https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
+https://blog.logrocket.com/build-better-higher-order-components-with-vue-3/
+https://blog.logrocket.com/page/3/
 
 ## Lets Read
 

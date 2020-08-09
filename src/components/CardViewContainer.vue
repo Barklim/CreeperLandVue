@@ -2,19 +2,19 @@
 import { Vue, Component } from 'vue-property-decorator'
 import CardView from "../components/CardView.vue";
 import CategorieView from "../components/CategorieView.vue";
+import CardManual from "../components/CardManual.vue";
 import axios from "axios";
 
 @Component({
   components: {
     CardView,
-    CategorieView
+    CategorieView,
+    CardManual
   }
 })
 export default class CardViewContainer extends Vue {
   dataCat = {};
-
   show: string = '';
-
   categoriesbuttons = [ 
     {
       id: 1,
@@ -53,7 +53,6 @@ export default class CardViewContainer extends Vue {
   ]
 
   mounted() {
-    
     axios
       .get("https://api.trademc.org/shop.getItems?shop=129168&v=3")
       .then(response => {
@@ -69,16 +68,19 @@ export default class CardViewContainer extends Vue {
           };
         });
 
-        // foreEach don't work here, why?
+        // ForeEach don't work here, why?
         for (let i = 0; i < dataCategorie.length; i++) {
-
            this.categoriesbuttons.push(dataCategorie[i])
         }
+
+        // Let's push cards:
+        // cards
+        
 
       })
       .catch(error => {
         console.log(error);
-        this.errored = true;
+        //this.errored = true;
       });
   }
 
@@ -86,8 +88,10 @@ export default class CardViewContainer extends Vue {
 </script>
 
 <template>
+
   <div class="module-items gray-area" id="donat">
     <div class="wrapper">
+
       <h2>
         Донат 
         <span class="sub-text pseudo-opacity">Валюта: 
@@ -110,8 +114,7 @@ export default class CardViewContainer extends Vue {
             <span onclick="shop.currency.set('EUR')">🇪🇺 Евро</span></span>
           </span>
         </span>
-    </h2>
-
+      </h2>
 
     <!-- ---------- Categories ---------- -->
     <div v-if="categoriesbuttons" id="categoriesItems" class="cards inner">
@@ -124,7 +127,6 @@ export default class CardViewContainer extends Vue {
     <div v-else>
       <div>Все категории...</div>
     </div>
-
 
     <!-- ---------- Cards ---------- -->
     <div v-if="cards" id="items" class="cards inner">
@@ -139,26 +141,7 @@ export default class CardViewContainer extends Vue {
     </div>
 
     <!-- ---------- Manual ---------- -->
-    <div class="module-manual">
-      <h2 class="enable-padding">Инструкция по покупке</h2>
-      <div class="manual clear-fix">
-        <div class="content">
-          <strong>1. Выбор товара</strong>
-          <br>
-          Добавьте необходимые товары в корзину и заполните предлагаемую форму.
-          <br>
-          <br>
-          <strong>2. Способ оплаты</strong>
-          <br>
-          Выберите предпочитаемый способ оплаты и следуйте дальнейшим инструкциям.
-          <br>
-          <br>
-          <strong>3. Активация привилегии</strong>
-          <br>
-          Товар выдается после оплаты в автоматическом режиме и моментально.
-        </div>
-      </div>
-    </div>
+    <CardManual></CardManual>
 
     </div>
   </div>
@@ -318,21 +301,6 @@ span.current-value {
     padding-bottom: 10px;
     display: inline-block;
     display: unset;
-}
-
-/* ---------- Manual ---------- */
-
-.manual.clear-fix {
-  text-align: initial;
-  font-size: 13px;
-  line-height: 19.5px;
-}
-clear-fix {
-  &:after {
-    content: "";
-    display: block;
-    clear: both;
-  }
 }
 
 </style>
