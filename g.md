@@ -22,10 +22,10 @@ vue 4.4.6 => 4.1.2
 * fixed controlls
 * Donat
 
-* vuex
 * express
 * typeorm - pgsql
 * unitpay.money
+* Need currency Api
 
 * Использовать интернационализацию по рус укр енг
 
@@ -42,7 +42,7 @@ vue 4.4.6 => 4.1.2
   * У них были не большие недоработки в части иконок vk, discord
 * шрифт
 * HeaderComp в телефонах 'ссылки на мониторинги' должна открывать модалку с ссылками
-* клик в хедере для плавного спуска вниз, плавный ховер на валюту
+* Текущий тип валюты должен реактивно находится в сторадже
 
 Дискорд виджет как тут
   https://mcnova.ru/
@@ -106,6 +106,8 @@ console.log();
 
 https://www.npmjs.com/package/vuex-module-decorators
 https://www.npmjs.com/package/vuex-class
+AllFormats
+https://stackoverflow.com/questions/48273724/complete-list-of-all-different-intl-numberformats
 
 ## Paper
 

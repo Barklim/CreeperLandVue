@@ -5,6 +5,9 @@ import CategorieView from "../components/CategorieView.vue";
 import CardManual from "../components/CardManual.vue";
 import axios from "axios";
 
+import { namespace } from 'vuex-class';
+const categoryModule = namespace('CategoryModule')
+
 @Component({
   components: {
     CardView,
@@ -13,6 +16,13 @@ import axios from "axios";
   }
 })
 export default class CardViewContainer extends Vue {
+  @categoryModule.State
+  public categoryCurrency!: string
+  @categoryModule.Mutation
+  public setCurrency!: (newId: string) => void
+  @categoryModule.Mutation
+  public setPrefix!: (newPrefix: number) => void
+
   dataCat = {};
   show: string = '';
   categoriesbuttons = [ 
@@ -55,6 +65,16 @@ export default class CardViewContainer extends Vue {
     }
   ]
 
+  toggleCurrency(event) {
+    const element = event.currentTarget;
+    const currencyInnerHTML = element.innerHTML;
+    const prefixAttr = element.getAttribute('prefix');
+    this.setCurrency(currencyInnerHTML);
+    this.setPrefix(prefixAttr);
+    console.log('TEST 123');
+    console.log(prefixAttr);
+  }
+
   mounted() {
     axios
       .get("https://api.trademc.org/shop.getItems?shop=129168&v=3")
@@ -90,6 +110,9 @@ export default class CardViewContainer extends Vue {
           }
         }
 
+        console.log('abc')
+        console.log(curDataCat)
+
         newCards.length !== 0 ? this.cards = newCards : null;
       })
       .catch(error => {
@@ -118,14 +141,14 @@ export default class CardViewContainer extends Vue {
             @mouseleave="show = !show"
             :class="{ show }"
           >
-            <span class="current-value">🇷🇺 Российский рубль</span><span class="options"><span onclick="shop.currency.set('RUB')">
-              🇷🇺 Российский рубль
-            </span>
-            <span onclick="shop.currency.set('UAH')">🇺🇦 Украинская гривна</span>
-            <span onclick="shop.currency.set('BYN')">🇧🇾 Белорусский рубль</span>
-            <span onclick="shop.currency.set('KZT')">🇰🇿 Казахстанский тенге</span>
-            <span onclick="shop.currency.set('USD')">🇺🇸 Доллар США</span>
-            <span onclick="shop.currency.set('EUR')">🇪🇺 Евро</span></span>
+          <span class="current-value">{{this.categoryCurrency}}</span>
+          <span class="options">
+            <span v-on:click="toggleCurrency" prefix="RUB" onclick="shop.currency.set('RUB')">🇷🇺 Российский рубль</span>
+            <span v-on:click="toggleCurrency" prefix="UAH" onclick="shop.currency.set('UAH')">🇺🇦 Украинская гривна</span>
+            <span v-on:click="toggleCurrency" prefix="BYN" onclick="shop.currency.set('BYN')">🇧🇾 Белорусский рубль</span>
+            <span v-on:click="toggleCurrency" prefix="KZT" onclick="shop.currency.set('KZT')">🇰🇿 Казахстанский тенге</span>
+            <span v-on:click="toggleCurrency" prefix="USD" onclick="shop.currency.set('USD')">🇺🇸 Доллар США</span>
+            <span v-on:click="toggleCurrency" prefix="EUR" onclick="shop.currency.set('EUR')">🇪🇺 Евро</span></span>
           </span>
         </span>
       </h2>
@@ -275,12 +298,14 @@ span.current-value {
 }
 .dropdown .options {
   &:before {
-    content:"";
-    display:block;
-    height:10px;
-    position:absolute;
-    top:-10px;
-    width:100%
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60%;
+    z-index: -1;
   }
 }
 
@@ -322,7 +347,7 @@ span.current-value {
 }
 
 span.current-value {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     display: inline-block;
     display: unset;
 }

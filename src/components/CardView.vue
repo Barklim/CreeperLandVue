@@ -1,31 +1,96 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator';
 import { CardItem } from "../types";
+import { namespace } from 'vuex-class';
+const categoryModule = namespace('CategoryModule')
 
-@Component
+// Utils func:
+const toFixedFilter = function(value) {
+  // return '$' + value.toFixed(2)
+  return value.toFixed(2)
+}
+
+@Component({
+  filters: {
+    test(value, value1) {
+      const newValue = value/2;
+      const toFixedNumber = toFixedFilter(newValue)
+      return toFixedNumber;
+    }
+  }
+})
 export default class CardView extends Vue {
 	@Prop() cardItem?: CardItem;
-	// const cardImage = cardItem.image;
-	// cardImage: string = CardItem.image;
-	cardImage: string = 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg';
   errored: boolean = false;
-
-  //@Prop() cattegoriesButton1?;
+  @categoryModule.State
+  public prefix!: string
 
 	truncate (str: string, n: number) {	
 		// for truncate description 
 	}	
-
 	openModal(id: string, cardItem: any) {
 		// this open Modal
 		// @click=openModal(cardItem.id, cardItem)
 	}
-
-  mounted() {
-    console.log('TEST 123');
-    console.log(this.cardItem);
+  toFixed(value) {
+    // return '$' + value.toFixed(2)
+    return value.toFixed(2)
   }
+  formattedCur(cost: number) { 
 
+    let nFormat;
+    let convertCost;
+    let postFix;
+
+    // TODO: Need currency Api
+    switch (this.prefix) {
+      case "RUB":
+        nFormat = "ru-RU";
+        convertCost = cost;
+        postFix = "₽";
+        break;
+      case "UAH":
+        nFormat = "ru-RU";
+        convertCost = cost/2.66;
+        // convertCost = cost/2.7;
+        postFix = "₴";
+        break;
+      case "BYN":
+        nFormat = "ru-RU";
+        convertCost = cost/30;
+        postFix = "Br";
+        break;
+      case "KZT":
+        nFormat = "ru-RU";
+        convertCost = cost/0.175;
+        // convertCost = cost/0.17;
+        postFix = "₸";
+        break;
+      case "USD":
+        nFormat = "en-EN";
+        convertCost = cost/73.64;
+        // convertCost = cost/73.6;
+        postFix = "$";
+        break;
+      case "EUR":
+        nFormat = "de-DE";
+        convertCost = cost/87.18;
+        // convertCost = cost/87.2;
+        postFix = "€";
+        break;
+      default:
+        nFormat = "ru-RU";
+        convertCost = cost;
+        postFix = "₽";
+    }
+
+    //const formattedCost = new Intl.NumberFormat(nFormat, { style: 'currency', currency: this.prefix }).format(convertCost)
+    //const formattedCost = this.toFixed(convertCost);
+    //const formattedCost = convertCost.toLocaleString('ru-RU') + " " + postFix;
+    const formattedCost = new Intl.NumberFormat(nFormat, { currency: this.prefix, maximumFractionDigits: 2 }).format(convertCost) + " " + postFix;
+
+    return formattedCost;
+  } 
 }
 </script>
 
@@ -33,8 +98,7 @@ export default class CardView extends Vue {
 	<div class="">
 
     <div class="card animate">
-    	<!-- <div class="image"> -->
-        <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
+      <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>
     	<div class="description">
     		<div class="sub-text">
@@ -42,13 +106,8 @@ export default class CardView extends Vue {
           {{cardItem.category}}
     		</div>
     		<div class="name">{{cardItem.name}}</div>
-    		<div class="cost">{{cardItem.cost}}</div>
+    		<div class="cost">{{formattedCur(cardItem.cost)}}</div>
     	</div>
-<!-- 			<div>
-				{{cardItem.title}}
-			</div>
-			<div :style="{ backgroundImage: `url('${cardItem.image}')` }" >
-			</div> -->
 		</div>
 
 	</div>
@@ -85,6 +144,14 @@ export default class CardView extends Vue {
     animation-fill-mode: both;
     animation-duration: .75s;
 }
+.cards:not(.small) .card {
+      &:hover {
+        .name {
+          color: #21ba45;
+        }
+      }
+}
+
 .cards .card {
 	@media screen and (min-width: 480px) {
 	    /*width: calc(50% - 20px);*/
@@ -128,8 +195,8 @@ export default class CardView extends Vue {
     position: absolute;
     /*width: 100%;*/
     /*height: 100%;*/
-    /* !!! */
-    height: 74%;
+    width: 100%;
+    height: calc(100% - 52px);
     color: #fff;
     top: 0;
     z-index: 1;
@@ -139,6 +206,20 @@ export default class CardView extends Vue {
     flex-wrap: wrap;
     -ms-flex-line-pack: end;
     align-content: flex-end;
+    text-align: left;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 60%;
+      z-index: -1;
+      background: rgba(0,0,0,.6);
+      background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8));
+    }
 }
 .cards .card .description {
     padding: 26px;
@@ -147,6 +228,10 @@ export default class CardView extends Vue {
 
 .cards.inner .card .description .cost .old-cost, .cards.inner .card .description .sub-text {
     opacity: .8;
+}
+.cards .card .description .cost {
+    font-weight: 700;
+    /*font-size: 120%;*/
 }
 .cards.inner .card .description>:not(.sale) {
     width: 100%;

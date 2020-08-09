@@ -64,10 +64,6 @@ export default class CardView extends Vue {
       return 'Пользователь: ' + this.name.toUpperCase();
     }
   }
-  created () {
-    //this.setName({ value: 'tH123aaaaAVb1' })
-    //this.setName('tH123aaaaAVb')
-  }
 
 }
 </script>
