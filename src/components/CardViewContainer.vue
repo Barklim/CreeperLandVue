@@ -24,27 +24,30 @@ export default class CardViewContainer extends Vue {
 
   cards = [
     {
-      id:1, 
       category: 'Привелегии',
-      title: 'Дракон Края',
+      id:1,
+      type: 1,
+      name: 'Дракон Края',
+      image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
+      actions: 0,
+      cost: 0,
+      description: "[b]Выживание[/b]\n- 7 точек дома\n- 7 приватов по 1 500 000 блоков\n- x2.5 множитель добычи валюты с мобов\n- 54 слота в рюкзаке\n- /workbench виртуальный верстак\n- /enderchest виртуальный эндер-сундук\n- /feed покормить себя\n- /heal исцелить себя\n- /back возврат назад (или на место смерти)\n- /ptime приватное время\n- /kit Dragon\n\n[b]Whitelist[/b]\n- Доступ\n\n[i]Навсегда![/i]"
+    },
+    {
+      category: 'Привелегии',
+      id:2,
+      type: 1,
+      name: 'Дракон Края',
       image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
       actions: 0,
       cost: 0,
       description: '<strong>Выживание</strong><br>- 7 точек дома<br>- 7 приватов по 1 500 000 блоков<br>- x2.5 множитель добычи валюты с мобов<br>- 54 слота в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /back возврат назад (или на место смерти)<br>- /ptime приватное время<br>- /kit Dragon<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>'
     },
     {
-      id:2, 
       category: 'Привелегии',
-      title: 'Дракон Края',
-      image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
-      actions: 0,
-      cost: 0,
-      description: '<strong>Выживание</strong><br>- 7 точек дома<br>- 7 приватов по 1 500 000 блоков<br>- x2.5 множитель добычи валюты с мобов<br>- 54 слота в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /back возврат назад (или на место смерти)<br>- /ptime приватное время<br>- /kit Dragon<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>'
-    },
-    {
-      id:3, 
-      category: 'Привелегии',
-      title: 'Дракон Края',
+      id:3,
+      type: 1,
+      name: 'Дракон Края',
       image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
       actions: 0,
       cost: 0,
@@ -70,13 +73,24 @@ export default class CardViewContainer extends Vue {
 
         // ForeEach don't work here, why?
         for (let i = 0; i < dataCategorie.length; i++) {
-           this.categoriesbuttons.push(dataCategorie[i])
+          this.categoriesbuttons.push(dataCategorie[i])
         }
 
-        // Let's push cards:
-        // cards
-        
+         // Let's push cards:
+        const newCards = [];
+        for (let i = 0; i < curDataCat.categories.length; i++) {
 
+          const curCategoryName = curDataCat.categories[i].name;
+          const curItems = curDataCat.categories[i].items;
+
+          for (let j = 0; j < curItems.length; j++) {
+            const cardObj = curItems[j];
+            cardObj.category = curCategoryName;
+            newCards.push(cardObj);
+          }
+        }
+
+        newCards.length !== 0 ? this.cards = newCards : null;
       })
       .catch(error => {
         console.log(error);
@@ -117,7 +131,7 @@ export default class CardViewContainer extends Vue {
       </h2>
 
     <!-- ---------- Categories ---------- -->
-    <div v-if="categoriesbuttons" id="categoriesItems" class="cards inner">
+    <div v-if="categoriesbuttons" id="categoriesItems" class="">
       <CategorieView
         v-for="categorieItem in categoriesbuttons"
         v-bind:key="categorieItem.id" 
@@ -150,11 +164,21 @@ export default class CardViewContainer extends Vue {
 
 <style lang="scss" scoped>
 
+/* ---------- Cards ---------- */
+
 #categoriesItems {
-  text-align: left;  
+  text-align: left;
+  margin-bottom: 30px;
+}
+.cards {
+    margin-left: -20px;
+    margin-top: -20px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
-/* ---------- Cards ---------- */
 
 .gray-area {
     background: #f8f9fa;

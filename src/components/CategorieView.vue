@@ -19,6 +19,8 @@ export default class CardView extends Vue {
 
   @categoryModule.Mutation
   public setName!: (newName: string) => void
+  @categoryModule.Mutation
+  public setId!: (newId: string) => void
 
   @categoryModule.Action
   public updateName!: (newName: string) => void
@@ -30,6 +32,8 @@ export default class CardView extends Vue {
   }
   toggle() {
     this.isActive = !this.isActive;
+    //this.setName(this.categorieItem.name);
+    this.setId(this.categorieItem.id);
   }
   toggleActive(event) {
 
@@ -49,7 +53,8 @@ export default class CardView extends Vue {
   mounted() {
     // Category 'All'
     if(this.categorieItem.id === 1) {
-      this.isActive = true;
+      //this.isActive = true;
+      this.toggle();
     } else {
       this.isActive = false;
     }
@@ -60,11 +65,8 @@ export default class CardView extends Vue {
     }
   }
   created () {
-    console.log('tH123aaaaAVb')
-    console.log(this)
-    //this.updateName('Test')
-    //this.nameUpperCase
-    this.setName('tH123aaaaAVb')
+    //this.setName({ value: 'tH123aaaaAVb1' })
+    //this.setName('tH123aaaaAVb')
   }
 
 }
@@ -117,7 +119,7 @@ span.icon {
 }
 
 .categories {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 .buttons-group {
     /*margin-top: -8px;*/

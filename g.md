@@ -99,6 +99,9 @@ https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3
 https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
 
+console.log('TEST 123');
+console.log();
+
 ## Docs
 
 https://www.npmjs.com/package/vuex-module-decorators
