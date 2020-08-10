@@ -22,8 +22,13 @@ const toFixedFilter = function(value) {
 export default class CardView extends Vue {
 	@Prop() cardItem?: CardItem;
   errored: boolean = false;
+  private isShow: boolean = false;
+
   @categoryModule.State
   public prefix!: string
+
+  @categoryModule.State
+  public categoryId!: number
 
 	truncate (str: string, n: number) {	
 		// for truncate description 
@@ -116,13 +121,32 @@ export default class CardView extends Vue {
 
     return formattedCost;
   } 
+  showCard(id: number) {
+
+    console.log('234')
+    console.log(id)
+    console.log(this.categoryId)
+
+    let isShowCard;
+
+      if(this.categoryId === 1) {
+        isShowCard = 'true';
+      } else {
+        isShowCard = 'false';
+      }
+      return isShowCard;
+    } 
 }
 </script>
 
+// v-bind:class="{ show: this.showCard(cardItem.id) }"
 <template>
 	<div class="">
 
-    <div class="card animate">
+    <div 
+      class="card animate"
+      v-bind:class="this.showCard(cardItem.id)"
+    >
       <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>
     	<div class="description">

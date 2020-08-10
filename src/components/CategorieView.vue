@@ -14,8 +14,8 @@ export default class CardView extends Vue {
   @categoryModule.State
   public categoryName!: string
 
-  @categoryModule.Getter
-  public nameUpperCase!: string
+  // @categoryModule.Getter
+  // public nameUpperCase!: string
 
   @categoryModule.Mutation
   public setName!: (newName: string) => void
@@ -26,8 +26,8 @@ export default class CardView extends Vue {
   public updateName!: (newName: string) => void
 
   methods() {
-      const toggle2 =  function(event) {
-        this.isActive = !this.isActive;
+    const toggle2 =  function(event) {
+      this.isActive = !this.isActive;
     }
   }
   toggle() {
@@ -37,7 +37,6 @@ export default class CardView extends Vue {
   }
   toggleActive(event) {
 
-    //activeCategory
     const element = event.currentTarget;
     const itemHasClass = element.classList.contains('active');
 

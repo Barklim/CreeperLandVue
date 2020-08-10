@@ -110,9 +110,6 @@ export default class CardViewContainer extends Vue {
           }
         }
 
-        // console.log('abc')
-        // console.log(curDataCat)
-
         newCards.length !== 0 ? this.cards = newCards : null;
       })
       .catch(error => {
@@ -245,7 +242,8 @@ h2>span {
     color: #bbbcbd;
 }
 span.current-value {
-    color: #21ba45;  
+    color: #21ba45;
+    cursor: pointer;
 }
 .dropdown .options {
     text-transform: none;
