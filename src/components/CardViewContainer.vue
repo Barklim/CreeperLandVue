@@ -110,8 +110,8 @@ export default class CardViewContainer extends Vue {
           }
         }
 
-        console.log('abc')
-        console.log(curDataCat)
+        // console.log('abc')
+        // console.log(curDataCat)
 
         newCards.length !== 0 ? this.cards = newCards : null;
       })

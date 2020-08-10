@@ -33,9 +33,28 @@ export default class CardView extends Vue {
 		// @click=openModal(cardItem.id, cardItem)
 	}
   toFixed(value) {
-    // return '$' + value.toFixed(2)
     return value.toFixed(2)
   }
+  isSale(saleObj: any) {
+
+    let oldCost = '';
+    let percent = '';
+    let isSale = false;
+
+    if((typeof saleObj === "object" || typeof saleObj === 'function') && (saleObj !== null)) {
+      oldCost = saleObj.old_cost;
+      percent = saleObj.percent;
+      isSale = true;
+    }
+
+    // console.log('TEST 123');
+    // console.log(saleObj);
+    // console.log(oldCost);
+    // console.log(percent);
+
+    return isSale;
+  }
+  // formattedSale(cost: number) 
   formattedCur(cost: number) { 
 
     let nFormat;
@@ -48,6 +67,7 @@ export default class CardView extends Vue {
         nFormat = "ru-RU";
         convertCost = cost;
         postFix = "₽";
+         // postFix = "";
         break;
       case "UAH":
         nFormat = "ru-RU";
@@ -87,7 +107,12 @@ export default class CardView extends Vue {
     //const formattedCost = new Intl.NumberFormat(nFormat, { style: 'currency', currency: this.prefix }).format(convertCost)
     //const formattedCost = this.toFixed(convertCost);
     //const formattedCost = convertCost.toLocaleString('ru-RU') + " " + postFix;
-    const formattedCost = new Intl.NumberFormat(nFormat, { currency: this.prefix, maximumFractionDigits: 2 }).format(convertCost) + " " + postFix;
+    const formattedCost = new Intl.NumberFormat(nFormat, 
+      {
+        style:'decimal',
+        currency: this.prefix,minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(convertCost) + " " + postFix;
 
     return formattedCost;
   } 
@@ -101,12 +126,21 @@ export default class CardView extends Vue {
       <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>
     	<div class="description">
+        <div class="sale" v-if="isSale(cardItem.sale)">
+          <div class="sale__size">-20%</div>
+        </div>
+        <div v-else></div>
     		<div class="sub-text">
     			<font-awesome-icon class="tags icon" icon="tag" />
           {{cardItem.category}}
     		</div>
     		<div class="name">{{cardItem.name}}</div>
-    		<div class="cost">{{formattedCur(cardItem.cost)}}</div>
+    		<div class="cost">
+          {{formattedCur(cardItem.cost)}}
+          <span class="old-cost" v-if="isSale(cardItem.sale)">
+            {{formattedCur(cardItem.sale.old_cost)}}
+          </span>
+        </div>
     	</div>
 		</div>
 
@@ -195,7 +229,8 @@ export default class CardView extends Vue {
     position: absolute;
     /*width: 100%;*/
     /*height: 100%;*/
-    width: 100%;
+    /*width: 100%;*/
+    width: calc(100% - 52px);
     height: calc(100% - 52px);
     color: #fff;
     top: 0;
@@ -257,6 +292,48 @@ export default class CardView extends Vue {
     word-break: normal;
     word-break: break-word;
     transition: all .3s ease;
+}
+
+.cards .card .description .cost .old-cost {
+    font-size: 80%;
+    opacity: .3;
+    position: relative;
+    display: inline-block;
+    text-decoration: line-through;
+}
+
+.cards.inner .card .description .sale {
+    top: 16px;
+    right: 16px;
+}
+.cards .card .description .sale {
+    position: absolute;
+    z-index: 10;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 50px;
+    -wekbit-box-shadow: 0 5px 17px rgba(255,74,74,.4);
+    box-shadow: 0 5px 17px rgba(255,74,74,.4);
+}
+.cards .card .description .sale>:last-child {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    /*padding-right: 16px;*/
+    padding-right: 10px;
+}
+.cards .card .description .sale__size {
+    background: #ff4a4a;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    padding-left: 16px;
+    font-size: 1.2em;
+}
+.cards .card .description .sale>* {
+    padding: 6px 10px;
+}
+.sale {
+    font-size: 14px;
 }
 
 </style>
