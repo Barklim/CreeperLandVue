@@ -94,6 +94,7 @@ https://jsfiddle.net/crswll/553jtefh/
 typescript vue lifecycle
 vue js css compute
 фильтры вьюих/  hover
+vue animate
 
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3

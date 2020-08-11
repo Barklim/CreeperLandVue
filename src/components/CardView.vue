@@ -23,6 +23,7 @@ export default class CardView extends Vue {
 	@Prop() cardItem?: CardItem;
   errored: boolean = false;
   private isShow: boolean = false;
+  private displayNone1: string = "";
 
   @categoryModule.State
   public prefix!: string
@@ -120,12 +121,27 @@ export default class CardView extends Vue {
       }).format(convertCost) + " " + postFix;
 
     return formattedCost;
-  } 
+  }
+  doTimeOut() {
+    console.log('TEST !!! 2')
+    console.log(this)
+
+    setTimeout(function () {
+        // this.basketAddSuccess = false
+
+        console.log('TEST !!! 3')
+         console.log(this)
+         this.displayNone1;
+
+    }.bind(this), 2000)
+  }
   showCard(id: number) {
 
-    console.log('234')
-    console.log(id)
-    console.log(this.categoryId)
+    // console.log('234')
+    // console.log(id)
+    // console.log(this.categoryId)
+    // console.log(this.cardItem.name)
+    // console.log(this.cardItem)
 
     let isShowCard;
 
@@ -135,6 +151,39 @@ export default class CardView extends Vue {
         isShowCard = 'false';
       }
       return isShowCard;
+    }
+    displayNone() {
+
+    // console.log('TEST 234 1')
+    // console.log(id)
+    // console.log(this.categoryId)
+    // console.log(this.cardItem.name)
+    // console.log(this.cardItem)
+
+    console.log('TEST !!! 1')
+    console.log(this)
+
+    let displayNone;
+
+    // const doTimeOut = function (argument) {
+    //   displayNone = 'displayNone';
+    //   this.displayNone1 = 'displayNone';
+    //       console.log('TEST !!!')
+    // console.log(this)
+
+    //   return displayNone;
+    // }
+
+    //setTimeout(doTimeOut, 1000);
+
+      if(this.categoryId === 1) {
+        // displayNone = 'displayNone';
+        displayNone = '';
+      } else {
+        displayNone = 'displayNone';
+        this.doTimeOut();
+      }
+      return displayNone;
     } 
 }
 </script>
@@ -145,7 +194,7 @@ export default class CardView extends Vue {
 
     <div 
       class="card animate"
-      v-bind:class="this.showCard(cardItem.id)"
+      v-bind:class="[this.showCard(cardItem.id), this.displayNone(), displayNone1]"
     >
       <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>
@@ -156,7 +205,7 @@ export default class CardView extends Vue {
         <div v-else></div>
     		<div class="sub-text">
     			<font-awesome-icon class="tags icon" icon="tag" />
-          {{cardItem.category}}
+          {{cardItem.categoryName}}
     		</div>
     		<div class="name">{{cardItem.name}}</div>
     		<div class="cost">
@@ -359,5 +408,40 @@ export default class CardView extends Vue {
 .sale {
     font-size: 14px;
 }
+
+.displayNone {
+  display: none;
+}
+/*
+.displayNone {
+  -webkit-animation: fadeout 2s cubic-bezier(0, 1.15, 0.2, 1) alternate 2;
+  -moz-animation: fadeout 2s cubic-bezier(0, 1.15, 0.2, 1) alternate 2;
+  animation: fadeout 1s cubic-bezier(0, 1.15, 0.2, 1) alternate 1;
+}
+@-webkit-keyframes fadeout {
+    from { opacity: 0}
+    to { opacity: 1; display: none !important; }
+}
+@-moz-keyframes fadeout {
+    from { opacity: 0 }
+    to { opacity: 1; display: none !important;}
+}
+@keyframes fadeout {
+    from { opacity: 0; }
+    to { opacity: 1; display: none !important; }
+}
+@-webkit-keyframes fadeout {
+    0% { opacity: 0}
+    100% { opacity: 1; display: none !important; }
+}
+@-moz-keyframes fadeout {
+    0% { opacity: 0 }
+    100% { opacity: 1; display: none !important;}
+}
+@keyframes fadeout {
+    0% { opacity: 0; }
+    100% { opacity: 1; display: none !important; }
+}
+*/
 
 </style>
