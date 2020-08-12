@@ -122,37 +122,19 @@ export default class CardView extends Vue {
 
     return formattedCost;
   }
-  doTimeOut() {
-    console.log('TEST !!! 2')
-    console.log(this)
-
-    setTimeout(function () {
-        // this.basketAddSuccess = false
-
-        console.log('TEST !!! 3')
-         console.log(this)
-         this.displayNone1;
-
-    }.bind(this), 2000)
+  zoomOut() {
+    // console.log('TEST !!! 2')
+    // console.log(this)
+    this.displayNone1 = "displayNone";
+    // console.log(this)
   }
-  showCard(id: number) {
-
-    // console.log('234')
-    // console.log(id)
-    // console.log(this.categoryId)
-    // console.log(this.cardItem.name)
-    // console.log(this.cardItem)
-
-    let isShowCard;
-
-      if(this.categoryId === 1) {
-        isShowCard = 'true';
-      } else {
-        isShowCard = 'false';
-      }
-      return isShowCard;
-    }
-    displayNone() {
+  zoomIn() {
+    // console.log('TEST !!! 2')
+    // console.log(this)
+    this.displayNone1 = "";
+    // console.log(this)
+  }
+  displayNone(card) {
 
     // console.log('TEST 234 1')
     // console.log(id)
@@ -162,28 +144,17 @@ export default class CardView extends Vue {
 
     console.log('TEST !!! 1')
     console.log(this)
+    console.log(card)
 
     let displayNone;
 
-    // const doTimeOut = function (argument) {
-    //   displayNone = 'displayNone';
-    //   this.displayNone1 = 'displayNone';
-    //       console.log('TEST !!!')
-    // console.log(this)
-
-    //   return displayNone;
-    // }
-
-    //setTimeout(doTimeOut, 1000);
-
       if(this.categoryId === 1) {
         // displayNone = 'displayNone';
-        displayNone = '';
+        setTimeout(this.zoomIn, 1000);
       } else {
-        displayNone = 'displayNone';
-        this.doTimeOut();
+        setTimeout(this.zoomOut, 1000);
       }
-      return displayNone;
+      return "";
     } 
 }
 </script>
@@ -194,7 +165,7 @@ export default class CardView extends Vue {
 
     <div 
       class="card animate"
-      v-bind:class="[this.showCard(cardItem.id), this.displayNone(), displayNone1]"
+      v-bind:class="[this.displayNone(cardItem), displayNone1]"
     >
       <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>

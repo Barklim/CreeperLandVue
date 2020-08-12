@@ -43,6 +43,7 @@ vue 4.4.6 => 4.1.2
 * шрифт
 * HeaderComp в телефонах 'ссылки на мониторинги' должна открывать модалку с ссылками
 * Текущий тип валюты должен реактивно находится в сторадже
+* Анимация карт как и в оригинале не "синхронна" для быстрых перекликов, нужно для setTimeOut stopPropagaion дописать или типо того
 
 Дискорд виджет как тут
   https://mcnova.ru/
@@ -95,10 +96,15 @@ typescript vue lifecycle
 vue js css compute
 фильтры вьюих/  hover
 vue animate
+vue set time out
 
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3
 https://api.trademc.org/shop.getLastPurchases?shops=129168&count=10&v=3
+
+how setTimout for class binding without vuex and vue-animate?
+https://laracasts.com/discuss/channels/vue/how-to-set-timeout-for-class-binding-with-vuejs?page=1
+https://www.it-swarm.dev/ru/javascript/vue-ekvivalentno-settimeout/825597538/
 
 console.log('TEST 123');
 console.log();
