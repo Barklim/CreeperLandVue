@@ -159,7 +159,6 @@ export default class CardView extends Vue {
 }
 </script>
 
-// v-bind:class="{ show: this.showCard(cardItem.id) }"
 <template>
 	<div class="">
 
