@@ -48,6 +48,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * vue cli
 * vuex
+* cypress.io
 * element ui
 * typescript
 * express
