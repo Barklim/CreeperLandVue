@@ -2,8 +2,8 @@
 
 {
   "response": {
-    "players": 4,
-    "max_players": 300,
-    "version": ""
+  "players": 4,
+  "max_players": 300,
+  "version": ""
   }
 }

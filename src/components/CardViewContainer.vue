@@ -145,12 +145,12 @@ export default class CardViewContainer extends Vue {
           >
           <span class="current-value">{{this.categoryCurrency}}</span>
           <span class="options">
-            <span v-on:click="toggleCurrency" prefix="RUB" onclick="shop.currency.set('RUB')">🇷🇺 Российский рубль</span>
-            <span v-on:click="toggleCurrency" prefix="UAH" onclick="shop.currency.set('UAH')">🇺🇦 Украинская гривна</span>
-            <span v-on:click="toggleCurrency" prefix="BYN" onclick="shop.currency.set('BYN')">🇧🇾 Белорусский рубль</span>
-            <span v-on:click="toggleCurrency" prefix="KZT" onclick="shop.currency.set('KZT')">🇰🇿 Казахстанский тенге</span>
-            <span v-on:click="toggleCurrency" prefix="USD" onclick="shop.currency.set('USD')">🇺🇸 Доллар США</span>
-            <span v-on:click="toggleCurrency" prefix="EUR" onclick="shop.currency.set('EUR')">🇪🇺 Евро</span></span>
+            <span v-on:click="toggleCurrency" prefix="RUB">🇷🇺 Российский рубль</span>
+            <span v-on:click="toggleCurrency" prefix="UAH">🇺🇦 Украинская гривна</span>
+            <span v-on:click="toggleCurrency" prefix="BYN">🇧🇾 Белорусский рубль</span>
+            <span v-on:click="toggleCurrency" prefix="KZT">🇰🇿 Казахстанский тенге</span>
+            <span v-on:click="toggleCurrency" prefix="USD">🇺🇸 Доллар США</span>
+            <span v-on:click="toggleCurrency" prefix="EUR">🇪🇺 Евро</span></span>
           </span>
         </span>
       </h2>

@@ -24,6 +24,8 @@ export default class CardView extends Vue {
   errored: boolean = false;
   private isShow: boolean = false;
   private displayNone1: string = "";
+  private zoomIn: string = "zoomIn";
+  private zoomOut: string = "";
 
   @categoryModule.State
   public prefix!: string
@@ -53,14 +55,8 @@ export default class CardView extends Vue {
       isSale = true;
     }
 
-    // console.log('TEST 123');
-    // console.log(saleObj);
-    // console.log(oldCost);
-    // console.log(percent);
-
     return isSale;
   }
-  // formattedSale(cost: number) 
   formattedCur(cost: number) { 
 
     let nFormat;
@@ -122,40 +118,41 @@ export default class CardView extends Vue {
 
     return formattedCost;
   }
-  zoomOut() {
-    // console.log('TEST !!! 2')
-    // console.log(this)
-    this.displayNone1 = "displayNone";
-    // console.log(this)
-  }
-  zoomIn() {
-    // console.log('TEST !!! 2')
-    // console.log(this)
+  zoomIn1() {
     this.displayNone1 = "";
-    // console.log(this)
   }
-  displayNone(card) {
+  zoomOut1() {
+    this.displayNone1 = "displayNone";
+  }
+  displayNone() {
 
-    // console.log('TEST 234 1')
-    // console.log(id)
-    // console.log(this.categoryId)
-    // console.log(this.cardItem.name)
-    // console.log(this.cardItem)
+    // Need for updated lifecycle
+    if(this.categoryId === 1) {
+      // this.isShow = "";
+    }
 
-    console.log('TEST !!! 1')
-    console.log(this)
-    console.log(card)
+    return "";
+  }
+  updated() {
 
-    let displayNone;
+    if(this.categoryId === 1) {
+      this.zoomIn = "zoomIn";
+      this.zoomOut = "";
+      this.displayNone1 = '';
+    }
 
-      if(this.categoryId === 1) {
-        // displayNone = 'displayNone';
-        setTimeout(this.zoomIn, 1000);
-      } else {
-        setTimeout(this.zoomOut, 1000);
+    if (this.categoryId === this.cardItem.categoryParentId) {
+      this.zoomIn = "zoomIn";
+      this.zoomOut = "";
+      setTimeout(this.zoomIn1, 350);
+    } else {
+      if (this.categoryId !== 1) {
+        this.zoomIn = "";
+        this.zoomOut = "zoomOut";
+        setTimeout(this.zoomOut1, 350);
       }
-      return "";
-    } 
+    }
+  }
 }
 </script>
 
@@ -164,7 +161,7 @@ export default class CardView extends Vue {
 
     <div 
       class="card animate"
-      v-bind:class="[this.displayNone(cardItem), displayNone1]"
+      v-bind:class="[this.displayNone(), displayNone1, zoomIn, zoomOut]"
     >
       <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>
@@ -219,7 +216,8 @@ export default class CardView extends Vue {
 }
 .animate {
     animation-fill-mode: both;
-    animation-duration: .75s;
+    /*animation-duration: .75s;*/
+    animation-duration: .6s;
 }
 .cards:not(.small) .card {
       &:hover {
@@ -400,6 +398,7 @@ export default class CardView extends Vue {
     from { opacity: 0; }
     to { opacity: 1; display: none !important; }
 }
+
 @-webkit-keyframes fadeout {
     0% { opacity: 0}
     100% { opacity: 1; display: none !important; }
@@ -413,5 +412,44 @@ export default class CardView extends Vue {
     100% { opacity: 1; display: none !important; }
 }
 */
+
+.animate {
+    animation-fill-mode: both;
+    animation-duration: .75s;
+}
+.zoomIn {
+    animation-name: a;
+}
+@-webkit-keyframes a {
+    0% { opacity: 0; transform: scale3d(.3,.3,.3); }
+    50% { opacity: 1; display: none !important; }
+}
+@-moz-keyframes a {
+    0% { opacity: 0; transform: scale3d(.3,.3,.3); }
+    50% { opacity: 1; display: none !important; }
+}
+@keyframes a {
+    0% { opacity: 0; transform: scale3d(.3,.3,.3); }
+    50% { opacity: 1; display: none !important; }
+}
+
+.zoomOut {
+    animation-name: b;
+}
+@-webkit-keyframes b {
+    0% { opacity: 1; }
+    50% { opacity: 0; transform: scale3d(.3,.3,.3); }
+    100% { opacity: 0;}
+}
+@-moz-keyframes b {
+    0% { opacity: 1; }
+    50% { opacity: 0; transform: scale3d(.3,.3,.3); }
+    100% { opacity: 0;}
+}
+@keyframes b {
+    0% { opacity: 1; }
+    50% { opacity: 0; transform: scale3d(.3,.3,.3); }
+    100% { opacity: 0;}
+}
 
 </style>
