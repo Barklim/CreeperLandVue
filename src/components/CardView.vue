@@ -34,6 +34,8 @@ export default class CardView extends Vue {
   public categoryId!: number
   @modal.Mutation
   public setModal!: (newState: boolean) => void
+  @modal.Mutation
+  public setCardItem!: (newCardItem) => void
 
 	truncate (str: string, n: number) {	
 		// for truncate description 
@@ -169,7 +171,7 @@ export default class CardView extends Vue {
     	</div>
     	<div 
         class="description"
-        @click="setModal(true)"
+        @click="setModal(true); setCardItem(cardItem)"
       >
         <div class="sale" v-if="isSale(cardItem.sale)">
           <div class="sale__size">-20%</div>
