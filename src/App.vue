@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="noindex">
+      <ModalComponent></ModalComponent>
+    </div>
     <HeaderComponent
       v-if="$route.name != 'Login' && $route.name != '404'"
     ></HeaderComponent>
@@ -17,6 +20,7 @@
 <script>
 import HeaderComponent from "./components/layout/HeaderComponent";
 import FooterComponent from "./components/layout/FooterComponent";
+import ModalComponent from "./components/noIndex/Modal";
 
 import "@/assets/style/global.scss";
 
@@ -24,7 +28,8 @@ export default {
   name: "app",
   components: {
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ModalComponent
   }
 };
 </script>

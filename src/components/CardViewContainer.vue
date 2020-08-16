@@ -74,8 +74,6 @@ export default class CardViewContainer extends Vue {
     const prefixAttr = element.getAttribute('prefix');
     this.setCurrency(currencyInnerHTML);
     this.setPrefix(prefixAttr);
-    console.log('TEST 123');
-    console.log(prefixAttr);
   }
 
   mounted() {

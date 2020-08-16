@@ -5,6 +5,7 @@ class CategoryModule extends VuexModule {
   public categoryId: number = 0;
   public categoryCurrency: string = '🇷🇺 Российский рубль';
   public prefix: string = 'RUB';
+  
   @Mutation
   public setName(newName: string): void {
     this.categoryName = newName

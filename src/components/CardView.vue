@@ -2,7 +2,8 @@
 import { Vue, Prop, Component } from 'vue-property-decorator';
 import { CardItem } from "../types";
 import { namespace } from 'vuex-class';
-const categoryModule = namespace('CategoryModule')
+const categoryModule = namespace('CategoryModule');
+const modal = namespace('Modal');
 
 // Utils func:
 const toFixedFilter = function(value) {
@@ -29,9 +30,10 @@ export default class CardView extends Vue {
 
   @categoryModule.State
   public prefix!: string
-
   @categoryModule.State
   public categoryId!: number
+  @modal.Mutation
+  public setModal!: (newState: boolean) => void
 
 	truncate (str: string, n: number) {	
 		// for truncate description 
@@ -165,7 +167,10 @@ export default class CardView extends Vue {
     >
       <div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }">
     	</div>
-    	<div class="description">
+    	<div 
+        class="description"
+        @click="setModal(true)"
+      >
         <div class="sale" v-if="isSale(cardItem.sale)">
           <div class="sale__size">-20%</div>
         </div>
