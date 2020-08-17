@@ -8,6 +8,8 @@
 ## User info
 
 [Spa CreepLand (Website)](https://creeper.land/) - for mc donats.
+[Server (github repository)](https://creeper.land/)
+g.md - file in repository for develop info.
 
 # Test
 
@@ -46,16 +48,17 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Bootstraped
 
-* vue cli
+* vue
 * vuex
 * cypress.io
 * element ui
 * typescript
+
 * express
 * typeorm - pgsql
 * unitpay.money
 
 ## Meta
 
-G-team:
+Team:
 - [Github](https://barklim.github.io/) - Full-stack developer Github page
