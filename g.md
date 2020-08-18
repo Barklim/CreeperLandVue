@@ -6,6 +6,8 @@ https://tmonitoring.com/
 
 https://swiperjs.com/api/
 https://github.surmon.me/vue-awesome-swiper/
+https://fontawesome.com/icons?d=gallery
+https://github.com/FortAwesome/vue-fontawesome
 !!!
 https://www.framer.com/motion/
 
@@ -100,6 +102,8 @@ vue js css compute
 фильтры вьюих/  hover
 vue animate
 vue set time out
+animate.css vue
+https://animate.style/
 
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3

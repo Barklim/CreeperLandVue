@@ -2,6 +2,7 @@
   <div id="app">
     <div class="noindex">
       <ModalComponent></ModalComponent>
+      <FixedCart></FixedCart>
     </div>
     <HeaderComponent
       v-if="$route.name != 'Login' && $route.name != '404'"
@@ -20,6 +21,7 @@
 <script>
 import HeaderComponent from "./components/layout/HeaderComponent";
 import FooterComponent from "./components/layout/FooterComponent";
+import FixedCart from "./components/noIndex/FixedCart";
 import ModalComponent from "./components/noIndex/Modal";
 
 import "@/assets/style/global.scss";
@@ -29,7 +31,8 @@ export default {
   components: {
     HeaderComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    FixedCart
   }
 };
 </script>
