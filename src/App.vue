@@ -2,6 +2,7 @@
   <div id="app">
     <div class="noindex">
       <ModalComponent></ModalComponent>
+      <FixedVk></FixedVk>
       <FixedCart></FixedCart>
     </div>
     <HeaderComponent
@@ -21,6 +22,7 @@
 <script>
 import HeaderComponent from "./components/layout/HeaderComponent";
 import FooterComponent from "./components/layout/FooterComponent";
+import FixedVk from "./components/noIndex/FixedVk";
 import FixedCart from "./components/noIndex/FixedCart";
 import ModalComponent from "./components/noIndex/Modal";
 
@@ -32,6 +34,7 @@ export default {
     HeaderComponent,
     FooterComponent,
     ModalComponent,
+    FixedVk,
     FixedCart
   }
 };
