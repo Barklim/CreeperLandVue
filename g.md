@@ -21,8 +21,8 @@ vue 4.4.6 => 4.1.2
 
 ## TODO
 
-* fixed controlls
 * Donat
+* Среднее время ответа – 5 минут (Прописать другой домен и интересно как шрифт серым сделали)
 
 ркон
 readme.md
@@ -104,6 +104,13 @@ vue animate
 vue set time out
 animate.css vue
 https://animate.style/
+how iframe to localhost
+iframe как использовать
+как забрать с чужого сайта iframe
+iframe Access-Control-Allow-Origin
+iframe widget_community_messages.php
+vk iframe пример
+на странице 2а iframe
 
 https://api.trademc.org/shop.getOnline?shop=129168&v=3
 https://api.trademc.org/shop.getItems?shop=129168&v=3

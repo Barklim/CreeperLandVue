@@ -35,7 +35,17 @@ export default class FooterComponent extends Vue {}
           </div>
           <div class="widget-vk">
               <div class="widget-area">
-                <div id="vk_groups" style="width: 300px; height: 160.4px; background: none;"><iframe name="fXD6c7f3" frameborder="0" src="https://vk.com/widget_community.php?app=0&amp;width=300px&amp;_ver=1&amp;gid=196036402&amp;mode=1&amp;color1=ffffff&amp;color2=&amp;color3=&amp;class_name=&amp;no_cover=1&amp;url=https%3A%2F%2Fcreeper.land%2F&amp;referrer=&amp;title=Creeper%20Land&amp;1739bb4cb51" width="300" height="141" scrolling="no" id="vkwidget2" style="overflow: hidden; height: 160.4px;"></iframe>
+                <div id="vk_groups" style="width: 300px; height: 160.4px; background: none;">
+                  <iframe 
+                    name="fXD6c7f3" 
+                    frameborder="0" 
+                    src="https://vk.com/widget_community.php?app=0&amp;width=300px&amp;_ver=1&amp;gid=196036402&amp;mode=1&amp;color1=ffffff&amp;color2=&amp;color3=&amp;class_name=&amp;no_cover=1&amp;url=https%3A%2F%2Fcreeper.land%2F&amp;referrer=&amp;title=Creeper%20Land&amp;1739bb4cb51" 
+                    width="300" 
+                    height="141" 
+                    scrolling="no" 
+                    id="vkwidget2" 
+                    style="overflow: hidden; height: 160.4px;">
+                  </iframe>
               </div>
             </div>
           </div>
