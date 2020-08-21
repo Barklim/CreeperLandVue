@@ -6,10 +6,12 @@ const modal = namespace('Modal');
 
 @Component({})
 export default class Modal extends Vue {
+	
 	private isVisible: string = "none";
 	private updateProps: string = "";
   private zoomIn: string = "";
   private zoomOut: string = "";
+  private addButtonHide: string = "";
 
   @categoryModule.State
   public prefix!: string
@@ -21,7 +23,11 @@ export default class Modal extends Vue {
   public setModal!: (newState: boolean) => void
 
   clickMarginModal(e) {
-    e.target.className === 'close modal-close' ? this.setModal(false) : null; 
+    e.target.className === 'close modal-close' ? this.setModal(false) : null;
+
+    // if (!e.target.classList.contains('js-add-to-cart')) {
+    // 	this.addButtonHide = ''
+    // }
   }
   hideBodyScroll() {
   	window.document.body.style.overflow = "hidden"
@@ -112,6 +118,9 @@ export default class Modal extends Vue {
 
     return formattedCost;
   }
+  addButtonClick() {
+  	this.addButtonHide = 'addButtonHide'
+  }
 
   mounted() {
   	this.modal ? this.isVisible = "block": this.isVisible = "none";
@@ -160,11 +169,17 @@ export default class Modal extends Vue {
 			            {{formattedCur(cardItem.sale.old_cost)}}
 			          </span>
               </div>
-              <div class="js-add-to-cart button themed-button">Добавить в корзину</div>
+              <div 
+                class="js-add-to-cart button themed-button"
+                v-bind:class="this.addButtonHide"
+                @click="this.addButtonClick"
+              >
+                Добавить в корзину
+              </div>
               <div class="description">
               	<strong>Выживание</strong><br>- 6 точек дома<br>- 6 приватов по 1 250 000 блоков<br>- x2 множитель добычи валюты с мобов<br>- 45 слотов в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /kit Wither<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>
               </div>
-              <h1>Это как парсить о_0 ? </h1>
+              <h1>Это как парсить о_0 ? (На сервере возвращать человеческий html, с классами и т.п.)</h1>
             	<div class="description">
               	{{cardItem.description}}
               </div>
@@ -518,6 +533,9 @@ body {
     top: 50%;
     background: rgb(51, 51, 51);
   }
+}
+.addButtonHide {
+	display: none;
 }
 
 </style>

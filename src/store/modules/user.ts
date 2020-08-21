@@ -1,7 +1,10 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 @Module({ namespaced: true, name: 'test' })
+
 class User extends VuexModule {
+
   public name: string = ''
+
   @Mutation
   public setName(newName: string): void {
     this.name = newName
@@ -11,4 +14,5 @@ class User extends VuexModule {
     this.context.commit('setName', newName)
   }
 }
+
 export default User
