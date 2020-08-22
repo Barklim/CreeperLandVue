@@ -9,7 +9,7 @@ class Cart extends VuexModule {
 
 	public cartArr: any = [];
 	//public cartArr: Array<any> = [];
-	
+
   // public id: number = 0;
   // public cost: number = 0;
   // public quantityCount: number = 0;
@@ -20,16 +20,17 @@ class Cart extends VuexModule {
   // Setter
   @Mutation
   public setCartArr(newCartItem: CartItem): void {
-    // this.cartArr = this.cartArr.push(newCartItem)
     this.cartArr.push(newCartItem)
   }
-  // Getters
+  // Getter
   @Mutation
   public getById(getterId: number) {
+  	// dont work :(
     // this.cartArr = this.cartArr.push(newCartItem);
     // return state.articles.find(item => item.id === parseInt(id));
     return 2;
   }
+  // Getter function dont work :(
   // get getById1(getterId: number) {
   //   // this.cartArr = this.cartArr.push(newCartItem);
   //   return 2;

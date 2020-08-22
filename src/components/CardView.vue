@@ -139,7 +139,7 @@ export default class CardView extends Vue {
   }
   updated() {
 
-    if(this.categoryId === 1) {
+    if (this.categoryId === 1) {
       this.zoomIn = "zoomIn";
       this.zoomOut = "";
       this.displayNone1 = '';
