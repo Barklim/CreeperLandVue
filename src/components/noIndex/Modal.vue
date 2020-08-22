@@ -1,17 +1,27 @@
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Prop, Component } from 'vue-property-decorator'
+
+import { CartItem } from "../../types";
+import { getById } from "../../utils";
+
 import { namespace } from 'vuex-class';
 const categoryModule = namespace('CategoryModule');
 const modal = namespace('Modal');
+const cart = namespace('Cart');
 
 @Component({})
 export default class Modal extends Vue {
+
+	@Prop() cartItem?: CartItem;
+	//getById(cartObj, id: boolean)
 	
 	private isVisible: string = "none";
 	private updateProps: string = "";
   private zoomIn: string = "";
   private zoomOut: string = "";
   private addButtonHide: string = "";
+  private test1: boolean;
+  private test: boolean;
 
   @categoryModule.State
   public prefix!: string
@@ -21,6 +31,12 @@ export default class Modal extends Vue {
   public cardItem
   @modal.Mutation
   public setModal!: (newState: boolean) => void
+
+  @cart.State
+  public cartArr
+  @cart.Mutation
+  public setCartArr!: (newCartItem: CartItem) => void
+
 
   clickMarginModal(e) {
     e.target.className === 'close modal-close' ? this.setModal(false) : null;
@@ -126,6 +142,31 @@ export default class Modal extends Vue {
   	this.modal ? this.isVisible = "block": this.isVisible = "none";
   	this.modal ? this.hideBodyScroll()   : this.showBodyScroll();
   	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
+
+  	const itemObj = {
+  	  id: 0,
+      cost: 0,
+      quantityCount: 0,
+      categoryName: '',
+      image: '',
+      name: ''
+  	};
+
+  	this.setCartArr(itemObj);
+
+  	const itemObj1 = {
+  	  id: 1,
+      cost: 0,
+      quantityCount: 0,
+      categoryName: '',
+      image: '',
+      name: ''
+  	};
+
+  	this.setCartArr(itemObj1);
+
+  	const b = getById(this.cartArr, 0);
+  	console.log(b)
   }
   updated() {
   	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
