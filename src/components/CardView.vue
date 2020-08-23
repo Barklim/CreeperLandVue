@@ -1,9 +1,13 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator';
+
 import { CardItem } from "../types";
+import { getById } from "../utils";
+
 import { namespace } from 'vuex-class';
 const categoryModule = namespace('CategoryModule');
 const modal = namespace('Modal');
+const cart = namespace('Cart');
 
 // Utils func:
 const toFixedFilter = function(value) {
@@ -33,9 +37,14 @@ export default class CardView extends Vue {
   @categoryModule.State
   public categoryId!: number
   @modal.Mutation
+  public setCardItem!: (newCardItem) => void
+  @modal.Mutation
   public setModal!: (newState: boolean) => void
   @modal.Mutation
-  public setCardItem!: (newCardItem) => void
+  public setIsInBasket!: (newState: boolean) => void
+
+  @cart.State
+  public cartArr
 
 	truncate (str: string, n: number) {	
 		// for truncate description 
@@ -137,6 +146,17 @@ export default class CardView extends Vue {
 
     return "";
   }
+  hasItemInBasket() {
+
+    // console.log('TEST 1234')
+    // console.log(this.cartArr)
+    // console.log(this.cardItem)
+    // console.log(getById)
+    // console.log(getById(this.cartArr, this.cardItem.id))
+
+    this.setIsInBasket(!!getById(this.cartArr, this.cardItem.id))
+  }
+
   updated() {
 
     if (this.categoryId === 1) {
@@ -171,7 +191,7 @@ export default class CardView extends Vue {
     	</div>
     	<div 
         class="description"
-        @click="setModal(true); setCardItem(cardItem)"
+        @click="setModal(true); setCardItem(cardItem); hasItemInBasket()"
       >
         <div class="sale" v-if="isSale(cardItem.sale)">
           <div class="sale__size">-20%</div>

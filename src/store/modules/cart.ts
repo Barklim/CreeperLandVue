@@ -9,6 +9,7 @@ class Cart extends VuexModule {
 
 	public cartArr: any = [];
 	//public cartArr: Array<any> = [];
+	public isOpen: boolean = false;
 
   // public id: number = 0;
   // public cost: number = 0;

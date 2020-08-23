@@ -13,37 +13,72 @@ const cart = namespace('Cart');
 export default class Modal extends Vue {
 
 	@Prop() cartItem?: CartItem;
-	//getById(cartObj, id: boolean)
 	
 	private isVisible: string = "none";
 	private updateProps: string = "";
   private zoomIn: string = "";
   private zoomOut: string = "";
   private addButtonHide: string = "";
-  private test1: boolean;
-  private test: boolean;
+  private addButtonHide1: string = "";
+  // private showButtonSecond: boolean = false;
+  // private rerender: boolean = true;
+  private display1: string = "";
+  private display2: string = "";
+  private changeState: boolean = false;
 
   @categoryModule.State
   public prefix!: string
+
+  @modal.State
+  public cardItem
   @modal.State
   public modal!: boolean
   @modal.State
-  public cardItem
+  public isInBasket!: boolean
   @modal.Mutation
   public setModal!: (newState: boolean) => void
+  @modal.Mutation
+  public setIsInBasket!: (newState: boolean) => void
 
   @cart.State
   public cartArr
   @cart.Mutation
   public setCartArr!: (newCartItem: CartItem) => void
 
-
   clickMarginModal(e) {
     e.target.className === 'close modal-close' ? this.setModal(false) : null;
+
+    // this.showButtonSecond = false;
+
+  	// console.log('TEST !!!');
+  	// console.log(this.isInBasket);
+
+  	// console.log(this.cartArr);
+	 	// console.log(this.cardItem.id);
+	 	// console.log(getById(this.cartArr, this.cardItem.id));
+
+	 	this.setIsInBasket(false);
+
+	 	this.display1 = "";
+	 	this.display2 = "";
+
+	 	// !!getById(this.cartArr, this.cardItem.id) ? this.addButtonHide1 = 'addButtonHide' : ''
+	 	// this.addButtonHide1 = 'addButtonHide';
 
     // if (!e.target.classList.contains('js-add-to-cart')) {
     // 	this.addButtonHide = ''
     // }
+  }
+  clickClose() {
+  	this.setModal(false);
+
+  	// this.showButtonSecond = false;
+  	// this.addButtonHide1 = 'addButtonHide';
+
+  	this.setIsInBasket(false)
+
+	 	this.display1 = "";
+	 	this.display2 = "";
   }
   hideBodyScroll() {
   	window.document.body.style.overflow = "hidden"
@@ -55,6 +90,9 @@ export default class Modal extends Vue {
   	this.isVisible = "none";
 
 		this.modal ? this.hideBodyScroll() : this.showBodyScroll();
+
+		this.addButtonHide = '';
+		this.addButtonHide1 = '';
   }
   hideModal() {
   	setTimeout(this.hideModal1, 250)
@@ -134,14 +172,71 @@ export default class Modal extends Vue {
 
     return formattedCost;
   }
-  addButtonClick() {
-  	this.addButtonHide = 'addButtonHide'
+  addButtonClick(e) {
+  	// this.addButtonHide = 'addButtonHide'
+  	this.setCartArr(this.cardItem)
+  	this.setIsInBasket(true);
+  	// this.rerender = false;
+
+  	// this.showButtonSecond = true;
+  	// this.showButtonSecond = true;
+  	// this.addButtonHide1 = ""
+
+  	// this.display1 = "addButtonHide"
+  	// this.display2 = ""
+  	this.changeState = true;
+  	// this.changeState = false;
+
+  	// e.target.className = 'addButtonHide'
+  	// document.getElementById('firstButton').className = 'addButtonHide'
+  	// document.getElementById('secondButton').classList.remove('addButtonHide')
+  }
+  addButtonClass() {
+  	// this.isInBasket ? this.addButtonHide = 'addButtonHide' : this.addButtonHide = ''; 
+
+  	// const isInBasket;
+
+    // let isInBasket;
+
+    // this.isInBasket ? isInBasket = 'addButtonHide' : isInBasket = '';
+
+  	// return isInBasket
+  }
+  computeFirst() {
+  	// console.log('TEST abc')
+  	// console.log(this.display1)
+  	// console.log(this.isInBasket)
+
+  	this.display1 = this.isInBasket ? 'addButtonHide': '';
+
+  	// return this.isInBasket ? 'addButtonHide': '';
+
+   // 	this.display1 = this.isInBasket ? 'addButtonHide': ''; 
+
+  	// return this.display1;
+  }
+  computeSecond() {
+  	// console.log('TEST abc')
+  	// console.log(this.isInBasket)
+
+  	this.display2 = this.isInBasket ? '': 'addButtonHide';
+
+  	// return this.isInBasket ? '': 'addButtonHide';
+
+  	// this.display2 = this.isInBasket ? '': 'addButtonHide'
+
+  	// return this.display2;
   }
 
-  mounted() {
+  mounted() { 
   	this.modal ? this.isVisible = "block": this.isVisible = "none";
   	this.modal ? this.hideBodyScroll()   : this.showBodyScroll();
   	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
+
+  	this.addButtonHide = ''
+  	this.addButtonHide1 = 'addButtonHide'
+  	// this.isInBasket ? this.addButtonHide = '' : this.addButtonHide = 'addButtonHide'
+  	// this.isInBasket ? this.addButtonHide1 = 'addButtonHide' : this.addButtonHide1 = ''
 
   	const itemObj = {
   	  id: 0,
@@ -152,7 +247,7 @@ export default class Modal extends Vue {
       name: ''
   	};
 
-  	this.setCartArr(itemObj);
+  	// this.setCartArr(itemObj);
 
   	const itemObj1 = {
   	  id: 1,
@@ -163,16 +258,56 @@ export default class Modal extends Vue {
       name: ''
   	};
 
-  	this.setCartArr(itemObj1);
-
-  	const b = getById(this.cartArr, 0);
-  	console.log(b)
+  	// this.setCartArr(itemObj1);
+  	// const b = getById(this.cartArr, 0);
   }
   updated() {
+
+  	// console.log('TEST')
+  	// console.log(this.changeState)
+  	// console.log(this.display1)
+  	if (this.changeState) {
+  		this.changeState = false;
+
+  		console.log('HEHEHE')
+
+  		this.computeFirst()
+  		this.computeSecond()
+
+	  	this.display1 = "addButtonHide"
+  	  // this.display2 = ""
+  	  this.display2 = "addButtonHide"
+  	}
+  	// console.log(this.cartArr)
+  	// console.log(this.cardItem.id)
+  	// console.log(!!getById(this.cartArr, this.cardItem.id))
+  	// console.log('TEST')
+  	// console.log(this.isInBasket)
+
+  	// const isItemInCart = !getById(this.cartArr, this.cardItem.id)
+
+  	// !this.isInBasket ? this.rerender = false : this.rerender = true;
+
+  	// console.log(this.isInBasket)
+  	// this.isInBasket ? this.addButtonHide = 'addButtonHide' : this.addButtonHide = ''; 
+
+	 	// this.isInBasket ? this.addButtonHide = '' : this.addButtonHide = 'addButtonHide'
+  	// this.isInBasket ? this.addButtonHide1 = 'addButtonHide' : this.addButtonHide1 = ''
+
   	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
   	this.modal ? this.zoomOut = ""  : this.zoomOut = "zoomOut";
   	this.modal ? this.hideBodyScroll() : null;
   	this.modal ? this.isVisible = "block" : this.hideModal();
+
+  	// console.log('TEST 1234')
+
+  	// console.log(this.cardItem)
+  	// console.log(this.cardItem.id)
+
+  	// const hasCart = getById(this.cartArr, this.cardItem.id);
+  	// console.log(hasCart)
+
+  	//hasCart!! ? this.addButtonHide = 'addButtonHide' : this.addButtonHide = '';  
   }
 }
 </script>
@@ -181,14 +316,14 @@ export default class Modal extends Vue {
 	<div
 	  class="modal"
 	  v-bind:class="[isVisible, modal]"
-	  v-bind:style="{ display: isVisible}"
+	  v-bind:style="{display: isVisible}"
 	  @click="this.clickMarginModal"
 	 >
   	<div class="layer">
       <div class="close modal-close">
       	<div 
       	  class="close-button"
-      	  @click="setModal(false)"
+      	  @click="clickClose"
       	 ></div>
       </div>
       <div 
@@ -212,10 +347,25 @@ export default class Modal extends Vue {
               </div>
               <div 
                 class="js-add-to-cart button themed-button"
-                v-bind:class="this.addButtonHide"
+                v-bind:class="[this.computeFirst(), display1]"
                 @click="this.addButtonClick"
+                id="firstButton"
               >
                 Добавить в корзину
+              </div>
+
+              <div 
+                v-bind:class="[this.computeSecond(), display2]"
+                id="secondButton"
+               >
+	              <div 
+                  class="js-add-to-cart button themed-button"
+                >
+                  В корзине
+                </div>
+                <div>
+                	Выбрать еще
+                </div>
               </div>
               <div class="description">
               	<strong>Выживание</strong><br>- 6 точек дома<br>- 6 приватов по 1 250 000 блоков<br>- x2 множитель добычи валюты с мобов<br>- 45 слотов в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /kit Wither<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>

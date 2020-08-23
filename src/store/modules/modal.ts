@@ -3,16 +3,21 @@ import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
 
 class Modal extends VuexModule {
 
-  public modal: boolean = false;
   public cardItem = {};
+  public modal: boolean = false;
+  public isInBasket: boolean = false;
 
+  @Mutation
+  public setCardItem(newCardItem: boolean): void {
+    this.cardItem = newCardItem
+  }
   @Mutation
   public setModal(newStateModal: boolean): void {
     this.modal = newStateModal
   }
   @Mutation
-  public setCardItem(newCardItem: boolean): void {
-    this.cardItem = newCardItem
+  public setIsInBasket(newStateModal: boolean): void {
+    this.isInBasket = newStateModal
   }
 }
 
