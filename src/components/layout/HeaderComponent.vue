@@ -21,8 +21,10 @@ export default class HeaderComponent extends Vue {
   }
 
   scrollTo() {
-    //console.log(document.getElementById('donat').scrollIntoView());
-    document.getElementById('donat').scrollIntoView({behavior: "smooth"});
+    // this.$refs dont worked :(
+    if (document.getElementById('donat') !== null) {
+      document.getElementById('donat').scrollIntoView({behavior: "smooth"});
+    }
   }
 }
 </script>

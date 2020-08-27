@@ -274,9 +274,9 @@ export default class Modal extends Vue {
   		this.computeFirst()
   		this.computeSecond()
 
-	  	this.display1 = "addButtonHide"
+	  	// this.display1 = "addButtonHide"
   	  // this.display2 = ""
-  	  this.display2 = "addButtonHide"
+  	  // this.display2 = "addButtonHide"
   	}
   	// console.log(this.cartArr)
   	// console.log(this.cardItem.id)
@@ -347,7 +347,7 @@ export default class Modal extends Vue {
               </div>
               <div 
                 class="js-add-to-cart button themed-button"
-                v-bind:class="[this.computeFirst(), display1]"
+                v-bind:class="{ addButtonHide: display1 }"
                 @click="this.addButtonClick"
                 id="firstButton"
               >
@@ -355,7 +355,7 @@ export default class Modal extends Vue {
               </div>
 
               <div 
-                v-bind:class="[this.computeSecond(), display2]"
+                v-bind:class="{ addButtonHide: display2 }"
                 id="secondButton"
                >
 	              <div 

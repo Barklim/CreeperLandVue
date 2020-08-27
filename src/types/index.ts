@@ -1,5 +1,6 @@
 export interface CardItem {
   id: number,
+  categoryParentId: number,
   category: string,
   title: string,
   image: string,

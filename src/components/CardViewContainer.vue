@@ -83,7 +83,8 @@ export default class CardViewContainer extends Vue {
 
         this.dataCat = response.data.response;
 
-        const curDataCat = this.dataCat
+        // const curDataCat = this.dataCat
+        const curDataCat = response.data.response;
 
         const dataCategorie = curDataCat.categories.map(function(item) {
           return { 

@@ -1,4 +1,13 @@
 ## Rt
+
+https://creeper.land/
+http://localhost:8080/
+type: 0
+https://ru.vuejs.org/v2/guide/class-and-style.html
+размонтировать модалку через удаление эелемента, а макс как бы сделал
+сначала засунуть все зумауты в функцию в конец в аппдейте
+https://coursehunter.net/course/sozdanie-sayta-na-vue-js
+
 https://coursehunter.net/course/sozdanie-sayta-na-vue-js
 https://github.com/slastonm
 http://minecraftrating.ru/
@@ -12,8 +21,11 @@ https://github.com/FortAwesome/vue-fontawesome
 https://www.framer.com/motion/
 
 ## WorkFlow
+
 npm run dev
 npm run serve
+
+deploy.sh
 
 node 12.14.0 => 12.16.0
 npm 6.13.4 => 6.13.4
@@ -26,6 +38,8 @@ vue 4.4.6 => 4.1.2
 * connect rcon
 * Скачать скрипт для js, чтобы каждый раз не прогружался
 * ссылки на мониторинги
+
+* header comp document.getEl...
 
 ркон
 readme.md
@@ -90,6 +104,12 @@ https://project365.design/
 * http://localhost:8080/
 
 ## Garbage
+
+ts.config -> use strict
+headerComp
+//
+gh pages vue
+https://cli.vuejs.org/ru/guide/deployment.html#github-pages
 
 vue ui
 i18n использоовать для валюты или фильтр

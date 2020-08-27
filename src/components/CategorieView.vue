@@ -20,7 +20,7 @@ export default class CardView extends Vue {
   @categoryModule.Mutation
   public setName!: (newName: string) => void
   @categoryModule.Mutation
-  public setId!: (newId: string) => void
+  public setId!: (newId: number) => void
 
   @categoryModule.Action
   public updateName!: (newName: string) => void
@@ -33,6 +33,8 @@ export default class CardView extends Vue {
   toggle() {
     this.isActive = !this.isActive;
     //this.setName(this.categorieItem.name);
+
+    // const idConverted = Number(this.categorieItem.id);
     this.setId(this.categorieItem.id);
   }
   toggleActive(event) {
@@ -43,7 +45,13 @@ export default class CardView extends Vue {
     if (!itemHasClass) {
 
       // Clear all active state if this is not this element
-      this.$parent.$children.forEach(element1 => element1.$el !== element ? element1.isActive = false : null );
+      const elDoIsActive = function (element1) {
+        if (element1.isActive !== undefined) {
+          element1.isActive = false;
+        }
+      }
+
+      this.$parent.$children.forEach(element1 => element1.$el !== element ? elDoIsActive(element1) : null );
 
       this.toggle();
     }
@@ -58,11 +66,11 @@ export default class CardView extends Vue {
       this.isActive = false;
     }
   }
-  computed() {
-    const test = function(event) {
-      return 'Пользователь: ' + this.name.toUpperCase();
-    }
-  }
+  // computed() {
+  //   const test = function(event) {
+  //     return 'Пользователь: ' + this.name.toUpperCase();
+  //   }
+  // }
 
 }
 </script>
