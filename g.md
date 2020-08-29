@@ -26,6 +26,7 @@ npm run dev
 npm run serve
 
 deploy.sh
+./deploy.sh
 
 node 12.14.0 => 12.16.0
 npm 6.13.4 => 6.13.4

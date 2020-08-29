@@ -57,7 +57,7 @@ export default class Modal extends Vue {
 	 	// console.log(this.cardItem.id);
 	 	// console.log(getById(this.cartArr, this.cardItem.id));
 
-	 	this.setIsInBasket(false);
+	 	// this.setIsInBasket(false);
 
 	 	this.display1 = "";
 	 	this.display2 = "";
@@ -75,7 +75,7 @@ export default class Modal extends Vue {
   	// this.showButtonSecond = false;
   	// this.addButtonHide1 = 'addButtonHide';
 
-  	this.setIsInBasket(false)
+  	// this.setIsInBasket(false)
 
 	 	this.display1 = "";
 	 	this.display2 = "";
@@ -266,10 +266,15 @@ export default class Modal extends Vue {
   	// console.log('TEST')
   	// console.log(this.changeState)
   	// console.log(this.display1)
+
+    console.log('HEHEHE')
+    console.log(this.isInBasket)
+
   	if (this.changeState) {
   		this.changeState = false;
 
-  		console.log('HEHEHE')
+  		// console.log('HEHEHE')
+    //   console.log(this.isInBasket)
 
   		this.computeFirst()
   		this.computeSecond()
@@ -347,7 +352,7 @@ export default class Modal extends Vue {
               </div>
               <div 
                 class="js-add-to-cart button themed-button"
-                v-bind:class="{ addButtonHide: display1 }"
+                v-bind:class="{ addButtonHide: this.isInBasket }"
                 @click="this.addButtonClick"
                 id="firstButton"
               >
@@ -355,7 +360,7 @@ export default class Modal extends Vue {
               </div>
 
               <div 
-                v-bind:class="{ addButtonHide: display2 }"
+                v-bind:class="{ addButtonHide: !this.isInBasket }"
                 id="secondButton"
                >
 	              <div 
