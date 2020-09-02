@@ -216,8 +216,6 @@ export default class Modal extends Vue {
   	// return this.display1;
   }
   computeSecond() {
-  	// console.log('TEST abc')
-  	// console.log(this.isInBasket)
 
   	this.display2 = this.isInBasket ? '': 'addButtonHide';
 
@@ -263,12 +261,8 @@ export default class Modal extends Vue {
   }
   updated() {
 
-  	// console.log('TEST')
-  	// console.log(this.changeState)
-  	// console.log(this.display1)
-
-    console.log('HEHEHE')
-    console.log(this.isInBasket)
+    // console.log('HEHEHE')
+    // console.log(this.isInBasket)
 
   	if (this.changeState) {
   		this.changeState = false;
