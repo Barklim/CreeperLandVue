@@ -152,6 +152,12 @@ export default class Modal extends Vue {
 
   	this.changeState = true;
   }
+  addButtonMoreClick(e) {
+    this.setModal(false);
+
+    this.display1 = "";
+    this.display2 = "";
+  }
   computeFirst() {
 
   	this.display1 = this.isInBasket ? 'addButtonHide': ''; 
@@ -235,12 +241,13 @@ export default class Modal extends Vue {
                 v-bind:class="{ addButtonHide: !this.isInBasket }"
                 id="secondButton"
                >
-	              <div 
-                  class="js-add-to-cart button themed-button"
-                >
+	              <div class="js-add-to-cart button themed-button">
                   В корзине
                 </div>
-                <div>
+                <div 
+                  @click="this.addButtonMoreClick" 
+                  class="button1 button1_shift"
+                >
                 	Выбрать еще
                 </div>
               </div>
@@ -468,7 +475,8 @@ export default class Modal extends Vue {
   font-weight: 700;
   /*font-size: 120%;*/
 }
-.modal .layer>.content>.item .content .button {
+.modal .layer>.content>.item .content .button,
+.modal .layer>.content>.item .content .button1, {
     margin-top: 20px;
 }
 body.buttons-default.green-buttons .themed-button {
@@ -550,6 +558,37 @@ body {
 	    /* background-size: 200% 1px; */
 	    box-shadow: 0 5px 17px rgba(0, 83, 20, 0.4);
     }
+}
+.button1 {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    padding: 14px 24px;
+    text-decoration: none!important;
+    font-weight: 700;
+    border: 0;
+    outline: 0;
+    vertical-align: top;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 70%;
+    position: relative;
+    white-space: nowrap;
+    transition: all .1s ease;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    border-radius: 25px;
+
+    &:hover {
+      background: rgba(0,0,0,.05);
+    }
+}
+.button1_shift {
+   margin-left: 8px;
 }
 
 .zoomIn {
