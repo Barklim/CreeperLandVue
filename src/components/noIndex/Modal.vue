@@ -15,13 +15,10 @@ export default class Modal extends Vue {
 	@Prop() cartItem?: CartItem;
 	
 	private isVisible: string = "none";
-	private updateProps: string = "";
   private zoomIn: string = "";
   private zoomOut: string = "";
   private addButtonHide: string = "";
   private addButtonHide1: string = "";
-  // private showButtonSecond: boolean = false;
-  // private rerender: boolean = true;
   private display1: string = "";
   private display2: string = "";
   private changeState: boolean = false;
@@ -48,34 +45,11 @@ export default class Modal extends Vue {
   clickMarginModal(e) {
     e.target.className === 'close modal-close' ? this.setModal(false) : null;
 
-    // this.showButtonSecond = false;
-
-  	// console.log('TEST !!!');
-  	// console.log(this.isInBasket);
-
-  	// console.log(this.cartArr);
-	 	// console.log(this.cardItem.id);
-	 	// console.log(getById(this.cartArr, this.cardItem.id));
-
-	 	// this.setIsInBasket(false);
-
 	 	this.display1 = "";
 	 	this.display2 = "";
-
-	 	// !!getById(this.cartArr, this.cardItem.id) ? this.addButtonHide1 = 'addButtonHide' : ''
-	 	// this.addButtonHide1 = 'addButtonHide';
-
-    // if (!e.target.classList.contains('js-add-to-cart')) {
-    // 	this.addButtonHide = ''
-    // }
   }
   clickClose() {
   	this.setModal(false);
-
-  	// this.showButtonSecond = false;
-  	// this.addButtonHide1 = 'addButtonHide';
-
-  	// this.setIsInBasket(false)
 
 	 	this.display1 = "";
 	 	this.display2 = "";
@@ -173,57 +147,18 @@ export default class Modal extends Vue {
     return formattedCost;
   }
   addButtonClick(e) {
-  	// this.addButtonHide = 'addButtonHide'
   	this.setCartArr(this.cardItem)
   	this.setIsInBasket(true);
-  	// this.rerender = false;
 
-  	// this.showButtonSecond = true;
-  	// this.showButtonSecond = true;
-  	// this.addButtonHide1 = ""
-
-  	// this.display1 = "addButtonHide"
-  	// this.display2 = ""
   	this.changeState = true;
-  	// this.changeState = false;
-
-  	// e.target.className = 'addButtonHide'
-  	// document.getElementById('firstButton').className = 'addButtonHide'
-  	// document.getElementById('secondButton').classList.remove('addButtonHide')
-  }
-  addButtonClass() {
-  	// this.isInBasket ? this.addButtonHide = 'addButtonHide' : this.addButtonHide = ''; 
-
-  	// const isInBasket;
-
-    // let isInBasket;
-
-    // this.isInBasket ? isInBasket = 'addButtonHide' : isInBasket = '';
-
-  	// return isInBasket
   }
   computeFirst() {
-  	// console.log('TEST abc')
-  	// console.log(this.display1)
-  	// console.log(this.isInBasket)
 
-  	this.display1 = this.isInBasket ? 'addButtonHide': '';
-
-  	// return this.isInBasket ? 'addButtonHide': '';
-
-   // 	this.display1 = this.isInBasket ? 'addButtonHide': ''; 
-
-  	// return this.display1;
+  	this.display1 = this.isInBasket ? 'addButtonHide': ''; 
   }
   computeSecond() {
 
   	this.display2 = this.isInBasket ? '': 'addButtonHide';
-
-  	// return this.isInBasket ? '': 'addButtonHide';
-
-  	// this.display2 = this.isInBasket ? '': 'addButtonHide'
-
-  	// return this.display2;
   }
 
   mounted() { 
@@ -233,80 +168,23 @@ export default class Modal extends Vue {
 
   	this.addButtonHide = ''
   	this.addButtonHide1 = 'addButtonHide'
-  	// this.isInBasket ? this.addButtonHide = '' : this.addButtonHide = 'addButtonHide'
-  	// this.isInBasket ? this.addButtonHide1 = 'addButtonHide' : this.addButtonHide1 = ''
 
-  	const itemObj = {
-  	  id: 0,
-      cost: 0,
-      quantityCount: 0,
-      categoryName: '',
-      image: '',
-      name: ''
-  	};
-
-  	// this.setCartArr(itemObj);
-
-  	const itemObj1 = {
-  	  id: 1,
-      cost: 0,
-      quantityCount: 0,
-      categoryName: '',
-      image: '',
-      name: ''
-  	};
-
+    // Set in redux from localStorage here
   	// this.setCartArr(itemObj1);
-  	// const b = getById(this.cartArr, 0);
   }
   updated() {
-
-    // console.log('HEHEHE')
-    // console.log(this.isInBasket)
 
   	if (this.changeState) {
   		this.changeState = false;
 
-  		// console.log('HEHEHE')
-    //   console.log(this.isInBasket)
-
   		this.computeFirst()
   		this.computeSecond()
-
-	  	// this.display1 = "addButtonHide"
-  	  // this.display2 = ""
-  	  // this.display2 = "addButtonHide"
   	}
-  	// console.log(this.cartArr)
-  	// console.log(this.cardItem.id)
-  	// console.log(!!getById(this.cartArr, this.cardItem.id))
-  	// console.log('TEST')
-  	// console.log(this.isInBasket)
-
-  	// const isItemInCart = !getById(this.cartArr, this.cardItem.id)
-
-  	// !this.isInBasket ? this.rerender = false : this.rerender = true;
-
-  	// console.log(this.isInBasket)
-  	// this.isInBasket ? this.addButtonHide = 'addButtonHide' : this.addButtonHide = ''; 
-
-	 	// this.isInBasket ? this.addButtonHide = '' : this.addButtonHide = 'addButtonHide'
-  	// this.isInBasket ? this.addButtonHide1 = 'addButtonHide' : this.addButtonHide1 = ''
 
   	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
   	this.modal ? this.zoomOut = ""  : this.zoomOut = "zoomOut";
   	this.modal ? this.hideBodyScroll() : null;
   	this.modal ? this.isVisible = "block" : this.hideModal();
-
-  	// console.log('TEST 1234')
-
-  	// console.log(this.cardItem)
-  	// console.log(this.cardItem.id)
-
-  	// const hasCart = getById(this.cartArr, this.cardItem.id);
-  	// console.log(hasCart)
-
-  	//hasCart!! ? this.addButtonHide = 'addButtonHide' : this.addButtonHide = '';  
   }
 }
 </script>
