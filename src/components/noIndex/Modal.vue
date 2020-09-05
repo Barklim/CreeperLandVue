@@ -248,7 +248,7 @@ export default class Modal extends Vue {
                   @click="this.addButtonMoreClick" 
                   class="button1 button1_shift"
                 >
-                	Выбрать еще1
+                	Выбрать еще
                 </div>
               </div>
               <div class="description">
