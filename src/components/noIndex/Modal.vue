@@ -212,6 +212,7 @@ export default class Modal extends Vue {
       <div 
         class="content clear-fix animate fast"
         v-bind:class="[zoomIn, zoomOut]"
+        v-if="false"
       >
         <div class="item">
         	<div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }"></div>
@@ -248,7 +249,7 @@ export default class Modal extends Vue {
                   @click="this.addButtonMoreClick" 
                   class="button1 button1_shift"
                 >
-                	Выбрать еще1
+                	Выбрать еще
                 </div>
               </div>
               <div class="description">
@@ -261,6 +262,104 @@ export default class Modal extends Vue {
             </div>
           </div>
         </div>
+      </div>
+
+      <div
+        class="content clear-fix animate fast" 
+        v-else
+      >
+        
+      <form class="cart js-buy-form">
+        <div class="items">
+          <h2>Корзина</h2>
+            <div class="js-cart-items-area">
+              <div class="item">
+                <div class="image" style="background-image:url(https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg)"></div>
+                  <div class="content">
+                    <div class="sub-text"> 
+                      <font-awesome-icon class="tags icon" icon="tag" />
+                      {{cardItem.categoryName}}
+                    </div>
+                    <div class="name name_inCart">Дракон Края</div>
+                    <div class="cost"><span class="change-cost">2 400.00 ₽</span></div>
+                    <div class="actions" data-id="517789">
+                    <span class="button action icon-only js-remove-item-from-cart">
+                      <i class="trash alternate icon"></i>
+                    </span>
+                  </div>
+                </div>
+               </div>
+               <div class="item">
+                  <div class="image" style="background-image:url(https://i.trademc.org/shops/9/i/9i85O8H4Kb.jpg)"></div>
+                  <div class="content">
+                    <div class="sub-text"> <i class="tag icon"></i>Привилегии</div>
+                    <div class="name">Иссушитель</div>
+                    <div class="cost"><span class="change-cost">1 240.00 ₽</span></div>
+                    <div class="actions" data-id="517786">
+                      <span class="button action icon-only js-remove-item-from-cart">
+                        <i class="trash alternate icon"></i>
+                      </span>
+                    </div>
+                  </div>
+               </div>
+            </div>
+            <div class="popular-items-area" style="display: block;">
+              <h2>С этим выбирают</h2>
+              <div class="popular-items">
+                <div class="item">
+                  <div class="image" style="background-image:url(https://i.trademc.org/collections/items/_default.svg)"></div>
+                  <div class="content">
+                    <div class="sub-text"> <i class="tag icon"></i>Другое</div>
+                    <div class="name">Разбан в Discord</div>
+                    <div class="cost">149.00 ₽</div>
+                    <div class="actions" data-id="520597">
+                      <span class="button action js-add-popular-item">
+                        <span class="label">
+                          <i class="shopping basket icon"></i>
+                        </span>Добавить
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         </div>
+         <div class="form">
+            <div class="total-cost">
+              <div class="sub-text">Итого:</div>
+              <div class="value total-cost-value">3 640.00 ₽</div>
+            </div>
+            <div class="form-notice"></div>
+            <p>Для продолжения заполните форму ниже:</p>
+            <div class="js-buyer-area">
+              <div class="field">
+                <div class="input">
+                  <label>
+                    <input required="" name="buyer">
+                      <span>Игровой никнейм</span>
+                    </label>
+                  </div>
+               </div>
+            </div>
+            <div class="field">
+              <div class="input">
+                <label>
+                  <input name="coupon">
+                  <span>Купон на скидку</span>
+                </label>                            
+                <div class="input__ui">
+                  <span class="link js-apply-coupon" data-active="Удалить">Применить</span>
+                </div>
+               </div>
+               <small>Если у вас есть купон на скидку, то вы можете ввести его в данное поле</small>                          
+            </div>
+            <div class="actions">
+              <button class="button themed-button animate" type="submit">Продолжить</button>
+            </div>
+         </div>
+      </form>
+
+
       </div>
   	</div>
   </div>
@@ -385,10 +484,10 @@ export default class Modal extends Vue {
 .clear-fix {
   position: relative;
 
-  &after {
+  &:after {
     content: "";
     display: block;
-    clear: both;	
+    clear: both;
   }
 }
 
@@ -644,5 +743,139 @@ body {
 .addButtonHide {
 	display: none;
 }
+
+/* ---------- cardForm ---------- */
+
+@media screen and (min-width: 800px) {
+  .modal .layer>.content>.cart {
+      display: -ms-flexbox;
+      display: flex;
+  }
+}
+.modal .layer>.content>.cart {
+    position: relative;
+    min-height: 400px;
+}
+
+/* ----- Items ----- */
+
+@media screen and (min-width: 800px) {
+  .modal .layer>.content>.cart .items {
+      width: 60%;
+  }
+}
+.modal .layer>.content>.cart .form, .modal .layer>.content>.cart .items {
+    display: block;
+    padding: 26px;
+}
+.modal .layer>.content>.cart .items {
+    background: #f8f9fa;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 0;
+    padding-bottom: 40px;
+    padding-top: 80px;
+    line-height: 1;
+    text-align: left;
+}
+h2:not(.enable-padding):first-child {
+    padding-top: 0;
+}
+
+.modal .layer>.content>.cart .item {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding: 10px 0;
+    border-bottom: 2px solid #f4f4f4;
+}
+.modal .layer>.content>.cart .item:first-of-type {
+    padding-top: 0;
+}
+
+/* --- Image ---
+
+.modal .layer>.content .cart .image, .modal .layer>.content .item .image {
+    background: #f0f0f0 no-repeat 50%;
+    background-size: cover;
+    position: relative;
+
+    &:before {
+      content: "";
+      padding-top: 100%;
+      float: left;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+}
+/* x */
+.modal .layer>.content>.cart .item .image {
+    width: 100px;
+    height: 100px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+@media screen and (min-width: 480px) {
+  .modal .layer>.content>.cart .item .image {
+      width: 170px;
+      height: 170px;
+  }
+}
+.content > .image {
+    width: 100px;
+    height: 100px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+
+    @media screen and (min-width: 480px) {
+      width: 170px;
+      height: 170px;
+    }
+}
+
+/* --- Text --- */ 
+.content>.cart .item .content {
+    padding-left: 16px;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.sub-text {
+    opacity: .3;
+    text-transform: uppercase;
+    font-size: 11.7px;
+    font-weight: 700;
+    line-height: 120%;
+    display: block;
+}
+.modal .layer>.content .cart .content .sub-text, .modal .layer>.content .item .content .sub-text {
+    margin-bottom: 5px;
+}
+
+.name_inCart {
+  font-size: 18px !important;
+}
+
+/* ----- Form ----- */
+
+@media screen and (min-width: 800px) {
+  .modal .layer>.content>.cart .form {
+      width: 40%;
+  }
+}
+.modal .layer>.content>.cart .form, .modal .layer>.content>.cart .items {
+    display: block;
+    padding: 26px;
+}
+
 
 </style>
