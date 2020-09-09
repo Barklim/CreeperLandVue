@@ -283,8 +283,8 @@ export default class Modal extends Vue {
                     <div class="name name_inCart">Дракон Края</div>
                     <div class="cost"><span class="change-cost">2 400.00 ₽</span></div>
                     <div class="actions" data-id="517789">
-                    <span class="button action icon-only js-remove-item-from-cart">
-                      <i class="trash alternate icon"></i>
+                    <span class="button2 action icon-only js-remove-item-from-cart">
+                      <font-awesome-icon class="trash alternate icon" icon="trash-alt" />
                     </span>
                   </div>
                 </div>
@@ -565,7 +565,8 @@ export default class Modal extends Vue {
 	font-size: 28px;
   line-height: 32px;
   font-weight: 700;
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
+  margin-bottom: 8px;
   word-wrap: break-word;
   word-break: normal;
   word-break: break-word;
@@ -575,7 +576,7 @@ export default class Modal extends Vue {
   /*font-size: 120%;*/
 }
 .modal .layer>.content>.item .content .button,
-.modal .layer>.content>.item .content .button1, {
+.modal .layer>.content>.item .content .button1 {
     margin-top: 20px;
 }
 body.buttons-default.green-buttons .themed-button {
@@ -688,6 +689,47 @@ body {
 }
 .button1_shift {
    margin-left: 8px;
+}
+
+.button2 {
+
+    display: inline-block;
+    color: #8b8c8c !important;
+    text-align: center;
+    cursor: pointer;
+    padding: 14px 24px;
+    text-decoration: none!important;
+    font-weight: 700;
+    border: 0;
+    outline: 0;
+    vertical-align: top;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 76%;
+    position: relative;
+    white-space: nowrap;
+    transition: all .1s ease;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    margin-right: 5px;
+
+    display: block;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+
+    background: #e7e8e9;
+    padding: 9px 10px;
+    color: #333;
+    overflow: hidden;
+    border-radius: 3px;
+
+    &:hover {
+      background: #d6d7d8;
+    }
 }
 
 .zoomIn {
@@ -863,6 +905,28 @@ h2:not(.enable-padding):first-child {
 
 .name_inCart {
   font-size: 18px !important;
+}
+
+.change-cost {
+  font-size: 13px !important;
+}
+
+.actions {
+  margin-top: 20px;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.item:last-of-type {
+    border: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* --- PopularItems --- */
+
+.popular-items-area {
+    display: none;
+    padding-top: 80px;
 }
 
 /* ----- Form ----- */
