@@ -235,7 +235,7 @@ export default class Modal extends Vue {
                 @click="this.addButtonClick"
                 id="firstButton"
               >
-                Добавить в корзину
+                Добавить в корзину1
               </div>
 
               <div 
