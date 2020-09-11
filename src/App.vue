@@ -41,6 +41,18 @@ export default {
 </script>
 
 <style>
+
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');*/
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"),
+  url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+}
+
+#app {
+  font-family: "Roboto", Helvetica, Arial;
+}
+
 .el-main {
   overflow: hidden;
 }
