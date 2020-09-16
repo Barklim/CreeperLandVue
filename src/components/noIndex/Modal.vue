@@ -945,6 +945,10 @@ h2:not(.enable-padding):first-child {
 
 /* ----- Form ----- */
 
+.form {
+  /*text-align: initial;*/
+}
+
 @media screen and (min-width: 800px) {
   .modal .layer>.content>.cart .form {
       width: 40%;
@@ -954,6 +958,40 @@ h2:not(.enable-padding):first-child {
     display: block;
     padding: 26px;
 }
+
+.content form .total-cost {
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 700;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+.content>.cart .form .total-cost {
+    padding: 0 0 20px;
+    border-bottom: 2px dashed #f4f4f4;
+    margin-bottom: 20px;
+}
+
+.layer>.content form .total-cost .sub-text {
+    line-height: 1;
+}
+
+.sub-text {
+    opacity: .3;
+    text-transform: uppercase;
+    font-size: 11.7px;
+    font-weight: 700;
+    line-height: 120%;
+    display: block;
+}
+.layer>.content form .total-cost .value {
+    font-size: 32px;
+    line-height: 30px;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    text-align: right;
+}
+
 
 
 </style>
