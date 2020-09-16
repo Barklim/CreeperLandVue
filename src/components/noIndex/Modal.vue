@@ -3,6 +3,7 @@ import { Vue, Prop, Component } from 'vue-property-decorator'
 
 import { CartItem } from "../../types";
 import { getById } from "../../utils";
+import { recItems } from "../../utils/RecommendedItems";
 
 import { namespace } from 'vuex-class';
 const categoryModule = namespace('CategoryModule');
@@ -177,6 +178,8 @@ export default class Modal extends Vue {
 
     // Set in redux from localStorage here
   	// this.setCartArr(itemObj1);
+    console.log('TEST')
+    console.log(recItems)
   }
   updated() {
 
@@ -235,7 +238,7 @@ export default class Modal extends Vue {
                 @click="this.addButtonClick"
                 id="firstButton"
               >
-                Добавить в корзину1
+                Добавить в корзину
               </div>
 
               <div 
@@ -283,9 +286,9 @@ export default class Modal extends Vue {
                     <div class="name name_inCart">Дракон Края</div>
                     <div class="cost"><span class="change-cost">2 400.00 ₽</span></div>
                     <div class="actions" data-id="517789">
-                    <span class="button2 action icon-only js-remove-item-from-cart">
-                      <font-awesome-icon class="trash alternate icon" icon="trash-alt" />
-                    </span>
+                      <span class="button2 action icon-only js-remove-item-from-cart">
+                        <font-awesome-icon class="trash alternate icon" icon="trash-alt" />
+                      </span>
                   </div>
                 </div>
                </div>
@@ -309,14 +312,16 @@ export default class Modal extends Vue {
                 <div class="item">
                   <div class="image" style="background-image:url(https://i.trademc.org/collections/items/_default.svg)"></div>
                   <div class="content">
-                    <div class="sub-text"> <i class="tag icon"></i>Другое</div>
-                    <div class="name">Разбан в Discord</div>
-                    <div class="cost">149.00 ₽</div>
-                    <div class="actions" data-id="520597">
-                      <span class="button action js-add-popular-item">
-                        <span class="label">
-                          <i class="shopping basket icon"></i>
-                        </span>Добавить
+                    <div class="sub-text"> 
+                      <font-awesome-icon class="tags icon" icon="tag" />
+                      Другое
+                    </div>
+                    <div class="name name_inCart">Разбан в Discord</div>
+                    <div class="cost"><span class="change-cost">149.00 ₽</span></div>
+                    <div class="actions" data-id="517789">
+                      <span class="button2 action icon-only js-remove-item-from-cart">
+                        <font-awesome-icon class="shopping1 basket1 icon1 shoppingBasket" icon="shopping-basket" style="font-size: 12px;"/>
+                        <span class="buttonPostix">Добавить</span>
                       </span>
                     </div>
                   </div>
@@ -377,7 +382,8 @@ export default class Modal extends Vue {
   z-index: 199;
   display: none;
   /*overflow: visible;*/
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: inherit;
 
@@ -730,6 +736,11 @@ body {
     &:hover {
       background: #d6d7d8;
     }
+
+    .buttonPostix {
+      color: #333;
+      padding-left: 8px;
+    }
 }
 
 .zoomIn {
@@ -797,6 +808,9 @@ body {
 .modal .layer>.content>.cart {
     position: relative;
     min-height: 400px;
+}
+.shoppingBasket {
+
 }
 
 /* ----- Items ----- */

@@ -93,4 +93,27 @@ export default {
     transform: translateY(100%);
   }
 }
+
+/* ----- Scrollbar styling ----- */
+body ::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    -webkit-border-radius: 7px;
+    background-color: rgba(0,0,0,.2);
+    transition: all .1s ease;
+}
+body ::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+body ::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+body ::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+}
+
 </style>
