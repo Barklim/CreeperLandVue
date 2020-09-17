@@ -628,6 +628,15 @@ body {
     background-size: 200% 1px;
     -wekbit-box-shadow: 0 5px 17px rgba(0,83,20,.4);
     box-shadow: 0 5px 17px rgba(0,83,20,.4);
+
+    &:hover {
+      background: linear-gradient(90deg, #21ba45 0, #007601);
+      box-shadow: 0 5px 17px rgba(0, 83, 20, 0.4);
+    }
+    &:active {
+      background: #007601;
+      background: linear-gradient(90deg,#189e29 0,#017702);
+    }
 	}
 }
 
@@ -735,6 +744,10 @@ body {
 
     &:hover {
       background: #d6d7d8;
+    }
+
+    &:active {
+      background: #c5c6c7;
     }
 
     .buttonPostix {
@@ -947,6 +960,88 @@ h2:not(.enable-padding):first-child {
 
 .form {
   /*text-align: initial;*/
+}
+.form p {
+    margin: 0 0 10px;
+    font-size: 13px;
+    text-align: left;
+}
+.form .actions {
+    padding-top: 10px;
+    margin-top: 0;
+}
+
+form .field {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.input {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 3px;
+    -wekbit-box-shadow: 0 0 0 2px #f0f0f0 inset;
+    box-shadow: inset 0 0 0 2px #f0f0f0;
+    transition: all .1s linear;
+    animation-fill-mode: both;
+    animation-duration: .75s;
+
+    label {
+      display: block;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      position: relative;
+  }
+}
+label input {
+    padding: 28px 15px 10px;
+    width: 100%;
+    border: 0;
+    line-height: 1;
+    background: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+.input label>span {
+    text-align: left;
+    font-size: 13px;
+
+    padding: 0 15px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    opacity: .3;
+    pointer-events: none;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    transition: all .1s ease;
+    transform: translateY(-50%);
+}
+.field small {
+    text-align: left;
+    font-size: 10px;
+    padding-top: 5px;
+    /*font-size: 80%;*/
+    opacity: .5;
+    line-height: 1.3;
+    display: block;
+}
+
+.input__ui {
+    padding-right: 15px;
+}
+span.link.js-apply-coupon {
+    font-size: 13px;
+    color: #21ba45;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
 }
 
 @media screen and (min-width: 800px) {

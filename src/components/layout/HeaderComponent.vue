@@ -231,12 +231,29 @@ header .content__block .actions {
 
 /* ---------- Button ---------- */
 
-body.buttons-default.green-buttons, .themed-button {
+/*body.buttons-default.green-buttons,*/
+.themed-button {
   background: #21ba45;
-  background: linear-gradient(90deg,#32cb56 0,#007601);
-  background-size: 200% 1px;
+  background: linear-gradient(90deg,#32cb56 0,#19a12c);
+  /*background-size: 200% 1px;*/
   -wekbit-box-shadow: 0 5px 17px rgba(0,83,20,.4);
   box-shadow: 0 5px 17px rgba(0,83,20,.4);
+
+	&:hover {
+	  /*background-position: 50%;*/
+
+	  /* background: linear-gradient(90deg,#32cb56 0,#007601); */
+	  /* background-size: 200% 1px; */
+	  /* -wekbit-box-shadow: 0 5px 17px rgba(0,83,20,.4); */
+
+	  background: linear-gradient(90deg, #21ba45 0, #007601);
+	  box-shadow: 0 5px 17px rgba(0,83,20,.4);
+  }
+	&:active {
+	  background: #007601;
+  	/*background-position: 100% !important;*/
+  	background: linear-gradient(90deg,#189e29 0,#017702);
+	}
 }
 body.buttons-default .button.flat, body.buttons-default .button.themed-button, body.buttons-outline .button.flat, body.buttons-outline .button.themed-button, body.buttons-scratch .button.flat, body.buttons-scratch .button.themed-button, body.buttons-underline .button.flat, body.buttons-underline, .button.themed-button {
   border-radius: 25px;
@@ -266,15 +283,6 @@ body.buttons-default .button.flat, body.buttons-default .button.themed-button, b
 
   font-size: 12px;
   font-family: Roboto, sans-serif;
-}
-body.buttons-default.green-buttons:hover,
-.themed-button:hover {
-  background-position: 50%;
-  /* background: linear-gradient(90deg,#32cb56 0,#007601); */
-  background: linear-gradient(90deg, #21ba45 0, #007601);
-  /* background-size: 200% 1px; */
-  /* -wekbit-box-shadow: 0 5px 17px rgba(0,83,20,.4); */
-  box-shadow: 0 5px 17px rgba(0,83,20,.4);
 }
 
 /* ---------- Nav ---------- */

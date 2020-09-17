@@ -35,7 +35,7 @@ export default class FixedCart extends Vue {
 /* body.buttons-default.green-buttons .themed-button*/
 .themed-button {
     background: #21ba45;
-    background: linear-gradient(90deg,#32cb56 0,#007601);
+    background: linear-gradient(90deg,#32cb56 0,#19a12c);
     background-size: 200% 1px;
     -wekbit-box-shadow: 0 5px 17px rgba(0,83,20,.4);
     box-shadow: 0 5px 17px rgba(0,83,20,.4);
@@ -45,10 +45,13 @@ export default class FixedCart extends Vue {
     align-items: center;
     justify-content: center;
 
-    &:hover {
-    background-position: 50%;
+  &:hover {
     background: linear-gradient(90deg, #21ba45 0, #007601);
     box-shadow: 0 5px 17px rgba(0, 83, 20, 0.4);
+  }
+  &:active {
+    background: #007601;
+    background: linear-gradient(90deg,#189e29 0,#017702);
   }
 }
 .button.cart-button {

@@ -172,19 +172,24 @@ span.icon {
     color: #333;
     overflow: hidden;
     border-radius: 3px;
+
+    &:hover {
+      background: #d6d7d8;
+    }
+
+    &:active {
+      background: #c5c6c7;
+    }
 }
 .button.action.active {
     /*pointer-events: none;*/
     background: #1b1c1d;
     color: #fff;
     cursor: pointer;
-}
-  
-.button.action:hover {
-    background: #d6d7d8;
-}
-.button.action.active:hover {
-  background: #1b1c1d;
+
+    &:hover {
+      background: black;
+    }
 }
 
 .button.action .label {
