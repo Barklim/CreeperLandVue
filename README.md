@@ -1,7 +1,6 @@
 ## Table of Contents
 
 - [User info](#user-info)
-- [Test](#test)
 - [Bootstraped](#bootstraped)
 - [Meta](#meta)	
 
@@ -10,8 +9,6 @@
 [Spa CreepLand (Website)](https://creeper.land/) - for mc donats.
 [Server (github repository)](https://creeper.land/)
 g.md - file in repository for develop info.
-
-# Test
 
 ## Project setup
 ```
@@ -53,11 +50,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * cypress.io
 * element ui
 * typescript
-
-
-* express
-* typeorm - pgsql
-* unitpay.money
 
 ## Meta
 
