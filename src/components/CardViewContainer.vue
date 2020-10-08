@@ -3,6 +3,9 @@ import { Vue, Component } from 'vue-property-decorator'
 import CardView from "../components/CardView.vue";
 import CategorieView from "../components/CategorieView.vue";
 import CardManual from "../components/CardManual.vue";
+// @ is an alias to /src
+import Spinner from '@/components/Spinner.vue';
+// import Spinner from '../components/Spinner.vue';
 import axios from "axios";
 
 import { namespace } from 'vuex-class';
@@ -12,7 +15,8 @@ const categoryModule = namespace('CategoryModule')
   components: {
     CardView,
     CategorieView,
-    CardManual
+    CardManual,
+    Spinner
   }
 })
 export default class CardViewContainer extends Vue {
@@ -32,7 +36,7 @@ export default class CardViewContainer extends Vue {
     }
   ]
 
-  cards = [
+  cards1 = [
     {
       categoryParentId: 1,
       categoryName: 'Привелегии',
@@ -67,6 +71,7 @@ export default class CardViewContainer extends Vue {
       description: '<strong>Выживание</strong><br>- 7 точек дома<br>- 7 приватов по 1 500 000 блоков<br>- x2.5 множитель добычи валюты с мобов<br>- 54 слота в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /back возврат назад (или на место смерти)<br>- /ptime приватное время<br>- /kit Dragon<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>'
     }
   ]
+  cards = [];
 
   toggleCurrency(event) {
     const element = event.currentTarget;
@@ -167,7 +172,7 @@ export default class CardViewContainer extends Vue {
     </div>
 
     <!-- ---------- Cards ---------- -->
-    <div v-if="cards" id="items" class="cards inner">
+    <div v-if="cards.length" id="items" class="cards inner">
       <CardView 
         v-for="cardItem in cards"
         v-bind:key="cardItem.id" 
@@ -175,7 +180,8 @@ export default class CardViewContainer extends Vue {
       ></CardView>
     </div>
     <div v-else>
-      Пока здесь пусто :(
+      <!-- Пока здесь пусто :( -->
+      <Spinner />
     </div>
 
     <!-- ---------- Manual ---------- -->

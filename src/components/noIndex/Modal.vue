@@ -16,13 +16,16 @@ export default class Modal extends Vue {
 	@Prop() cartItem?: CartItem;
 	
 	private isVisible: string = "none";
+  private isVisibleBasket: string = "none";
   private zoomIn: string = "";
   private zoomOut: string = "";
+  private zoomInBasket: string = "";
   private addButtonHide: string = "";
   private addButtonHide1: string = "";
   private display1: string = "";
   private display2: string = "";
   private changeState: boolean = false;
+  private showBasketModal: boolean = false;
 
   @categoryModule.State
   public prefix!: string
@@ -48,12 +51,22 @@ export default class Modal extends Vue {
 
 	 	this.display1 = "";
 	 	this.display2 = "";
+
+    e.target.className === 'close modal-close' ? this.hideModalBasketAsync() : null;
+
+    // this.isVisibleBasket = "none";
+    // this.hideModalBasketAsyncCss()
   }
   clickClose() {
   	this.setModal(false);
 
 	 	this.display1 = "";
 	 	this.display2 = "";
+
+    this.hideModalBasketAsync();
+
+    // this.isVisibleBasket = "none";
+    // this.hideModalBasketAsyncCss()
   }
   hideBodyScroll() {
   	window.document.body.style.overflow = "hidden"
@@ -61,6 +74,14 @@ export default class Modal extends Vue {
   showBodyScroll() {
   	window.document.body.style.overflow = "auto"
   }
+
+  himdeModalBasketCss() {
+    this.isVisibleBasket = "none";
+  }
+  hideModalBasketAsyncCss() {
+    setTimeout(this.himdeModalBasketCss, 250)
+  }
+
   hideModal1() {
   	this.isVisible = "none";
 
@@ -72,6 +93,14 @@ export default class Modal extends Vue {
   hideModal() {
   	setTimeout(this.hideModal1, 250)
   }
+
+  himdeModalBasket() {
+    this.showBasketModal = false;
+  }
+  hideModalBasketAsync() {
+    setTimeout(this.himdeModalBasket, 250)
+  }
+
   isSale(saleObj: any) {
 
     let oldCost = '';
@@ -85,6 +114,12 @@ export default class Modal extends Vue {
     }
 
     return isSale;
+  }
+  isModalOrBasket() {
+
+    // showBasket;
+
+    return !this.showBasketModal;
   }
   formattedCur(cost: number) { 
 
@@ -153,11 +188,32 @@ export default class Modal extends Vue {
 
   	this.changeState = true;
   }
+
+  zoomInBasketModal() {
+    this.zoomInBasket = "zoomIn"
+    this.isVisibleBasket = "block";
+  }
+  zoomInBasketModalAsync() {
+    // setTimeout(this.zoomInBasketModal, 250)
+    this.isVisibleBasket = "none";
+    setTimeout(this.zoomInBasketModal, 100)
+  }
+
+  showBasketButtonClick(e) {
+
+    this.zoomInBasketModalAsync();
+    // this.zoomInBasketModal();
+    this.zoomInBasket = "";
+    this.isVisible = "";
+
+    this.showBasketModal = !this.showBasketModal;
+  }
   addButtonMoreClick(e) {
     this.setModal(false);
 
-    this.display1 = "";
-    this.display2 = "";
+    // ?
+    // this.display1 = "";
+    // this.display2 = "";
   }
   computeFirst() {
 
@@ -178,8 +234,6 @@ export default class Modal extends Vue {
 
     // Set in redux from localStorage here
   	// this.setCartArr(itemObj1);
-    console.log('TEST')
-    console.log(recItems)
   }
   updated() {
 
@@ -194,6 +248,10 @@ export default class Modal extends Vue {
   	this.modal ? this.zoomOut = ""  : this.zoomOut = "zoomOut";
   	this.modal ? this.hideBodyScroll() : null;
   	this.modal ? this.isVisible = "block" : this.hideModal();
+
+    console.log('!!!');
+    // this.showBasketModal? this.zoomInBasketModalAsync() : null;
+    // this.showBasketModal? this.zoomInBasketModal() : null;
   }
 }
 </script>
@@ -215,7 +273,7 @@ export default class Modal extends Vue {
       <div 
         class="content clear-fix animate fast"
         v-bind:class="[zoomIn, zoomOut]"
-        v-if="false"
+        v-if="isModalOrBasket()"
       >
         <div class="item">
         	<div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }"></div>
@@ -245,7 +303,10 @@ export default class Modal extends Vue {
                 v-bind:class="{ addButtonHide: !this.isInBasket }"
                 id="secondButton"
                >
-	              <div class="js-add-to-cart button themed-button">
+	              <div 
+                  class="js-add-to-cart button themed-button"
+                  @click="this.showBasketButtonClick"
+                >
                   В корзине
                 </div>
                 <div 
@@ -268,7 +329,9 @@ export default class Modal extends Vue {
       </div>
 
       <div
-        class="content clear-fix animate fast" 
+        class="content clear-fix animate fast"
+        v-bind:class="[zoomInBasket, zoomOut]"
+        v-bind:style="{display: isVisibleBasket}"
         v-else
       >
         
