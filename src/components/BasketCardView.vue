@@ -13,10 +13,6 @@ export default class BasketCardView extends Vue {
   // @cart.Mutation
   // public setCartArr!: (newCartItem: CartItem) => void
 
-	// console.log('thisc !!!')
-	// console.log(cardItem)
-	// console.log(this)
-
   created() {
   	console.log('thisc !!!')
 		// console.log(cardItem)

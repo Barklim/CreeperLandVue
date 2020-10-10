@@ -354,13 +354,6 @@ export default class Modal extends Vue {
           <h2>Корзина</h2>
             <div class="js-cart-items-area">
 
-              <!-- Basket Cards !!! -->
-              <!-- <BasketCardView
-                v-for="basketItem in basketCards"
-                v-bind:key="basketItem.id" 
-                :basketItem="basketItem"
-              ></BasketCardView>
-            -->
             <BasketCardView></BasketCardView>
 
               <div class="item">
