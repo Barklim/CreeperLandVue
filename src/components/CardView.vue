@@ -147,12 +147,6 @@ export default class CardView extends Vue {
     return "";
   }
   hasItemInBasket() {
-
-    // console.log('TEST 1234')
-    // console.log(this.cartArr)
-    // console.log(this.cardItem)
-    // console.log(getById(this.cartArr, this.cardItem.id))
-
     this.setIsInBasket(!!getById(this.cartArr, this.cardItem.id))
   }
 

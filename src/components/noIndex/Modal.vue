@@ -68,6 +68,13 @@ export default class Modal extends Vue {
     // this.isVisibleBasket = "none";
     // this.hideModalBasketAsyncCss()
   }
+  restrictChars($event) {
+    console.log('!!!')
+    console.log($event)
+    return alert('test');
+  }
+
+
   hideBodyScroll() {
   	window.document.body.style.overflow = "hidden"
   }
@@ -194,7 +201,6 @@ export default class Modal extends Vue {
     this.isVisibleBasket = "block";
   }
   zoomInBasketModalAsync() {
-    // setTimeout(this.zoomInBasketModal, 250)
     this.isVisibleBasket = "none";
     setTimeout(this.zoomInBasketModal, 100)
   }
@@ -202,7 +208,6 @@ export default class Modal extends Vue {
   showBasketButtonClick(e) {
 
     this.zoomInBasketModalAsync();
-    // this.zoomInBasketModal();
     this.zoomInBasket = "";
     this.isVisible = "";
 
@@ -210,10 +215,6 @@ export default class Modal extends Vue {
   }
   addButtonMoreClick(e) {
     this.setModal(false);
-
-    // ?
-    // this.display1 = "";
-    // this.display2 = "";
   }
   computeFirst() {
 
@@ -224,6 +225,15 @@ export default class Modal extends Vue {
   	this.display2 = this.isInBasket ? '': 'addButtonHide';
   }
 
+  // keyBinding
+  created() {
+    window.addEventListener('keydown', (e) => {
+      if (e.key == 'Escape') {
+        console.log('TEST !!!!')
+        this.clickClose();
+      }
+    })
+  }
   mounted() { 
   	this.modal ? this.isVisible = "block": this.isVisible = "none";
   	this.modal ? this.hideBodyScroll()   : this.showBodyScroll();
@@ -249,9 +259,9 @@ export default class Modal extends Vue {
   	this.modal ? this.hideBodyScroll() : null;
   	this.modal ? this.isVisible = "block" : this.hideModal();
 
-    console.log('!!!');
-    // this.showBasketModal? this.zoomInBasketModalAsync() : null;
-    // this.showBasketModal? this.zoomInBasketModal() : null;
+    // console.log('!!!');
+    // console.log(this.cartArr);
+    // console.log(this.cartArr.length);
   }
 }
 </script>
@@ -426,7 +436,6 @@ export default class Modal extends Vue {
             </div>
          </div>
       </form>
-
 
       </div>
   	</div>
@@ -763,6 +772,10 @@ body {
 
     &:hover {
       background: rgba(0,0,0,.05);
+    }
+
+    &:active {
+      background: #c5c6c7;
     }
 }
 .button1_shift {
@@ -1149,7 +1162,5 @@ span.link.js-apply-coupon {
     flex-grow: 1;
     text-align: right;
 }
-
-
 
 </style>
