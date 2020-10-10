@@ -4,13 +4,18 @@ import { Vue, Prop, Component } from 'vue-property-decorator'
 import { CartItem } from "../../types";
 import { getById } from "../../utils";
 import { recItems } from "../../utils/RecommendedItems";
+import BasketCardView from "../../components/BasketCardView.vue";
 
 import { namespace } from 'vuex-class';
 const categoryModule = namespace('CategoryModule');
 const modal = namespace('Modal');
 const cart = namespace('Cart');
 
-@Component({})
+@Component({
+  components: {
+    BasketCardView
+  }
+})
 export default class Modal extends Vue {
 
 	@Prop() cartItem?: CartItem;
@@ -46,6 +51,13 @@ export default class Modal extends Vue {
   @cart.Mutation
   public setCartArr!: (newCartItem: CartItem) => void
 
+  basketCards = [{},{},{}];
+  // console.log('thisc !!!')
+  // console.log(this)
+  // console.log(cardItem)
+  // console.log(this.cartArr);
+  // console.log(this.cartArr.length);
+
   clickMarginModal(e) {
     e.target.className === 'close modal-close' ? this.setModal(false) : null;
 
@@ -68,13 +80,6 @@ export default class Modal extends Vue {
     // this.isVisibleBasket = "none";
     // this.hideModalBasketAsyncCss()
   }
-  restrictChars($event) {
-    console.log('!!!')
-    console.log($event)
-    return alert('test');
-  }
-
-
   hideBodyScroll() {
   	window.document.body.style.overflow = "hidden"
   }
@@ -229,7 +234,6 @@ export default class Modal extends Vue {
   created() {
     window.addEventListener('keydown', (e) => {
       if (e.key == 'Escape') {
-        console.log('TEST !!!!')
         this.clickClose();
       }
     })
@@ -349,6 +353,16 @@ export default class Modal extends Vue {
         <div class="items">
           <h2>Корзина</h2>
             <div class="js-cart-items-area">
+
+              <!-- Basket Cards !!! -->
+              <!-- <BasketCardView
+                v-for="basketItem in basketCards"
+                v-bind:key="basketItem.id" 
+                :basketItem="basketItem"
+              ></BasketCardView>
+            -->
+            <BasketCardView></BasketCardView>
+
               <div class="item">
                 <div class="image" style="background-image:url(https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg)"></div>
                   <div class="content">
