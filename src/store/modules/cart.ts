@@ -11,13 +11,6 @@ class Cart extends VuexModule {
 	//public cartArr: Array<any> = [];
 	public isOpen: boolean = false;
 
-  // public id: number = 0;
-  // public cost: number = 0;
-  // public quantityCount: number = 0;
-  // public categoryName: string = ''
-  // public image : string = ''
-  // public name: string = ''
-
   // Setter
   @Mutation
   public setCartArr(newCartItem: CartItem): void {
@@ -36,6 +29,18 @@ class Cart extends VuexModule {
   //   // this.cartArr = this.cartArr.push(newCartItem);
   //   return 2;
   // }
+  @Mutation
+  public delById(delById: number) {
+    // this.cartArr.forEach((item, index, array) => {
+    //   console.log(`${item.id} имеет позицию ${index} в ${array}`);
+    //   console.log('!!! test');
+    //   console.log(delById);
+    // });
+
+    const filtredArray = this.cartArr.filter(item => item.id !== delById);
+
+    this.cartArr = filtredArray; 
+  }
 }
 
 export default Cart

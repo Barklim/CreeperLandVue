@@ -6,6 +6,7 @@ class Modal extends VuexModule {
   public cardItem = {};
   public modal: boolean = false;
   public isInBasket: boolean = false;
+  public isInBasketAllItemsRemove: boolean = false;
 
   @Mutation
   public setCardItem(newCardItem: boolean): void {
@@ -18,6 +19,10 @@ class Modal extends VuexModule {
   @Mutation
   public setIsInBasket(newStateModal: boolean): void {
     this.isInBasket = newStateModal
+  }
+  @Mutation
+  public setIsInBasketAllItemsRemove(newStateIsInBasketAllItemsRemove: boolean): void {
+    this.isInBasketAllItemsRemove = newStateIsInBasketAllItemsRemove
   }
 }
 

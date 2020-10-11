@@ -41,22 +41,19 @@ export default class Modal extends Vue {
   public modal!: boolean
   @modal.State
   public isInBasket!: boolean
+  @modal.State
+  public isInBasketAllItemsRemove!: boolean
   @modal.Mutation
   public setModal!: (newState: boolean) => void
   @modal.Mutation
   public setIsInBasket!: (newState: boolean) => void
+  @modal.Mutation
+  public setIsInBasketAllItemsRemove!: (newState: boolean) => void
 
   @cart.State
   public cartArr
   @cart.Mutation
   public setCartArr!: (newCartItem: CartItem) => void
-
-  basketCards = [{},{},{}];
-  // console.log('thisc !!!')
-  // console.log(this)
-  // console.log(cardItem)
-  // console.log(this.cartArr);
-  // console.log(this.cartArr.length);
 
   clickMarginModal(e) {
     e.target.className === 'close modal-close' ? this.setModal(false) : null;
@@ -128,9 +125,6 @@ export default class Modal extends Vue {
     return isSale;
   }
   isModalOrBasket() {
-
-    // showBasket;
-
     return !this.showBasketModal;
   }
   formattedCur(cost: number) { 
@@ -263,9 +257,11 @@ export default class Modal extends Vue {
   	this.modal ? this.hideBodyScroll() : null;
   	this.modal ? this.isVisible = "block" : this.hideModal();
 
-    // console.log('!!!');
-    // console.log(this.cartArr);
-    // console.log(this.cartArr.length);
+    if (this.isInBasketAllItemsRemove)
+    {
+      this.setIsInBasketAllItemsRemove(false);
+      this.clickClose()
+    }
   }
 }
 </script>
@@ -356,35 +352,6 @@ export default class Modal extends Vue {
 
             <BasketCardView></BasketCardView>
 
-              <div class="item">
-                <div class="image" style="background-image:url(https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg)"></div>
-                  <div class="content">
-                    <div class="sub-text"> 
-                      <font-awesome-icon class="tags icon" icon="tag" />
-                      {{cardItem.categoryName}}
-                    </div>
-                    <div class="name name_inCart">Дракон Края</div>
-                    <div class="cost"><span class="change-cost">2 400.00 ₽</span></div>
-                    <div class="actions" data-id="517789">
-                      <span class="button2 action icon-only js-remove-item-from-cart">
-                        <font-awesome-icon class="trash alternate icon" icon="trash-alt" />
-                      </span>
-                  </div>
-                </div>
-               </div>
-               <div class="item">
-                  <div class="image" style="background-image:url(https://i.trademc.org/shops/9/i/9i85O8H4Kb.jpg)"></div>
-                  <div class="content">
-                    <div class="sub-text"> <i class="tag icon"></i>Привилегии</div>
-                    <div class="name">Иссушитель</div>
-                    <div class="cost"><span class="change-cost">1 240.00 ₽</span></div>
-                    <div class="actions" data-id="517786">
-                      <span class="button action icon-only js-remove-item-from-cart">
-                        <i class="trash alternate icon"></i>
-                      </span>
-                    </div>
-                  </div>
-               </div>
             </div>
             <div class="popular-items-area" style="display: block;">
               <h2>С этим выбирают</h2>

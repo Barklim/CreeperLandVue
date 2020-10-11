@@ -2,22 +2,91 @@
 import { Vue, Prop, Component } from 'vue-property-decorator'
 
 import { namespace } from 'vuex-class';
+const categoryModule = namespace('CategoryModule');
+const modal = namespace('Modal');
 const cart = namespace('Cart');
 
 @Component({})
 export default class BasketCardView extends Vue {
-	// @Prop() cardItem?: CardItem;
 
   @cart.State
   public cartArr
-  // @cart.Mutation
-  // public setCartArr!: (newCartItem: CartItem) => void 
+  @cart.Mutation
+  public delById!: (delById) => void
 
-  created() {
-  	console.log('thisc !!!')
-		// console.log(cardItem)
-		// console.log(this)
-		console.log(this.cartArr)
+  @modal.Mutation
+  public setModal!: (newState: boolean) => void
+  @modal.Mutation
+  public setIsInBasketAllItemsRemove!: (newState: boolean) => void
+
+  @categoryModule.State
+  public prefix!: string
+
+  formattedCur(cost: number) { 
+
+    let nFormat;
+    let convertCost;
+    let postFix;
+
+    // TODO: Need currency Api
+    switch (this.prefix) {
+      case "RUB":
+        nFormat = "ru-RU";
+        convertCost = cost;
+        postFix = "₽";
+         // postFix = "";
+        break;
+      case "UAH":
+        nFormat = "ru-RU";
+        convertCost = cost/2.66;
+        // convertCost = cost/2.7;
+        postFix = "₴";
+        break;
+      case "BYN":
+        nFormat = "ru-RU";
+        convertCost = cost/30;
+        postFix = "Br";
+        break;
+      case "KZT":
+        nFormat = "ru-RU";
+        convertCost = cost/0.175;
+        // convertCost = cost/0.17;
+        postFix = "₸";
+        break;
+      case "USD":
+        nFormat = "en-EN";
+        convertCost = cost/73.64;
+        // convertCost = cost/73.6;
+        postFix = "$";
+        break;
+      case "EUR":
+        nFormat = "de-DE";
+        convertCost = cost/87.18;
+        // convertCost = cost/87.2;
+        postFix = "€";
+        break;
+      default:
+        nFormat = "ru-RU";
+        convertCost = cost;
+        postFix = "₽";
+    }
+
+    const formattedCost = new Intl.NumberFormat(nFormat, 
+      {
+        style:'decimal',
+        currency: this.prefix,minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(convertCost) + " " + postFix;
+
+    return formattedCost;
+  }
+  removeClick(par) {
+    this.delById(par);
+
+    if (this.cartArr.length === 0) {
+      this.setModal(false);
+      this.setIsInBasketAllItemsRemove(true);
+    }
   }
 }
 </script>
@@ -28,6 +97,7 @@ export default class BasketCardView extends Vue {
 	  v-for="basketItem in this.cartArr"
 	  v-bind:key="basketItem.id" 
 	  :cardItem="basketItem"
+	  class="itemsVfor"
 	>
 		<div class="item">
 		  <div class="image" :style="{ backgroundImage: `url('${basketItem.image}')` }"></div>
@@ -37,9 +107,12 @@ export default class BasketCardView extends Vue {
 		        {{ basketItem.categoryName }}
 		      </div>
 		      <div class="name name_inCart">{{ basketItem.name }}</div>
-		      <div class="cost"><span class="change-cost">{{ basketItem.cost }}</span></div>
+		      <div class="cost"><span class="change-cost">{{formattedCur(basketItem.cost)}}</span></div>
 		      <div class="actions" data-id="517789">
-		        <span class="button2 action icon-only js-remove-item-from-cart">
+		        <span 
+		          class="button2 action icon-only js-remove-item-from-cart"
+		          @click="removeClick(basketItem.id)"
+		        >
 		          <font-awesome-icon class="trash alternate icon" icon="trash-alt" />
 		        </span>
 		    </div>
@@ -537,7 +610,7 @@ h2:not(.enable-padding):first-child {
     padding-top: 0;
 }
 
-.modal .layer>.content>.cart .item {
+.js-cart-items-area>.cart, .item {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: nowrap;
@@ -545,9 +618,10 @@ h2:not(.enable-padding):first-child {
     padding: 10px 0;
     border-bottom: 2px solid #f4f4f4;
 }
-.modal .layer>.content>.cart .item:first-of-type {
-    padding-top: 0;
+.js-cart-items-area > .itemsVfor:last-child > .item {
+    border: 0;
 }
+
 
 /* --- Image ---
 
@@ -627,22 +701,14 @@ h2:not(.enable-padding):first-child {
   display: flex;
 }
 
+/*
 .item:last-of-type {
     border: 0 !important;
     padding-bottom: 0 !important;
-}
 
-
-
-.item {
-    display: flex;
-    flex-wrap: nowrap;
-    padding: 10px 0 !important;
-    border-bottom: 2px solid #f4f4f4 !important;
+    border: 0;
+    padding-bottom: 0;
 }
-.item:last-of-type {
-    border: 0 !important;
-    padding-bottom: 0 !important;
-}
+*/
 
 </style>
