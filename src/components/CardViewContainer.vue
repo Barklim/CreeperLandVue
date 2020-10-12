@@ -35,42 +35,6 @@ export default class CardViewContainer extends Vue {
       name: "Все товары"
     }
   ]
-
-  cards1 = [
-    {
-      categoryParentId: 1,
-      categoryName: 'Привелегии',
-      id:1,
-      type: 1,
-      name: 'Дракон Края',
-      image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
-      actions: 0,
-      cost: 0,
-      description: "[b]Выживание[/b]\n- 7 точек дома\n- 7 приватов по 1 500 000 блоков\n- x2.5 множитель добычи валюты с мобов\n- 54 слота в рюкзаке\n- /workbench виртуальный верстак\n- /enderchest виртуальный эндер-сундук\n- /feed покормить себя\n- /heal исцелить себя\n- /back возврат назад (или на место смерти)\n- /ptime приватное время\n- /kit Dragon\n\n[b]Whitelist[/b]\n- Доступ\n\n[i]Навсегда![/i]"
-    },
-    {
-      categoryParentId: 1,
-      categoryName: 'Привелегии',
-      id:2,
-      type: 1,
-      name: 'Дракон Края',
-      image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
-      actions: 0,
-      cost: 0,
-      description: '<strong>Выживание</strong><br>- 7 точек дома<br>- 7 приватов по 1 500 000 блоков<br>- x2.5 множитель добычи валюты с мобов<br>- 54 слота в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /back возврат назад (или на место смерти)<br>- /ptime приватное время<br>- /kit Dragon<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>'
-    },
-    {
-      categoryParentId: 1,
-      categoryName: 'Привелегии',
-      id:3,
-      type: 1,
-      name: 'Дракон Края',
-      image: 'https://i.trademc.org/shops/3/M/3MQwN232Vh.jpg',
-      actions: 0,
-      cost: 0,
-      description: '<strong>Выживание</strong><br>- 7 точек дома<br>- 7 приватов по 1 500 000 блоков<br>- x2.5 множитель добычи валюты с мобов<br>- 54 слота в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /back возврат назад (или на место смерти)<br>- /ptime приватное время<br>- /kit Dragon<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>'
-    }
-  ]
   cards = [];
 
   toggleCurrency(event) {

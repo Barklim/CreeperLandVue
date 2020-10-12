@@ -1,134 +1,27 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator'
 
-import BasketCardView from "../../components/BasketCardView.vue";
-import BasketCardSpec from "../../components/BasketCardSpec.vue";
-import { CartItem } from "../../types";
-import { getById } from "../../utils";
-import { recItems } from "../../utils/RecommendedItems";
-
 import { namespace } from 'vuex-class';
 const categoryModule = namespace('CategoryModule');
 const modal = namespace('Modal');
 const cart = namespace('Cart');
 
-@Component({
-  components: {
-    BasketCardView,
-    BasketCardSpec
-  }
-})
-export default class Modal extends Vue {
-
-	@Prop() cartItem?: CartItem;
-	
-	private isVisible: string = "none";
-  private isVisibleBasket: string = "none";
-  private zoomIn: string = "";
-  private zoomOut: string = "";
-  private zoomInBasket: string = "";
-  private addButtonHide: string = "";
-  private addButtonHide1: string = "";
-  private display1: string = "";
-  private display2: string = "";
-  private changeState: boolean = false;
-  private showBasketModal: boolean = false;
-
-  @categoryModule.State
-  public prefix!: string
-
-  @modal.State
-  public cardItem
-  @modal.State
-  public modal!: boolean
-  @modal.State
-  public isInBasket!: boolean
-  @modal.State
-  public isInBasketAllItemsRemove!: boolean
-  @modal.Mutation
-  public setModal!: (newState: boolean) => void
-  @modal.Mutation
-  public setIsInBasket!: (newState: boolean) => void
-  @modal.Mutation
-  public setIsInBasketAllItemsRemove!: (newState: boolean) => void
+@Component({})
+export default class BasketCardSpec extends Vue {
 
   @cart.State
   public cartArr
   @cart.Mutation
-  public setCartArr!: (newCartItem: CartItem) => void
+  public delById!: (delById) => void
 
-  clickMarginModal(e) {
-    e.target.className === 'close modal-close' ? this.setModal(false) : null;
+  @modal.Mutation
+  public setModal!: (newState: boolean) => void
+  @modal.Mutation
+  public setIsInBasketAllItemsRemove!: (newState: boolean) => void
 
-	 	this.display1 = "";
-	 	this.display2 = "";
+  @categoryModule.State
+  public prefix!: string
 
-    e.target.className === 'close modal-close' ? this.hideModalBasketAsync() : null;
-
-    // this.isVisibleBasket = "none";
-    // this.hideModalBasketAsyncCss()
-  }
-  clickClose() {
-  	this.setModal(false);
-
-	 	this.display1 = "";
-	 	this.display2 = "";
-
-    this.hideModalBasketAsync();
-
-    // this.isVisibleBasket = "none";
-    // this.hideModalBasketAsyncCss()
-  }
-  hideBodyScroll() {
-  	window.document.body.style.overflow = "hidden"
-  }
-  showBodyScroll() {
-  	window.document.body.style.overflow = "auto"
-  }
-
-  himdeModalBasketCss() {
-    this.isVisibleBasket = "none";
-  }
-  hideModalBasketAsyncCss() {
-    setTimeout(this.himdeModalBasketCss, 250)
-  }
-
-  hideModal1() {
-  	this.isVisible = "none";
-
-		this.modal ? this.hideBodyScroll() : this.showBodyScroll();
-
-		this.addButtonHide = '';
-		this.addButtonHide1 = '';
-  }
-  hideModal() {
-  	setTimeout(this.hideModal1, 250)
-  }
-
-  himdeModalBasket() {
-    this.showBasketModal = false;
-  }
-  hideModalBasketAsync() {
-    setTimeout(this.himdeModalBasket, 250)
-  }
-
-  isSale(saleObj: any) {
-
-    let oldCost = '';
-    let percent = '';
-    let isSale = false;
-
-    if((typeof saleObj === "object" || typeof saleObj === 'function') && (saleObj !== null)) {
-      oldCost = saleObj.old_cost;
-      percent = saleObj.percent;
-      isSale = true;
-    }
-
-    return isSale;
-  }
-  isModalOrBasket() {
-    return !this.showBasketModal;
-  }
   formattedCur(cost: number) { 
 
     let nFormat;
@@ -178,9 +71,6 @@ export default class Modal extends Vue {
         postFix = "₽";
     }
 
-    //const formattedCost = new Intl.NumberFormat(nFormat, { style: 'currency', currency: this.prefix }).format(convertCost)
-    //const formattedCost = this.toFixed(convertCost);
-    //const formattedCost = convertCost.toLocaleString('ru-RU') + " " + postFix;
     const formattedCost = new Intl.NumberFormat(nFormat, 
       {
         style:'decimal',
@@ -190,214 +80,47 @@ export default class Modal extends Vue {
 
     return formattedCost;
   }
-  addButtonClick(e) {
-  	this.setCartArr(this.cardItem)
-  	this.setIsInBasket(true);
+  removeClick(par) {
+    this.delById(par);
 
-  	this.changeState = true;
-  }
-
-  zoomInBasketModal() {
-    this.zoomInBasket = "zoomIn"
-    this.isVisibleBasket = "block";
-  }
-  zoomInBasketModalAsync() {
-    this.isVisibleBasket = "none";
-    setTimeout(this.zoomInBasketModal, 100)
-  }
-
-  showBasketButtonClick(e) {
-
-    this.zoomInBasketModalAsync();
-    this.zoomInBasket = "";
-    this.isVisible = "";
-
-    this.showBasketModal = !this.showBasketModal;
-  }
-  addButtonMoreClick(e) {
-    this.setModal(false);
-  }
-  computeFirst() {
-
-  	this.display1 = this.isInBasket ? 'addButtonHide': ''; 
-  }
-  computeSecond() {
-
-  	this.display2 = this.isInBasket ? '': 'addButtonHide';
-  }
-
-  // keyBinding
-  created() {
-    window.addEventListener('keydown', (e) => {
-      if (e.key == 'Escape') {
-        this.clickClose();
-      }
-    })
-  }
-  mounted() { 
-  	this.modal ? this.isVisible = "block": this.isVisible = "none";
-  	this.modal ? this.hideBodyScroll()   : this.showBodyScroll();
-  	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
-
-  	this.addButtonHide = ''
-  	this.addButtonHide1 = 'addButtonHide'
-
-    // Set in redux from localStorage here
-  	// this.setCartArr(itemObj1);
-  }
-  updated() {
-
-  	if (this.changeState) {
-  		this.changeState = false;
-
-  		this.computeFirst()
-  		this.computeSecond()
-  	}
-
-  	this.modal ? this.zoomIn = "zoomIn"  : this.zoomIn = "";
-  	this.modal ? this.zoomOut = ""  : this.zoomOut = "zoomOut";
-  	this.modal ? this.hideBodyScroll() : null;
-  	this.modal ? this.isVisible = "block" : this.hideModal();
-
-    if (this.isInBasketAllItemsRemove)
-    {
-      this.setIsInBasketAllItemsRemove(false);
-      this.clickClose()
+    if (this.cartArr.length === 0) {
+      this.setModal(false);
+      this.setIsInBasketAllItemsRemove(true);
     }
   }
 }
 </script>
 
 <template>
+<div class="js-cart-items-area">
 	<div
-	  class="modal"
-	  v-bind:class="[isVisible, modal]"
-	  v-bind:style="{display: isVisible}"
-	  @click="this.clickMarginModal"
-	 >
-  	<div class="layer">
-      <div class="close modal-close">
-      	<div 
-      	  class="close-button"
-      	  @click="clickClose"
-      	 ></div>
-      </div>
-      <div 
-        class="content clear-fix animate fast"
-        v-bind:class="[zoomIn, zoomOut]"
-        v-if="isModalOrBasket()"
-      >
-        <div class="item">
-        	<div class="image" :style="{ backgroundImage: `url('${cardItem.image}')` }"></div>
-          <div class="content">
-        	  <div class="content__area">
-              <div class="sub-text"> <i class="tag icon"></i>
-              	<font-awesome-icon class="tags icon" icon="tag" />
-                {{cardItem.categoryName}}
-              </div>
-              <div class="name">{{cardItem.name}}</div>
-              <div class="cost">
-              	{{formattedCur(cardItem.cost)}}
-    	          <span class="old-cost" v-if="isSale(cardItem.sale)">
-			            {{formattedCur(cardItem.sale.old_cost)}}
-			          </span>
-              </div>
-              <div 
-                class="js-add-to-cart button themed-button"
-                v-bind:class="{ addButtonHide: this.isInBasket }"
-                @click="this.addButtonClick"
-                id="firstButton"
-              >
-                Добавить в корзину
-              </div>
-
-              <div 
-                v-bind:class="{ addButtonHide: !this.isInBasket }"
-                id="secondButton"
-               >
-	              <div 
-                  class="js-add-to-cart button themed-button"
-                  @click="this.showBasketButtonClick"
-                >
-                  В корзине
-                </div>
-                <div 
-                  @click="this.addButtonMoreClick" 
-                  class="button1 button1_shift"
-                >
-                	Выбрать еще
-                </div>
-              </div>
-              <div class="description">
-              	<strong>Выживание</strong><br>- 6 точек дома<br>- 6 приватов по 1 250 000 блоков<br>- x2 множитель добычи валюты с мобов<br>- 45 слотов в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /kit Wither<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>
-              </div>
-              <h1>Это как парсить о_0 ? (На сервере возвращать человеческий html, с классами и т.п.)</h1>
-            	<div class="description">
-              	{{cardItem.description}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="content clear-fix animate fast"
-        v-bind:class="[zoomInBasket, zoomOut]"
-        v-bind:style="{display: isVisibleBasket}"
-        v-else
-      >
-        
-      <form class="cart js-buy-form">
-        <div class="items">
-          <h2>Корзина</h2>
-            <div class="js-cart-items-area">
-              <BasketCardView></BasketCardView>
-            </div>
-
-            <div class="popular-items-area" style="display: block;">
-              <h2>С этим выбирают</h2>
-              <BasketCardSpec></BasketCardSpec>
-            </div>
-
-         </div>
-         <div class="form">
-            <div class="total-cost">
-              <div class="sub-text">Итого:</div>
-              <div class="value total-cost-value">3 640.00 ₽</div>
-            </div>
-            <div class="form-notice"></div>
-            <p>Для продолжения заполните форму ниже:</p>
-            <div class="js-buyer-area">
-              <div class="field">
-                <div class="input">
-                  <label>
-                    <input required="" name="buyer">
-                      <span>Игровой никнейм</span>
-                    </label>
-                  </div>
-               </div>
-            </div>
-            <div class="field">
-              <div class="input">
-                <label>
-                  <input name="coupon">
-                  <span>Купон на скидку</span>
-                </label>                            
-                <div class="input__ui">
-                  <span class="link js-apply-coupon" data-active="Удалить">Применить</span>
-                </div>
-               </div>
-               <small>Если у вас есть купон на скидку, то вы можете ввести его в данное поле</small>                          
-            </div>
-            <div class="actions">
-              <button class="button themed-button animate" type="submit">Продолжить</button>
-            </div>
-         </div>
-      </form>
-
-      </div>
-  	</div>
-  </div>
+	  v-for="basketItem in this.cartArr"
+	  v-bind:key="basketItem.id" 
+	  :cardItem="basketItem"
+	  class="itemsVfor popular-items"
+	>
+		<div class="item">
+		  <div class="image" :style="{ backgroundImage: `url('${basketItem.image}')` }"></div>
+		    <div class="content">
+		      <div class="sub-text"> 
+		        <font-awesome-icon class="tags icon" icon="tag" />
+		        {{ basketItem.categoryName }}
+		      </div>
+		      <div class="name name_inCart">{{ basketItem.name }}</div>
+		      <div class="cost"><span class="change-cost">{{formattedCur(basketItem.cost)}}</span></div>
+		      <div class="actions" data-id="517789">
+		        <span 
+		          class="button2 action icon-only js-remove-item-from-cart"
+		          @click="removeClick(basketItem.id)"
+		        >
+              <font-awesome-icon class="shopping1 basket1 icon1 shoppingBasket" icon="shopping-basket" style="font-size: 12px;"/>
+              <span class="buttonPostix">Добавить</span>
+		        </span>
+		    </div>
+		  </div>
+		</div>
+	</div>
+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -888,7 +611,7 @@ h2:not(.enable-padding):first-child {
     padding-top: 0;
 }
 
-.modal .layer>.content>.cart .item {
+.js-cart-items-area>.cart, .item {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: nowrap;
@@ -896,9 +619,13 @@ h2:not(.enable-padding):first-child {
     padding: 10px 0;
     border-bottom: 2px solid #f4f4f4;
 }
-.modal .layer>.content>.cart .item:first-of-type {
+.js-cart-items-area > .itemsVfor:last-child > .item {
+    border: 0;
+}
+.js-cart-items-area > .itemsVfor:first-child > .item {
     padding-top: 0;
 }
+
 
 /* --- Image ---
 
@@ -978,147 +705,14 @@ h2:not(.enable-padding):first-child {
   display: flex;
 }
 
+/*
 .item:last-of-type {
     border: 0 !important;
     padding-bottom: 0 !important;
-}
 
-/* --- PopularItems --- */
-
-.popular-items-area {
-    display: none;
-    padding-top: 80px;
-}
-
-/* ----- Form ----- */
-
-.form {
-  /*text-align: initial;*/
-}
-.form p {
-    margin: 0 0 10px;
-    font-size: 13px;
-    text-align: left;
-}
-.form .actions {
-    padding-top: 10px;
-    margin-top: 0;
-}
-
-form .field {
-    width: 100%;
-    margin-bottom: 10px;
-}
-.input {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    background: #fff;
-    border-radius: 3px;
-    -wekbit-box-shadow: 0 0 0 2px #f0f0f0 inset;
-    box-shadow: inset 0 0 0 2px #f0f0f0;
-    transition: all .1s linear;
-    animation-fill-mode: both;
-    animation-duration: .75s;
-
-    label {
-      display: block;
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      position: relative;
-  }
-}
-label input {
-    padding: 28px 15px 10px;
-    width: 100%;
     border: 0;
-    line-height: 1;
-    background: none;
-    -webkit-appearance: none;
-    border-radius: 0;
+    padding-bottom: 0;
 }
-.input label>span {
-    text-align: left;
-    font-size: 13px;
-
-    padding: 0 15px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    opacity: .3;
-    pointer-events: none;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-    transition: all .1s ease;
-    transform: translateY(-50%);
-}
-.field small {
-    text-align: left;
-    font-size: 10px;
-    padding-top: 5px;
-    /*font-size: 80%;*/
-    opacity: .5;
-    line-height: 1.3;
-    display: block;
-}
-
-.input__ui {
-    padding-right: 15px;
-}
-span.link.js-apply-coupon {
-    font-size: 13px;
-    color: #21ba45;
-
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-}
-
-@media screen and (min-width: 800px) {
-  .modal .layer>.content>.cart .form {
-      width: 40%;
-  }
-}
-.modal .layer>.content>.cart .form, .modal .layer>.content>.cart .items {
-    display: block;
-    padding: 26px;
-}
-
-.content form .total-cost {
-    display: -ms-flexbox;
-    display: flex;
-    font-weight: 700;
-    -ms-flex-align: end;
-    align-items: flex-end;
-}
-.content>.cart .form .total-cost {
-    padding: 0 0 20px;
-    border-bottom: 2px dashed #f4f4f4;
-    margin-bottom: 20px;
-}
-
-.layer>.content form .total-cost .sub-text {
-    line-height: 1;
-}
-
-.sub-text {
-    opacity: .3;
-    text-transform: uppercase;
-    font-size: 11.7px;
-    font-weight: 700;
-    line-height: 120%;
-    display: block;
-}
-.layer>.content form .total-cost .value {
-    font-size: 32px;
-    line-height: 30px;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    text-align: right;
-}
+*/
 
 </style>

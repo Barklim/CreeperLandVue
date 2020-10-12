@@ -621,6 +621,9 @@ h2:not(.enable-padding):first-child {
 .js-cart-items-area > .itemsVfor:last-child > .item {
     border: 0;
 }
+.js-cart-items-area > .itemsVfor:first-child > .item {
+    padding-top: 0;
+}
 
 
 /* --- Image ---
