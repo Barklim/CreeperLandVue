@@ -5,7 +5,6 @@ import BasketCardView from "../../components/BasketCardView.vue";
 import BasketCardSpec from "../../components/BasketCardSpec.vue";
 import { CartItem } from "../../types";
 import { getById } from "../../utils";
-import { recItems } from "../../utils/RecommendedItems";
 
 import { namespace } from 'vuex-class';
 const categoryModule = namespace('CategoryModule');
@@ -226,7 +225,7 @@ export default class Modal extends Vue {
   	this.display2 = this.isInBasket ? '': 'addButtonHide';
   }
 
-  // keyBinding
+  // KeyBinding
   created() {
     window.addEventListener('keydown', (e) => {
       if (e.key == 'Escape') {
@@ -353,12 +352,7 @@ export default class Modal extends Vue {
             <div class="js-cart-items-area">
               <BasketCardView></BasketCardView>
             </div>
-
-            <div class="popular-items-area" style="display: block;">
-              <h2>С этим выбирают</h2>
-              <BasketCardSpec></BasketCardSpec>
-            </div>
-
+            <BasketCardSpec></BasketCardSpec>
          </div>
          <div class="form">
             <div class="total-cost">
@@ -981,13 +975,6 @@ h2:not(.enable-padding):first-child {
 .item:last-of-type {
     border: 0 !important;
     padding-bottom: 0 !important;
-}
-
-/* --- PopularItems --- */
-
-.popular-items-area {
-    display: none;
-    padding-top: 80px;
 }
 
 /* ----- Form ----- */

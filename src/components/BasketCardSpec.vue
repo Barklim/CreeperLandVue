@@ -1,7 +1,8 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator'
-
 import { namespace } from 'vuex-class';
+import { recItems } from "../utils/RecommendedItems";
+
 const categoryModule = namespace('CategoryModule');
 const modal = namespace('Modal');
 const cart = namespace('Cart');
@@ -21,6 +22,40 @@ export default class BasketCardSpec extends Vue {
 
   @categoryModule.State
   public prefix!: string
+
+  private filteredRecItems = recItems;
+  private showRecText: boolean = true;
+
+  // ----- Filter recommended items -----
+  created() {
+
+    const arraySparse = this.cartArr;
+    let numCallbackRuns = 0;
+    let countItemsType0 = 0;
+    let countItemsType1 = 0;
+
+    arraySparse.forEach((element) => {
+      console.log(element)
+      if (element.type === 0) {
+        countItemsType0++
+      }
+      if (element.type === 1) {
+        countItemsType1++
+      }
+      numCallbackRuns++
+    })
+
+    if(countItemsType0 === 0) {
+      this.filteredRecItems = recItems.filter(item => item.type !== 1);
+    }
+    if(countItemsType1 === 0) {
+      this.filteredRecItems = recItems.filter(item => item.type !== 0);
+    }
+    if(countItemsType0 !== 0 && countItemsType1 !== 0) {
+      this.filteredRecItems = [];
+      this.showRecText = false;
+    }
+  }
 
   formattedCur(cost: number) { 
 
@@ -81,6 +116,10 @@ export default class BasketCardSpec extends Vue {
     return formattedCost;
   }
   removeClick(par) {
+    console.log('!!!')
+    console.log(this.cartArr)
+    console.log(recItems)
+    // curRecItems
     this.delById(par);
 
     if (this.cartArr.length === 0) {
@@ -92,34 +131,37 @@ export default class BasketCardSpec extends Vue {
 </script>
 
 <template>
-<div class="js-cart-items-area">
-	<div
-	  v-for="basketItem in this.cartArr"
-	  v-bind:key="basketItem.id" 
-	  :cardItem="basketItem"
-	  class="itemsVfor popular-items"
-	>
-		<div class="item">
-		  <div class="image" :style="{ backgroundImage: `url('${basketItem.image}')` }"></div>
-		    <div class="content">
-		      <div class="sub-text"> 
-		        <font-awesome-icon class="tags icon" icon="tag" />
-		        {{ basketItem.categoryName }}
-		      </div>
-		      <div class="name name_inCart">{{ basketItem.name }}</div>
-		      <div class="cost"><span class="change-cost">{{formattedCur(basketItem.cost)}}</span></div>
-		      <div class="actions" data-id="517789">
-		        <span 
-		          class="button2 action icon-only js-remove-item-from-cart"
-		          @click="removeClick(basketItem.id)"
-		        >
-              <font-awesome-icon class="shopping1 basket1 icon1 shoppingBasket" icon="shopping-basket" style="font-size: 12px;"/>
-              <span class="buttonPostix">Добавить</span>
-		        </span>
-		    </div>
-		  </div>
-		</div>
-	</div>
+<div class="popular-items-area" style="display: block;">
+  <h2 v-if="this.showRecText">С этим выбирают</h2>
+  <div class="js-cart-items-area">
+  	<div
+  	  v-for="basketItem in this.filteredRecItems"
+  	  v-bind:key="basketItem.id" 
+  	  :cardItem="basketItem"
+  	  class="itemsVfor popular-items"
+  	>
+  		<div class="item">
+  		  <div class="image" :style="{ backgroundImage: `url('${basketItem.image}')` }"></div>
+  		    <div class="content">
+  		      <div class="sub-text"> 
+  		        <font-awesome-icon class="tags icon" icon="tag" />
+  		        {{ basketItem.categoryName }}
+  		      </div>
+  		      <div class="name name_inCart">{{ basketItem.name }}</div>
+  		      <div class="cost"><span class="change-cost">{{formattedCur(basketItem.cost)}}</span></div>
+  		      <div class="actions" data-id="517789">
+  		        <span 
+  		          class="button2 action icon-only js-remove-item-from-cart"
+  		          @click="removeClick(basketItem.id)"
+  		        >
+                <font-awesome-icon class="shopping1 basket1 icon1 shoppingBasket" icon="shopping-basket" style="font-size: 12px;"/>
+                <span class="buttonPostix">Добавить</span>
+  		        </span>
+  		    </div>
+  		  </div>
+  		</div>
+  	</div>
+  </div>
 </div>
 </template>
 
@@ -714,5 +756,24 @@ h2:not(.enable-padding):first-child {
     padding-bottom: 0;
 }
 */
+
+/* --- PopularItems --- */
+
+.popular-items-area {
+    display: none;
+    /*padding-top: 80px;*/
+}
+h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 0;
+    padding-bottom: 40px;
+    padding-top: 80px !important;
+    line-height: 1;
+    text-align: left;
+}
+h2:not(.enable-padding):first-child {
+    padding-top: 0;
+}
 
 </style>
