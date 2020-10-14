@@ -41,6 +41,10 @@ class Cart extends VuexModule {
 
     this.cartArr = filtredArray; 
   }
+  // @Mutation
+  // public addItem(delById: any) {
+
+  // }
 }
 
 export default Cart

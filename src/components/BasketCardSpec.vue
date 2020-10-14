@@ -14,6 +14,8 @@ export default class BasketCardSpec extends Vue {
   public cartArr
   @cart.Mutation
   public delById!: (delById) => void
+  @cart.Mutation
+  public setCartArr!: (newCartItem: CartItem) => void
 
   @modal.Mutation
   public setModal!: (newState: boolean) => void
@@ -115,16 +117,14 @@ export default class BasketCardSpec extends Vue {
 
     return formattedCost;
   }
-  removeClick(par) {
-    console.log('!!!')
-    console.log(this.cartArr)
-    console.log(recItems)
-    // curRecItems
-    this.delById(par);
+  addClick(basketItem) {
 
-    if (this.cartArr.length === 0) {
-      this.setModal(false);
-      this.setIsInBasketAllItemsRemove(true);
+    this.filteredRecItems = this.filteredRecItems.filter(item => item.id !== basketItem.id);
+
+    this.setCartArr(basketItem);
+
+    if (this.filteredRecItems.length === 0) {
+      this.showRecText = false;
     }
   }
 }
@@ -152,7 +152,7 @@ export default class BasketCardSpec extends Vue {
   		      <div class="actions" data-id="517789">
   		        <span 
   		          class="button2 action icon-only js-remove-item-from-cart"
-  		          @click="removeClick(basketItem.id)"
+  		          @click="addClick(basketItem)"
   		        >
                 <font-awesome-icon class="shopping1 basket1 icon1 shoppingBasket" icon="shopping-basket" style="font-size: 12px;"/>
                 <span class="buttonPostix">Добавить</span>
