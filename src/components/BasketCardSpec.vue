@@ -121,6 +121,9 @@ export default class BasketCardSpec extends Vue {
 
     this.filteredRecItems = this.filteredRecItems.filter(item => item.id !== basketItem.id);
 
+    // hack
+    basketItem.qtty = 1;
+
     this.setCartArr(basketItem);
 
     if (this.filteredRecItems.length === 0) {

@@ -100,7 +100,7 @@ export default class BasketCardView extends Vue {
     this.addCountItem(arg);
 
     // Vue.forceUpdate();
-    this.$forceUpdate(); 
+    this.$forceUpdate();
   }
   subCountItemClick(arg) {
     this.subCountItem(arg);
