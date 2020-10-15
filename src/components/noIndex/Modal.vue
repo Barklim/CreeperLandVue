@@ -44,12 +44,17 @@ export default class Modal extends Vue {
   public isInBasket!: boolean
   @modal.State
   public isInBasketAllItemsRemove!: boolean
+  @modal.State
+  public showBasketModalAtonce!: boolean
+
   @modal.Mutation
   public setModal!: (newState: boolean) => void
   @modal.Mutation
   public setIsInBasket!: (newState: boolean) => void
   @modal.Mutation
   public setIsInBasketAllItemsRemove!: (newState: boolean) => void
+  @modal.Mutation
+  public setFalseBasketModal!: () => void
 
   @cart.State
   public cartArr
@@ -217,11 +222,9 @@ export default class Modal extends Vue {
     this.setModal(false);
   }
   computeFirst() {
-
   	this.display1 = this.isInBasket ? 'addButtonHide': ''; 
   }
   computeSecond() {
-
   	this.display2 = this.isInBasket ? '': 'addButtonHide';
   }
 
@@ -262,6 +265,15 @@ export default class Modal extends Vue {
     {
       this.setIsInBasketAllItemsRemove(false);
       this.clickClose()
+    }
+
+    if (this.showBasketModalAtonce) {
+      this.setFalseBasketModal();
+
+      this.zoomInBasketModalAsync();
+      this.zoomInBasket = "";
+      this.isVisible = "";
+      this.showBasketModal = !this.showBasketModal;
     }
   }
 }

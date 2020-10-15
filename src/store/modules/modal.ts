@@ -7,6 +7,7 @@ class Modal extends VuexModule {
   public modal: boolean = false;
   public isInBasket: boolean = false;
   public isInBasketAllItemsRemove: boolean = false;
+  public showBasketModalAtonce: boolean = false;
 
   @Mutation
   public setCardItem(newCardItem: boolean): void {
@@ -23,6 +24,14 @@ class Modal extends VuexModule {
   @Mutation
   public setIsInBasketAllItemsRemove(newStateIsInBasketAllItemsRemove: boolean): void {
     this.isInBasketAllItemsRemove = newStateIsInBasketAllItemsRemove
+  }
+  @Mutation
+  public setTrueBasketModal(): void {
+    this.showBasketModalAtonce = true;
+  }
+  @Mutation
+  public setFalseBasketModal(): void {
+    this.showBasketModalAtonce = false;
   }
 }
 

@@ -1,7 +1,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { namespace } from 'vuex-class';
 
+import { namespace } from 'vuex-class';
+const modal = namespace('Modal');
 const cart = namespace('Cart');
 
 @Component({})
@@ -11,17 +12,23 @@ export default class FixedCart extends Vue {
   @cart.State
   public cartArr
 
+  @modal.Mutation
+  public setModal!: (newState: boolean) => void
+  @modal.Mutation
+  public setTrueBasketModal!: () => void
+
   clearShakeClass() {
   	this.shake = "";
   }
 
   doShake() {
-  	setTimeout(this.clearShakeClass, 750);
-    this.shake = "shake";
-  }
-  mounted() {
-    console.log('!!!')
-    console.log(this.cartArr)
+    if(this.cartArr.length > 0) {
+      this.setModal(true)
+      this.setTrueBasketModal();
+    } else {
+      setTimeout(this.clearShakeClass, 750);
+      this.shake = "shake";
+    }
   }
 }
 </script>
