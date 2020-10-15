@@ -1,9 +1,15 @@
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator';
+import { namespace } from 'vuex-class';
+
+const cart = namespace('Cart');
 
 @Component({})
 export default class FixedCart extends Vue {
 	private shake: string = "";
+
+  @cart.State
+  public cartArr
 
   clearShakeClass() {
   	this.shake = "";
@@ -12,6 +18,10 @@ export default class FixedCart extends Vue {
   doShake() {
   	setTimeout(this.clearShakeClass, 750);
     this.shake = "shake";
+  }
+  mounted() {
+    console.log('!!!')
+    console.log(this.cartArr)
   }
 }
 </script>
@@ -25,7 +35,12 @@ export default class FixedCart extends Vue {
 	  @click="doShake()"
 	>
   	<font-awesome-icon class="shopping1 basket1 icon1 shoppingBasket" icon="shopping-basket" style="font-size: 18px;"/>
-  	<span class="corner items-count">1</span>
+  	<span 
+      class="corner items-count"
+      v-if="this.cartArr.length > 0"
+    >
+      {{ this.cartArr.length }}
+    </span>
   </div>
 
 </template>

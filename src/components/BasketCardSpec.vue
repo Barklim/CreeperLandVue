@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Vue, Prop, Component } from 'vue-property-decorator'
+import { Vue, Prop, Component } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { recItems } from "../utils/RecommendedItems";
 import { CartItem } from "../types";

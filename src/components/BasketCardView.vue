@@ -105,9 +105,6 @@ export default class BasketCardView extends Vue {
   subCountItemClick(arg) {
     this.subCountItem(arg);
 
-    console.log('THIS')
-    console.log(this)
-
     this.$forceUpdate(); 
   }
   testRender(arg) {
@@ -115,10 +112,6 @@ export default class BasketCardView extends Vue {
     // const itemValue = this.getCountItem(arg.id)
 
     // const countItem = this.cartArr.find(item => item.id === arg.id);
-
-    // console.log('!!!')
-    // console.log(arg)
-    // console.log(countItem)
 
     const countItem = this.cartArr.find(item => item.id === 520597);
 
