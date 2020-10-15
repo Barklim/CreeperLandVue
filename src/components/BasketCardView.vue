@@ -13,6 +13,12 @@ export default class BasketCardView extends Vue {
   public cartArr
   @cart.Mutation
   public delById!: (delById) => void
+  @cart.Mutation
+  public addCountItem!: (id) => void
+  @cart.Mutation
+  public subCountItem!: (id) => void
+  @cart.Mutation
+  public getCountItem!: (id) => void
 
   @modal.Mutation
   public setModal!: (newState: boolean) => void
@@ -21,6 +27,8 @@ export default class BasketCardView extends Vue {
 
   @categoryModule.State
   public prefix!: string
+
+  // private stateSpecType: number = true;
 
   formattedCur(cost: number) { 
 
@@ -88,6 +96,34 @@ export default class BasketCardView extends Vue {
       this.setIsInBasketAllItemsRemove(true);
     }
   }
+  addCountItemClick(arg) {
+    this.addCountItem(arg);
+
+    // Vue.forceUpdate();
+    this.$forceUpdate(); 
+  }
+  subCountItemClick(arg) {
+    this.subCountItem(arg);
+
+    console.log('THIS')
+    console.log(this)
+
+    this.$forceUpdate(); 
+  }
+  testRender(arg) {
+
+    // const itemValue = this.getCountItem(arg.id)
+
+    // const countItem = this.cartArr.find(item => item.id === arg.id);
+
+    // console.log('!!!')
+    // console.log(arg)
+    // console.log(countItem)
+
+    const countItem = this.cartArr.find(item => item.id === 520597);
+
+    return countItem.qtty;
+  }
 }
 </script>
 
@@ -108,13 +144,39 @@ export default class BasketCardView extends Vue {
 		      </div>
 		      <div class="name name_inCart">{{ basketItem.name }}</div>
 		      <div class="cost"><span class="change-cost">{{formattedCur(basketItem.cost)}}</span></div>
-		      <div class="actions" data-id="517789">
+		      <div class="actions">
 		        <span 
 		          class="button2 action icon-only js-remove-item-from-cart"
 		          @click="removeClick(basketItem.id)"
+              v-if="basketItem.qtty <= 1"
 		        >
 		          <font-awesome-icon class="trash alternate icon" icon="trash-alt" />
 		        </span>
+
+            <span
+              class="button2 action icon-only js-remove-item-from-cart"
+              @click="subCountItemClick(basketItem.id)"
+              v-if="basketItem.qtty > 1"
+            >
+              <font-awesome-icon class="minus alternate icon" icon="minus" />
+            </span>
+
+            <span 
+              class="button2 action icon-only js-remove-item-from-cart"
+              @click="addCountItemClick(basketItem.id)"
+              v-if="basketItem.type === 0"
+            >
+              <span>
+                <font-awesome-icon class="trash alternate icon" icon="plus" />
+              </span>
+            </span>
+
+            <span
+              class="count" 
+              v-if="basketItem.type === 0"
+            >
+              {{ basketItem.qtty }} шт.
+            </span>
 		    </div>
 		  </div>
 		</div>
@@ -713,5 +775,12 @@ h2:not(.enable-padding):first-child {
     padding-bottom: 0;
 }
 */
+.count {
+    display: block;
+  padding-left: 10px;
+  font-weight: 700;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
 </style>

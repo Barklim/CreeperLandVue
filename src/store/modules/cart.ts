@@ -24,27 +24,46 @@ class Cart extends VuexModule {
     // return state.articles.find(item => item.id === parseInt(id));
     return 2;
   }
+  @Mutation
+  public getCountItem(id: number) {
+    const countItem = this.cartArr.find(item => item.id === id);
+
+    // console.log('!!! !')
+    // console.log(id)
+    // console.log(countItem)
+    // console.log(countItem.qtty)
+
+    // Dont work!
+
+    return countItem.qtty;
+  }
   // Getter function dont work :(
   // get getById1(getterId: number) {
   //   // this.cartArr = this.cartArr.push(newCartItem);
   //   return 2;
   // }
   @Mutation
-  public delById(delById: number) {
+  public delById(id: number) {
     // this.cartArr.forEach((item, index, array) => {
     //   console.log(`${item.id} имеет позицию ${index} в ${array}`);
     //   console.log('!!! test');
     //   console.log(delById);
     // });
 
-    const filtredArray = this.cartArr.filter(item => item.id !== delById);
+    const filtredArray = this.cartArr.filter(item => item.id !== id);
 
     this.cartArr = filtredArray; 
   }
-  // @Mutation
-  // public addItem(delById: any) {
-
-  // }
+  @Mutation
+  public addCountItem(id: number) {
+    const addCountItem = this.cartArr.find(item => item.id === id);
+    ++addCountItem.qtty;
+  }
+  @Mutation
+  public subCountItem(id: number) {
+    const addCountItem = this.cartArr.find(item => item.id === id);
+    --addCountItem.qtty;
+  }
 }
 
 export default Cart

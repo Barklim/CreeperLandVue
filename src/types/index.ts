@@ -7,6 +7,7 @@ export interface CardItem {
   actions: number,
   cost: number,
   description: string,
+  count: number
 }
 
 export interface CategorieItem {

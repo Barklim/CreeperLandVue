@@ -79,6 +79,8 @@ export default class CardViewContainer extends Vue {
             const cardObj = curItems[j];
             cardObj.categoryName = curCategoryName;
             cardObj.categoryParentId = categoryParentId;
+            // Let push countItem
+            cardObj.qtty = 1;
             newCards.push(cardObj);
           }
         }

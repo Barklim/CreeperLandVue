@@ -2,6 +2,7 @@
 import { Vue, Prop, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class';
 import { recItems } from "../utils/RecommendedItems";
+import { CartItem } from "../types";
 
 const categoryModule = namespace('CategoryModule');
 const modal = namespace('Modal');
@@ -37,7 +38,6 @@ export default class BasketCardSpec extends Vue {
     let countItemsType1 = 0;
 
     arraySparse.forEach((element) => {
-      console.log(element)
       if (element.type === 0) {
         countItemsType0++
       }
@@ -149,7 +149,7 @@ export default class BasketCardSpec extends Vue {
   		      </div>
   		      <div class="name name_inCart">{{ basketItem.name }}</div>
   		      <div class="cost"><span class="change-cost">{{formattedCur(basketItem.cost)}}</span></div>
-  		      <div class="actions" data-id="517789">
+  		      <div class="actions">
   		        <span 
   		          class="button2 action icon-only js-remove-item-from-cart"
   		          @click="addClick(basketItem)"
