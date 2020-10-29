@@ -32,6 +32,7 @@ export default class Modal extends Vue {
   private display2: string = "";
   private changeState: boolean = false;
   private showBasketModal: boolean = false;
+  private itemsSum: number = 0;
 
   @categoryModule.State
   public prefix!: string
@@ -56,6 +57,8 @@ export default class Modal extends Vue {
   @modal.Mutation
   public setFalseBasketModal!: () => void
 
+  @cart.State
+  public qttySum!: boolean
   @cart.State
   public cartArr
   @cart.Mutation
@@ -246,6 +249,14 @@ export default class Modal extends Vue {
 
     // Set in redux from localStorage here
   	// this.setCartArr(itemObj1);
+
+
+    console.log('!!! !!!')
+    console.log(this.cartArr)
+    console.log(this.itemsSum)
+    this.cartArr.forEach(element => this.itemsSum = this.itemsSum + element.qtty*element.cost);
+    console.log(this.itemsSum)
+    // засетить тут а потом дальше по кликам удалять прибавлять
   }
   updated() {
 
@@ -275,6 +286,11 @@ export default class Modal extends Vue {
       this.isVisible = "";
       this.showBasketModal = !this.showBasketModal;
     }
+
+    console.log('!!!')
+    console.log(this.cartArr)
+    console.log(this.itemsSum)
+    // this.qttySum = this.cartArr[0].cost*this.cartArr[0].qtty;
   }
 }
 </script>
@@ -369,7 +385,8 @@ export default class Modal extends Vue {
          <div class="form">
             <div class="total-cost">
               <div class="sub-text">Итого:</div>
-              <div class="value total-cost-value">3 640.00 ₽</div>
+              <!-- 3 640.00 ₽ -->
+              <div class="value total-cost-value">{{ this.itemsSum }} ₽</div>
             </div>
             <div class="form-notice"></div>
             <p>Для продолжения заполните форму ниже:</p>

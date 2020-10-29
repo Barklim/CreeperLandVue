@@ -10,11 +10,12 @@ class Cart extends VuexModule {
 	public cartArr: any = [];
 	//public cartArr: Array<any> = [];
 	public isOpen: boolean = false;
+  public qttySum: number = 0;
 
   // Setter
   @Mutation
   public setCartArr(newCartItem: CartItem): void {
-    this.cartArr.push(newCartItem)
+    this.cartArr.push(newCartItem);
   }
   // Getter
   @Mutation
