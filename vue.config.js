@@ -4,6 +4,7 @@ module.exports = {
   //   : '/',
   // prepare gh-pages
   publicPath:'/CreeperLand/',
+  // publicPath:'/CreeperLand/dist',
   pluginOptions: {
     i18n: {
       locale: "en",
