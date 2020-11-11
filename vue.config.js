@@ -1,9 +1,9 @@
 module.exports = {
-  // publicPath: process.env.NODE_ENV === 'production'
-  //   ? '/CreeperLand/'
-  //   : '/',
+  publicPath: process.env.NODE_ENV === 'production'
+    ? ''
+    : '/',
   // prepare gh-pages
-  publicPath:'/CreeperLand/',
+  // publicPath:'/CreeperLand/',
   // publicPath:'/CreeperLand/dist',
   pluginOptions: {
     i18n: {
