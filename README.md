@@ -43,6 +43,11 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Reqirements
+
+	node 13.13.5
+	vue 2.6.11 or 2.9.6
+
 ## Bootstraped
 
 * vue

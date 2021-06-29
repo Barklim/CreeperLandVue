@@ -13,7 +13,7 @@ export default class FooterComponent extends Vue {}
           <a class="logo" href="/">Creeper Land</a>
           <div class="copyright">
             Создано с помощью 
-            <a href="https://barklim.github.io/" title="Trade MC - автодонат на ваш игровой сервер" class='links_textDecoration'>Barky </a>
+            <a href="https://barklim.github.io/folio/" title="Trade MC - автодонат на ваш игровой сервер" class='links_textDecoration'>Barklim</a>
             © 2020
           </div>
         </div>
@@ -31,6 +31,7 @@ export default class FooterComponent extends Vue {}
           <div class="title">Ссылки</div>
             <ul>
               <li><a href="/votes" target="_self" class="links_textDecoration">Ссылки на мониторинги</a></li>
+              <li><a href="/votes" target="_self" class="links_textDecoration links_subtext">Discord</a></li>
             </ul>
           </div>
           <div class="widget-vk">
@@ -238,6 +239,10 @@ body .link, body a {
     cursor: pointer;
 }
 
+.links_subtext {
+  margin-top: 6px;
+  display: inline-block;
+}
 .links_textDecoration:hover {
   text-decoration: underline;
 }

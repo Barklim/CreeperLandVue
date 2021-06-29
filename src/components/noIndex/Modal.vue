@@ -19,6 +19,9 @@ const cart = namespace('Cart');
 })
 export default class Modal extends Vue {
 
+  // Todo
+  // Нужно написать парсер на поле cardItem.description, для обозначений [b], [i] переводы строки
+
 	@Prop() cartItem?: CartItem;
 	
 	private isVisible: string = "none";
@@ -220,6 +223,17 @@ export default class Modal extends Vue {
     this.isVisible = "";
 
     this.showBasketModal = !this.showBasketModal;
+
+    // Set in redux from localStorage here
+  	// this.setCartArr(itemObj1);
+
+    //console.log('!!! !!!')
+    //console.log(this.cartArr)
+    //console.log(this.itemsSum)
+    this.itemsSum = 0;
+    this.cartArr.forEach(element => this.itemsSum = this.itemsSum + element.qtty*element.cost);
+    //console.log(this.itemsSum)
+    // засетить тут а потом дальше по кликам удалять прибавлять
   }
   addButtonMoreClick(e) {
     this.setModal(false);
@@ -246,17 +260,6 @@ export default class Modal extends Vue {
 
   	this.addButtonHide = ''
   	this.addButtonHide1 = 'addButtonHide'
-
-    // Set in redux from localStorage here
-  	// this.setCartArr(itemObj1);
-
-
-    console.log('!!! !!!')
-    console.log(this.cartArr)
-    console.log(this.itemsSum)
-    this.cartArr.forEach(element => this.itemsSum = this.itemsSum + element.qtty*element.cost);
-    console.log(this.itemsSum)
-    // засетить тут а потом дальше по кликам удалять прибавлять
   }
   updated() {
 
@@ -287,9 +290,9 @@ export default class Modal extends Vue {
       this.showBasketModal = !this.showBasketModal;
     }
 
-    console.log('!!!')
-    console.log(this.cartArr)
-    console.log(this.itemsSum)
+    // console.log('!!!')
+    // console.log(this.cartArr)
+    // console.log(this.itemsSum)
     // this.qttySum = this.cartArr[0].cost*this.cartArr[0].qtty;
   }
 }
@@ -358,10 +361,6 @@ export default class Modal extends Vue {
               <div class="description">
               	<strong>Выживание</strong><br>- 6 точек дома<br>- 6 приватов по 1 250 000 блоков<br>- x2 множитель добычи валюты с мобов<br>- 45 слотов в рюкзаке<br>- /workbench виртуальный верстак<br>- /enderchest виртуальный эндер-сундук<br>- /feed покормить себя<br>- /heal исцелить себя<br>- /kit Wither<br><br><strong>Whitelist</strong><br>- Доступ<br><br><em>Навсегда!</em>
               </div>
-              <h1>Это как парсить о_0 ? (На сервере возвращать человеческий html, с классами и т.п.)</h1>
-            	<div class="description">
-              	{{cardItem.description}}
-              </div>
             </div>
           </div>
         </div>
@@ -386,7 +385,7 @@ export default class Modal extends Vue {
             <div class="total-cost">
               <div class="sub-text">Итого:</div>
               <!-- 3 640.00 ₽ -->
-              <div class="value total-cost-value">{{ this.itemsSum }} ₽</div>
+              <div class="value total-cost-value">{{formattedCur(this.itemsSum)}}</div>
             </div>
             <div class="form-notice"></div>
             <p>Для продолжения заполните форму ниже:</p>
@@ -394,7 +393,7 @@ export default class Modal extends Vue {
               <div class="field">
                 <div class="input">
                   <label>
-                    <input required="" name="buyer">
+                    <input required="" name="buyer" class="input-reset">
                       <span>Игровой никнейм</span>
                     </label>
                   </div>
@@ -403,7 +402,7 @@ export default class Modal extends Vue {
             <div class="field">
               <div class="input">
                 <label>
-                  <input name="coupon">
+                  <input name="coupon" class="input-reset1">
                   <span>Купон на скидку</span>
                 </label>                            
                 <div class="input__ui">
@@ -424,6 +423,18 @@ export default class Modal extends Vue {
 </template>
 
 <style lang="scss" scoped>
+
+.input-reset:focus-visible { 
+  box-shadow: inset 0 0 0 1px rgba(33,186,69,.5); 
+  outline: none !important;
+  width: 32vw !important;
+  display: block;
+  flex-grow: 1;
+  position: relative;
+}
+.input-reset1:focus-visible {  
+  outline: none !important;
+}
 
 .modal {
   background: rgba(0,0,0,.6);
